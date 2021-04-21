@@ -1,6 +1,6 @@
-import mongoose, { connection, MongooseDocument } from 'mongoose';
+import mongoose from 'mongoose';
 
-const connect = {};
+const connection = {};
 
 async function dbConnect () {
     if (connection.isConnected) {
