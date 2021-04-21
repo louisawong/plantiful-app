@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import UploadForm from '../components/UploadForm/UploadForm'
 import styles from '../styles/Home.module.scss'
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       </main> */}
       <body>
         HELLO WORLD!
+        <UploadForm/>
         {/* <!-- The core Firebase JS SDK is always required and must be listed first --> */}
         <script src="/__/firebase/8.4.1/firebase-app.js"></script>
 
@@ -23,6 +25,7 @@ export default function Home() {
 
         {/* <!-- Initialize Firebase --> */}
         <script src="/__/firebase/init.js"></script>
+        
       </body>
     </div>
   )
