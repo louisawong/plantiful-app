@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const Inspo = require('./inspos');
+const Trade = require('./trades');
+const Chat = require('./chats');
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -10,7 +13,68 @@ const UserSchema = new mongoose.Schema({
     password:{
         type: String,
         required: [true, 'Please enter a password.'],
-    }
+    },
+    followers: {
+        type: [String],
+        default: []
+    },
+    numFollowers: {
+        type: Number,
+        default: 0,
+    },
+    profile: {
+        type: String,
+        default: "",
+    },
+    inspos: {
+        type: [Inspo],
+        default: [],
+    },
+    numInspos: {
+        type: Number,
+        default: 0,
+    },
+    trades: {
+        type: [Trade],
+        default: [],
+    },
+    numTrades: {
+        type: Number,
+        default: 0,
+    },
+    location: {
+        type: {
+            type: String,
+            enum: ['Point'],
+        },
+        coordinates: {
+            type: [Number],
+        }
+    },
+    chats: {
+        type: [Chat],
+        default: [],
+    },
+    email: {
+        type: String,
+        required: true,
+    },
+    updated:{
+        type: Date,
+        default: Date.now,
+    },
+    firstName: {
+        type: String,
+        required: true,
+    },
+    lastName: {
+        type: String,
+        default: "",
+    },
+    description:{
+        type: String,
+        default: "",
+    },
 })
 
 module.exports = mongoose.models.User || mongoose.model('User', UserSchema)

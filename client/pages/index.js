@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import UploadForm from '../components/UploadForm/UploadForm'
 import styles from '../styles/Home.module.scss'
+import Image from 'next/Image'
+const Plantiful = require('../public/images/Plantiful.png')
 
 export default function Home() {
   return (
@@ -8,7 +10,6 @@ export default function Home() {
       <Head>
         <title>Plantiful</title>
         <link rel="icon" href="/favicon.ico" />
-        {/* <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> */}
       </Head>
 
       {/* <main className={styles.main}>
@@ -16,6 +17,12 @@ export default function Home() {
       <body>
         HELLO WORLD!
         <UploadForm/>
+
+        {/* <Image src="/../public/images/Plantiful.png" width={200} height={200} /> */}
+        <img src={Plantiful}/>
+
+
+
         {/* <!-- The core Firebase JS SDK is always required and must be listed first --> */}
         <script src="/__/firebase/8.4.1/firebase-app.js"></script>
 
