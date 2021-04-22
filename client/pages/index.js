@@ -4,6 +4,9 @@ import styles from '../styles/Home.module.scss'
 //import Image from 'next/Image'
 const Plantiful = require('../public/images/Plantiful.png')
 
+const withImages=require('next-images')
+withImages({})
+
 export default function Home() {
   return (
     <div className={styles.container}>
