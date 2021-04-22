@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import UploadForm from '../components/UploadForm/UploadForm'
 import styles from '../styles/Home.module.scss'
-//import Image from 'next/Image'
+import Image from 'next/Image'
 const Plantiful = require('../public/images/Plantiful.png')
 
-const withImages=require('next-images')
-withImages({})
+// const withImages=require('next-images')
+// withImages({})
 
 export default function Home() {
   return (
@@ -17,12 +17,12 @@ export default function Home() {
 
       {/* <main className={styles.main}>
       </main> */}
-      <body>
+      <main>
         HELLO WORLD!
         <UploadForm/>
 
-        {/* <Image src="/../public/images/Plantiful.png" width={200} height={200} /> */}
-        <img src={Plantiful}/>
+        <Image src="/../public/images/Plantiful.png" width={200} height={200} />
+        {/* <img src={Plantiful}/> */}
 
 
 
@@ -36,7 +36,7 @@ export default function Home() {
         {/* <!-- Initialize Firebase --> */}
         <script src="/__/firebase/init.js"></script>
         
-      </body>
+      </main>
     </div>
   )
 }
