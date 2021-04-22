@@ -1,8 +1,12 @@
 import {useState, useEffect} from 'react';
-import {projectStorage} from './config'
+import firebaseClient from './config';
+import firebase from 'firebase/app';
+//import {projectStorage} from './config'
 
 //custom hook to interact with FireBase storage for media upload
 //returns information back about the upload
+firebaseClient();
+const projectStorage = firebase.storage();
 
 const useStorage = (file) => {
     const [progress,setProgress] = useState(0);

@@ -5,9 +5,11 @@ import 'firebase/analytics'
 
 // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
     apiKey: "AIzaSyCbohHldibFPn_sBYSPDa8AxN0_lvV0stc",
     authDomain: "plantiful-ec98d.firebaseapp.com",
+    databaseURL: "https://plantiful-ec98d-default-rtdb.firebaseio.com",
     projectId: "plantiful-ec98d",
     storageBucket: "plantiful-ec98d.appspot.com",
     messagingSenderId: "997098059961",
@@ -15,9 +17,11 @@ import 'firebase/analytics'
     measurementId: "G-V0MZCSJB64"
   };
   // Initialize Firebase
-  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  export default function firebaseClient() {
+      if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  }
   //firebase.analytics();
 
-  const projectStorage = firebase.storage();
+//   const projectStorage = firebase.storage();
 
-  export {projectStorage};
+//   export {projectStorage};
