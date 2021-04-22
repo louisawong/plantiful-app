@@ -1,9 +1,11 @@
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/storage';
+import 'firebase/auth';
+import 'firebase/analytics'
 
 // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  var firebaseConfig = {
+  const firebaseConfig = {
     apiKey: "AIzaSyCbohHldibFPn_sBYSPDa8AxN0_lvV0stc",
     authDomain: "plantiful-ec98d.firebaseapp.com",
     projectId: "plantiful-ec98d",
@@ -13,8 +15,8 @@ import 'firebase/storage';
     measurementId: "G-V0MZCSJB64"
   };
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  //firebase.analytics();
 
   const projectStorage = firebase.storage();
 

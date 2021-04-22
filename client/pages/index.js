@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import UploadForm from '../components/UploadForm/UploadForm'
 import styles from '../styles/Home.module.scss'
-import Image from 'next/image'
+//import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -16,21 +16,8 @@ export default function Home() {
       <main>
         HELLO WORLD!
         <UploadForm/>
-
-        <Image src="/images/Plantiful.png" width={200} height={200} />
+        {/* <Image src="/images/Plantiful.png" width={200} height={200} /> */}
         <img src="/images/Plantiful.png"/>
-
-
-
-        {/* <!-- The core Firebase JS SDK is always required and must be listed first --> */}
-        <script src="/__/firebase/8.4.1/firebase-app.js"></script>
-
-        {/* <!-- TODO: Add SDKs for Firebase products that you want to use
-            https://firebase.google.com/docs/web/setup#available-libraries --> */}
-        <script src="/__/firebase/8.4.1/firebase-analytics.js"></script>
-
-        {/* <!-- Initialize Firebase --> */}
-        <script src="/__/firebase/init.js"></script>
         
       </main>
     </div>
