@@ -8,7 +8,7 @@ function authenticated({session}) {
     firebaseClient();
 
     async function signoutHandler () {
-        await firebase.auth().signout();
+        await firebase.auth().signOut();
         window.location.href="/";
     }
 

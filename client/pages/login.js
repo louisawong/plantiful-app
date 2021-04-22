@@ -15,7 +15,7 @@ function login() {
         await firebase.auth().createUserWithEmailAndPassword(email,password)
         .then(() => {
             console.log("REDIRECTING")
-            //window.location.href = "/"
+            window.location.href = "/"
         })
         .catch((err) => {
             const message = err.message;
