@@ -3,10 +3,14 @@ import {motion} from 'framer-motion'
 import style from './ProgressBar.module.scss';
 import useStorage from '../../firebase/useStorage';
 
-function ProgressBar({file, setFile}) {
+function ProgressBar({file, setUrl}) {
 
     const {url,progress} = useStorage(file);
     console.log(progress,url);
+
+    useEffect(() => {
+        if (url) setUrl(url);
+    }, [url])
     
     return (
         <motion.div 

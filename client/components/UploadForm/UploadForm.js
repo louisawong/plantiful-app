@@ -6,6 +6,7 @@ function UploadForm() {
     
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
+    const [url, setUrl] = useState(null);
 
     const types = ['image/png', 'image/jpeg'];
 
@@ -30,7 +31,8 @@ function UploadForm() {
                 <div className={style.output}>
                     { error && <div className={style.error}>{ error }</div>}
                     { file && <div>{ file.name}</div> }
-                    {file && <ProgressBar file={file} setFile={setFile}/>}
+                    {file && <ProgressBar file={file} setUrl={setUrl}/>}
+                    {url && <div>{url}</div>}
                  </div>
             </form>
         </div>
