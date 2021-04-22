@@ -25,7 +25,7 @@ function login() {
 
     const loginHandler = async (e) => {
         e.preventDefault();
-        await firebase.auth().signin(email,password)
+        await firebase.auth().signInWithEmailAndPassword(email,password)
         .then(() => {
             window.location.href = "/"
         })
