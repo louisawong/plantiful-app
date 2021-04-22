@@ -21,7 +21,7 @@ export default function Home() {
         HELLO WORLD!
         <UploadForm/>
 
-        <Image src="/../public/images/Plantiful.png" width={200} height={200} />
+        <Image src="/images/Plantiful.png" width={200} height={200} />
         {/* <img src={Plantiful}/> */}
 
 
