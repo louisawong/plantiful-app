@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const databaseURI = process.env.MONGO_URI || "mongodb+srv://general:oJtmLp85RvK3PbEo@plantiful.xmjku.mongodb.net/PlantifulDB?retryWrites=true&w=majority"
+const databaseURI = process.env.MONGO_URI  
 
 const connection = {};
 

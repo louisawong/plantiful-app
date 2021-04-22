@@ -9,10 +9,13 @@ function login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
 
-    async function createHandler () {
+    const createHandler = async () => {
+        //e.preventDefault();
+        console.log("HANDLING CREATE")
         await firebase.auth().createUserWithEmailAndPassword(email,password)
         .then(() => {
-            window.location.href = "/"
+            console.log("REDIRECTING")
+            //window.location.href = "/"
         })
         .catch((err) => {
             const message = err.message;
@@ -20,7 +23,8 @@ function login() {
         })
     }
 
-    async function loginHandler () {
+    const loginHandler = async (e) => {
+        e.preventDefault();
         await firebase.auth().signin(email,password)
         .then(() => {
             window.location.href = "/"
@@ -43,7 +47,7 @@ function login() {
                     <label>Password:</label>
                     <input required type='password' value={password} onChange={(e)=>setPassword(e.target.value)}></input>
                 </div>
-                <button disabled={email===""||password===""}onClick={createHandler}>
+                <button type="button" disabled={email===""||password===""}onClick={createHandler}>
                     Create Account
                 </button>
                 <button disabled={email===""||password===""}onClick={loginHandler}>

@@ -1,7 +1,7 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('./authSecrets.json');
+const serviceAccount = require('../authSecrets.json');
 
-export const verifyIfToken = (token) => {
+export const verifyIdToken = (token) => {
     if (!admin.apps.length) {
         admin.initializeApp({
             credential:admin.credential.cert(serviceAccount),

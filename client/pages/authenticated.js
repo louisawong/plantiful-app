@@ -26,7 +26,7 @@ function authenticated({session}) {
     }
 }
 
-export async function getServerSidePropd(context){
+export async function getServerSideProps(context){
     try {
         const cookies = nookies.get(context);
         const token = await verifyIdToken(cookies.token);
