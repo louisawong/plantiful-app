@@ -4,5 +4,5 @@ import dbConnect from '../../util/dbConnect';
 dbConnect();
 
 export default async (req,res) => {
-  res.send('hello')
+  res.send(<p>HELLO</p>)
 }
