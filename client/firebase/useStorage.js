@@ -11,15 +11,17 @@ const useStorage = (file) => {
 
     useEffect(()=>{
       //references
-      const storageRef = projectStorage.ref(file.name)
+      const storageRef = projectStorage.ref();
+      const imageRef = storageRef.child(file.name);
       
-      storageRef.put(file).on('state_changed', (snap) => {
+      imageRef.put(file).on('state_changed', (snap) => {
           let percentage = (snap.bytesTransferred/snap.totalBytes)*100;
           setProgress(percentage);
       }, (err) => {
           setError(err);
       }, async () => {
-          const url = await storageRef.getDownloadURL();
+          const url = await imageRef.getDownloadURL();
+          //console.log(url)
           setUrl(url);
       })
     },[file])
