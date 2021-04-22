@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import UploadForm from '../components/UploadForm/UploadForm'
 import styles from '../styles/Home.module.scss'
-import Image from 'next/Image'
+//import Image from 'next/Image'
 const Plantiful = require('../public/images/Plantiful.png')
 
 export default function Home() {
