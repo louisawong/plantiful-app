@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
-const databaseURI = process.env.MONGO_URI  
+const databaseURI = process.env.MONGO_URI;
+console.log(databaseURI);
 
 const connection = {};
 
