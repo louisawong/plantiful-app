@@ -2,7 +2,7 @@ import Head from 'next/head'
 import UploadForm from '../components/UploadForm/UploadForm'
 import styles from '../styles/Home.module.scss'
 import Image from 'next/image'
-const Plantiful = require('../public/images/Plantiful.png')
+//const Plantiful = require('../public/images/Plantiful.png')
 
 // const withImages=require('next-images')
 // withImages({})
