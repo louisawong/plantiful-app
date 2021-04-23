@@ -32,12 +32,12 @@ function Navigation() {
             <div className={style.rightNoUser}>
                 <Link href="/login">
                     <div className={style.container_nav3}>
-                         <div className={style.trades}>Log In</div>
+                         <div className={style.buttons}>Log In</div>
                     </div>
                 </Link>
                 <Link href="/signup">
-                    <div className={style.container_nav3}>
-                        <div className={style.trades}>Sign Up</div>
+                    <div className={style.container_nav4}>
+                        <div className={style.buttons}>Sign Up</div>
                     </div>
                 </Link>
             </div>
