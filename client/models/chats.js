@@ -26,6 +26,10 @@ const ChatSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    removed: {
+        type:Boolean,
+        default: false,
+    }
 })
 
 module.exports = mongoose.models.Chat || mongoose.model('Chat', ChatSchema)

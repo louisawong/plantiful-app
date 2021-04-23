@@ -10,16 +10,6 @@ export default function Home() {
 
   const {user} = useAuth();
 
-  const [location, setLocation] = useState([]);
-
-   useEffect(()=>{
-     if (navigator.geolocation){
-       navigator.geolocation.getCurrentPosition(function(position){
-         setLocation([position.coords.latitude, position.coords.longitude])
-       })
-     }else console.log("no navigator")
-    },[])
-
   return (
     <div className={style.container}>
       <Head>
@@ -30,7 +20,6 @@ export default function Home() {
         <img className={style.logo} src="/images/Plantiful.png"/>
         {/* <Image src="/images/Plantiful.png" width={200} height={200} /> */}
         Welcome To Home Page
-        {location}
         <UploadForm/>
         <h2>{`User ID: ${user ? user.uid : "No user signed in"}`}</h2>
         <div>

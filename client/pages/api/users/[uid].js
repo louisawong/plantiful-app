@@ -53,10 +53,13 @@ dbConnect();
                 {uid:uid},
                 {removed: req.body.removed}
               );
-              res.status(204).send();
+              res.status(204);
+              res.redirect("/");
+              res.send();
             } catch (err) {
               console.error(`Couldn't remove user: ${uid}`, err);
               res.status(500).send(err);
             }
+            break;
     }
 }
