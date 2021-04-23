@@ -3,8 +3,8 @@ import style from './SignUp.module.scss'
 
 function SignUp() {
     return (
-        <div>
-            
+        <div className={style.container}>
+            <h1></h1>
         </div>
     )
 }

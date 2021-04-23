@@ -15,4 +15,4 @@ const CommentSchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.models.Message || mongoose.model('Message', MessageSchema)
+module.exports = mongoose.models.Comment || mongoose.model('Comment', CommentSchema)

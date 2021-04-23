@@ -4,15 +4,15 @@ const Trade = require('./trades');
 const Chat = require('./chats');
 
 const UserSchema = new mongoose.Schema({
+    uid: {
+        type:String,
+        require: true,
+    },
     username: {
         type: String,
         required: [true, 'Please enter a username.'],
         unique: true,
         maxLength: [30, 'Username cannot be more than 30 characters.']
-    },
-    password:{
-        type: String,
-        required: [true, 'Please enter a password.'],
     },
     followers: {
         type: [String],
@@ -75,6 +75,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
+    removed: {
+        type: Boolean,
+        default: false,
+    }
 })
 
 module.exports = mongoose.models.User || mongoose.model('User', UserSchema)

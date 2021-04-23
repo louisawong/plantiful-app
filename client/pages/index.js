@@ -19,13 +19,13 @@ export default function Home() {
         <img className={style.logo} src="/images/Plantiful.png"/>
         {/* <Image src="/images/Plantiful.png" width={200} height={200} /> */}
         Welcome To Home Page
-        {process.env.MONGO_URI}
+        {navigator.geolocation}
         <UploadForm/>
         <h2>{`User ID: ${user ? user.uid : "No user signed in"}`}</h2>
         <div>
           <button disabled={!user}>
             <Link href="/authenticated">
-              <a>Sign In</a>
+              <a>Authorized Page</a>
             </Link>
           </button>
           <button disabled={user}>
