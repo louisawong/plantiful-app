@@ -5,6 +5,7 @@ import style from '../styles/Home.module.scss'
 import {useAuth} from '../firebase/auth';
 import Link from 'next/link'
 import React, {useEffect,useState} from 'react'
+import Navigation from '../components/Navigation/Navigation';
 
 export default function Home() {
 
@@ -17,9 +18,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <img className={style.logo} src="/images/Plantiful.png"/>
+        <Navigation/>
+        {/* <img className={style.logo} src="/images/Plantiful.png"/> */}
         {/* <Image src="/images/Plantiful.png" width={200} height={200} /> */}
-        Welcome To Home Page
         <UploadForm/>
         <h2>{`User ID: ${user ? user.uid : "No user signed in"}`}</h2>
         <div>

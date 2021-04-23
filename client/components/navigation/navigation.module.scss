@@ -1,0 +1,40 @@
+$chocolate-web: #C86931ff;
+$rust: #A44815ff;
+$morning-blue: #899B9Bff;
+$wintergreen-dream: #50837Eff;
+$msu-green: #134842ff;
+$phthalo-green: #052E26ff;
+$dark-jungle-green: #041910ff;
+
+.navigation {
+    box-sizing: border-box;
+    width: 100vw;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    //background-color:$phthalo-green;
+    color: rgb(61, 60, 60);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 10vw;
+    max-width: 200px;
+    min-width: 100px;
+    margin-right: 2vw;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    border-style: solid red;
+    border-width: 1px;
+}
