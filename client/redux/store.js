@@ -3,6 +3,7 @@ import userReducer from './user'
 import tradesReducer from './trades'
 import insposReducer from './inspos'
 import searchReducer from './search'
+import navReducer from './nav'
 
 export default configureStore({
     reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
         trades: tradesReducer,
         inspos: insposReducer,
         search: searchReducer,
+        nav: navReducer,
     }
 })

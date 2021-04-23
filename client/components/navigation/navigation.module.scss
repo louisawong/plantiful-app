@@ -14,17 +14,19 @@ $dark-jungle-green: #041910ff;
     padding-top: 2vh;
     padding-bottom: 2vh;
     //background-color:$phthalo-green;
-    color: rgb(61, 60, 60);
+    color: rgb(39, 53, 47);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-size: 0.9em ;
+    font-weight: 600;
 }
 
 .logo {
     width: 10vw;
     max-width: 200px;
     min-width: 100px;
-    margin-right: 2vw;
+    margin-right: 1vw;
 
     &:hover {
         cursor: pointer;
@@ -34,8 +36,61 @@ $dark-jungle-green: #041910ff;
 .left {
     display: flex;
     align-items: center;
-    width: 30%;
-    border-style: solid;
-    border-width: 1px;
-    border-color: red;
+    width: 25%;
+    justify-content: space-between;
+    height: 100%;
+
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: red;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 15%;
+    max-width: 120px;
+    height: 100%;
+
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: red;
+}
+
+.container_nav {
+
+
+    padding: 0.5rem;
+    border-radius: 20px;
+    display: grid;
+    place-content: center;
+
+    &:hover{
+        background-color: #e1ede6;
+        cursor: pointer;
+    }
+    &:active {
+        background-color: $rust;
+        color: white;
+    }
+}
+
+.container_nav2 {
+    
+
+    padding: 0.5rem;
+    border-radius: 20px;
+    display: grid;
+    place-content: center;
+
+    &:hover{
+        background-color: #e1ede6;
+        cursor: pointer;
+    }
+
+    &:active {
+        background-color: $rust;
+        color: white;
+    }
 }

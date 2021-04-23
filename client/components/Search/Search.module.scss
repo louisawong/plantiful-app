@@ -1,0 +1,47 @@
+$chocolate-web: #C86931ff;
+$rust: #A44815ff;
+$morning-blue: #899B9Bff;
+$wintergreen-dream: #50837Eff;
+$msu-green: #134842ff;
+$phthalo-green: #052E26ff;
+$dark-jungle-green: #041910ff;
+
+.searchBarContainer {
+    display: flex;
+    width: 40%;
+    align-items: center;
+
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: red;
+}
+.searchBar {
+    outline: 0;
+    padding: 0.3rem;
+    padding-left: 1rem;
+    width: 90%;
+
+    &:hover {
+        box-shadow:0 0 5px 3px #e1ede6;
+    }
+
+    &:focus {
+        background-color:#e1ede6;
+    }
+
+}
+
+.input {
+    padding-left:20px;
+    border:0;
+    border-radius: 20px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    font-family: 'Poppins', sans-serif;
+    color: $dark-jungle-green;
+}
+
+.icon {
+    width: 1vw;
+    margin-right: 1rem;
+}
+
