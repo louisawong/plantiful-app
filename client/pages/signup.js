@@ -25,7 +25,8 @@ function signUp() {
         .catch((err) => {
             const message = err.message;
             if (message ==="The email address is already in use by another account."){
-                alert(message)
+                alert(message);
+                window.location.href="/login"
             } else {
                 alert(message)
             }
@@ -59,11 +60,11 @@ function signUp() {
                     </div>
                     <div className={style.fields}>
                         <label>First Name:</label>
-                        <input className={style.input}  required type='text' value={password} onChange={(e)=>setFirstName(e.target.value)}></input>
+                        <input className={style.input}  required type='text' value={firstName} onChange={(e)=>setFirstName(e.target.value)}></input>
                     </div>
                     <div className={style.fields}>
                         <label>Last Name:</label>
-                        <input className={style.input} type='text' value={password} onChange={(e)=>setLastName(e.target.value)}></input>
+                        <input className={style.input} type='text' value={lastName} onChange={(e)=>setLastName(e.target.value)}></input>
                     </div>
                     <button className={style.button}  type="button" disabled={email===""||password===""}onClick={createHandler}>
                         Create Account
