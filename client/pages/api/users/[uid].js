@@ -9,6 +9,7 @@ dbConnect();
      console.log(uid);
 
     switch(method) {
+        //getting all a user's info by uid
          case 'GET':
              try {
                const user = await User.findOne({uid: uid })
@@ -18,6 +19,7 @@ dbConnect();
                res.status(500).send(err);
              }
              break;
+        //making a new account
           case 'POST':
             const user = {
               uid: uid,
@@ -34,6 +36,7 @@ dbConnect();
               res.status(500).send(err);
             }
             break;
+          //editing any info in user
           case 'PUT':
             try {
               const result = await User.findOneAndUpdate(
@@ -47,6 +50,7 @@ dbConnect();
               res.status(500).send(err);
             }
             break;
+          //soft deleting the user
           case 'DELETE':
             try {
               await User.findOneAndUpdate(

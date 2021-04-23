@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Message = require('./messages')
 
 const ChatSchema = new mongoose.Schema({
+    _id: {
+        type: String,
+        required: true,
+    },
     user1Id: {
         type: String,
         required: true,
@@ -25,6 +29,10 @@ const ChatSchema = new mongoose.Schema({
     updated:{
         type: Date,
         default: Date.now,
+    },
+    unread: {
+        type:Boolean,
+        default: false,
     },
     removed: {
         type:Boolean,

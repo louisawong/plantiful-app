@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Comment = require('./comments')
 
 const InspoSchema = new mongoose.Schema({
+    _id: {
+        type: String,
+        required: true,
+    },
     userId: {
         type: String,
         required: true,
@@ -34,15 +38,15 @@ const InspoSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    location: {
-        type: {
-            type: String,
-            enum: ['Point'],
-        },
-        coordinates: {
-            type: [Number],
-        }
-    },
+    // location: {
+    //     type: {
+    //         type: String,
+    //         enum: ['Point'],
+    //     },
+    //     coordinates: {
+    //         type: [Number],
+    //     }
+    // },
     comments: {
         type: [Comment],
         default: [],
