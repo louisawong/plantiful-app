@@ -7,19 +7,17 @@ $phthalo-green: #052E26ff;
 $dark-jungle-green: #041910ff;
 
 .container {
-    height: 60vh;
+    height: 70vh;
     width: 40%;
     min-width: 350px;
     max-width: 800px;
-    color: white;
+    min-height: 5000;
+    overflow-y: scroll;
     margin: auto;
     margin-top: 10vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     border-radius: 10px;
-    background-image: url(https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/Background.png?alt=media&token=6aff9683-0e81-4bce-a36e-9a3d0b717bcc);
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/calathea_orbifolia%20.png?alt=media&token=1ca05062-6e59-4d57-a703-1a8882686543);
     background-color: $rust;
     background-size: cover;
     background-position: center;
@@ -27,4 +25,108 @@ $dark-jungle-green: #041910ff;
     // border-style: solid;
     // border-width: 1px;
     // border-color: red;    
+}
+.wrapper {
+    height: 80%;
+    max-height: 8000px;
+    width: 80%;
+    color: white;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: red; 
+}
+.redirect {
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+.redirectLink {
+    font-weight: 600;
+
+    &:hover {
+        color: $rust;
+        cursor:pointer;
+    }
+}
+.form {
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 1000;
+}
+.signForm {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 1000;
+}
+.button {
+    color: white;
+    background-color: $rust;
+    border-radius: 10px;
+    padding: 0.25rem 0.5rem;
+    font-family: 'Poppins', sans-serif;
+
+    &:disabled {
+        color: rgb(205, 203, 203);
+        background-color: rgba(164, 71, 21, 0.8);
+    }
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: red; 
+}
+.h2 {
+    margin: 1.5rem;
+    margin-top:0;
+    padding: 0;
+    line-height: 0.8em;
+
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: red;
+}
+.slogan {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 0.8em;
+
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: red;
+}
+
+.input {
+    margin-left: 0.5rem;
+    border-radius: 10px;
+    border: 0;
+    color: rgb(48, 48, 48);
+    padding: 0 0.5em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 0.8rem;
+}
+
+.fields {
+    font-weight: 300;
+    font-size: 0.8rem;
 }

@@ -11,20 +11,6 @@ function login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
 
-    // const createHandler = async () => {
-    //     //e.preventDefault();
-    //     console.log("HANDLING CREATE")
-    //     await firebase.auth().createUserWithEmailAndPassword(email,password)
-    //     .then(() => {
-    //         console.log("REDIRECTING")
-    //         window.location.href = "/"
-    //     })
-    //     .catch((err) => {
-    //         const message = err.message;
-    //         alert(message)
-    //     })
-    // }
-
     const loginHandler = async (e) => {
         e.preventDefault();
         await firebase.auth().signInWithEmailAndPassword(email,password)
@@ -48,21 +34,26 @@ function login() {
                 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"/>
             </Head>
         <main className={style.container}>
-            <h1>Login</h1>
-            <form>
-                <div className={style.email}>
-                    <label>Email:</label>
-                    <input required type='email' value={email} onChange={(e)=>setEmail(e.target.value)}></input>
+            <div className={style.wrapper}>
+                <div className={style.header}>
+                    <h1 className={style.h2}>Login</h1>
+                    <p className={style.slogan}>To Discover Plants Nearby</p>
                 </div>
-                <div className={style.password}>
-                    <label>Password:</label>
-                    <input required type='password' value={password} onChange={(e)=>setPassword(e.target.value)}></input>
-                </div>
-                <button disabled={email===""||password===""}onClick={loginHandler}>
-                    Login
-                </button>
-            </form>
-            <p>Don't have an account? <Link href="/signup">Sign up.</Link></p>
+                <form className={style.form}>
+                    <div className={style.fields}>
+                        <label>Email:</label>
+                        <input className={style.input} required type='email' value={email} onChange={(e)=>setEmail(e.target.value)}></input>
+                    </div>
+                    <div className={style.fields}>
+                        <label>Password:</label>
+                        <input className={style.input} required type='password' value={password} onChange={(e)=>setPassword(e.target.value)}></input>
+                    </div>
+                    <button className={style.button} disabled={email===""||password===""} onClick={loginHandler}>
+                        Login
+                    </button>
+                </form>
+                <p className={style.redirect}>Don't have an account? <Link href="/signup"><span className={style.redirectLink}>Sign up.</span></Link></p>
+            </div>
         </main>
       </div>
     )
