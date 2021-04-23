@@ -24,7 +24,23 @@ function Navigation() {
         {!user? 
         //Show this nav if no user
         <div className={style.navigation}>
-            <img className={style.logo} src="/images/Plantiful.png"/>
+            <div className={style.left}>
+                <Link href="/">
+                <img className={style.logo} src="/images/Plantiful.png"/>
+                </Link>
+            </div>
+            <div className={style.rightNoUser}>
+                <Link href="/login">
+                    <div className={style.container_nav3}>
+                         <div className={style.trades}>Log In</div>
+                    </div>
+                </Link>
+                <Link href="/signup">
+                    <div className={style.container_nav3}>
+                        <div className={style.trades}>Sign Up</div>
+                    </div>
+                </Link>
+            </div>
         </div>
         :
         //Show this nav if user is logged in

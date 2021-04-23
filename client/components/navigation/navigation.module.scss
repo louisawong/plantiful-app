@@ -49,8 +49,8 @@ $dark-jungle-green: #041910ff;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 18%;
-    max-width: 120px;
+    width: 15%;
+    max-width: 140px;
     height: 100%;
 
     // border-style: solid;
@@ -77,6 +77,38 @@ $dark-jungle-green: #041910ff;
 }
 
 .container_nav2 {
+    
+
+    padding: 0.5rem;
+    border-radius: 20px;
+    display: grid;
+    place-content: center;
+
+    &:hover{
+        background-color: #e1ede6;
+        cursor: pointer;
+    }
+
+    &:active {
+        background-color: $rust;
+        color: white;
+    }
+}
+
+.rightNoUser {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 16%;
+    max-width: 200px;
+    height: 100%;
+
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: red;
+}
+
+.container_nav3 {
     
 
     padding: 0.5rem;

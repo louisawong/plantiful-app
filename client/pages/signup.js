@@ -6,49 +6,42 @@ import "firebase/auth"
 import style from '../styles/Login.module.scss'
 import Link from 'next/link'
 
-function login() {
+function signUp() {
+
     firebaseClient();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
 
-    // const createHandler = async () => {
-    //     //e.preventDefault();
-    //     console.log("HANDLING CREATE")
-    //     await firebase.auth().createUserWithEmailAndPassword(email,password)
-    //     .then(() => {
-    //         console.log("REDIRECTING")
-    //         window.location.href = "/"
-    //     })
-    //     .catch((err) => {
-    //         const message = err.message;
-    //         alert(message)
-    //     })
-    // }
-
-    const loginHandler = async (e) => {
-        e.preventDefault();
-        await firebase.auth().signInWithEmailAndPassword(email,password)
+    const createHandler = async () => {
+        //e.preventDefault();
+        console.log("HANDLING CREATE")
+        await firebase.auth().createUserWithEmailAndPassword(email,password)
         .then(() => {
+            console.log("REDIRECTING")
             window.location.href = "/"
         })
         .catch((err) => {
             const message = err.message;
-            alert(message)
+            if (message ==="The email address is already in use by another account."){
+                alert(message)
+            } else {
+                alert(message)
+            }
         })
     }
 
     return (
         <div>
             <Head>
-                <title>Plantiful-Login</title>
+                <title>Plantiful-SignUp</title>
                 <link rel="icon" href="/favicon.ico" />
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-                  rel="stylesheet"></link>
+                rel="stylesheet"></link>
                 <link rel="preconnect" href="https://fonts.gstatic.com"/>
                 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"/>
             </Head>
-        <main className={style.container}>
-            <h1>Login</h1>
+        <div className={style.container}>
+            <h1>Sign Up</h1>
             <form>
                 <div className={style.email}>
                     <label>Email:</label>
@@ -58,14 +51,14 @@ function login() {
                     <label>Password:</label>
                     <input required type='password' value={password} onChange={(e)=>setPassword(e.target.value)}></input>
                 </div>
-                <button disabled={email===""||password===""}onClick={loginHandler}>
-                    Login
+                <button type="button" disabled={email===""||password===""}onClick={createHandler}>
+                    Create Account
                 </button>
             </form>
-            <p>Don't have an account? <Link href="/signup">Sign up.</Link></p>
-        </main>
-      </div>
+            <p>Already have an account? <Link href="/login">Login.</Link></p>
+        </div>
+        </div>
     )
 }
 
-export default login
+export default signUp
