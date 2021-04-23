@@ -20,9 +20,15 @@ function Navigation() {
     }
 
     return (
+        <div>
+        {!user? 
+        //Show this nav if no user
         <div className={style.navigation}>
-            {user ? 
-            <div>
+            <img className={style.logo} src="/images/Plantiful.png"/>
+        </div>
+        :
+        //Show this nav if user is logged in
+        <div className={style.navigation}>
             <div className={style.left}>
                 <Link href="/home">
                 <img className={style.logo} src="/images/Plantiful.png"/>
@@ -52,10 +58,8 @@ function Navigation() {
                     <span className={`material-icons ${style.icon}`}>logout</span>
                 </div>
             </div>
-            </div>
-             : 
-             <img className={style.logo} src="/images/Plantiful.png"/>
-             }
+        </div>
+        }
         </div>
     )
 }
