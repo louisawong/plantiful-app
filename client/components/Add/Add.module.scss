@@ -1,0 +1,40 @@
+$chocolate-web: #C86931ff;
+$rust: #A44815ff;
+$morning-blue: #899B9Bff;
+$wintergreen-dream: #50837Eff;
+$msu-green: #134842ff;
+$phthalo-green: #052E26ff;
+$dark-jungle-green: #041910ff;
+
+.wrapper {
+    position: absolute;
+    right: 4vw;
+    bottom: 2vh;
+}
+
+.container {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #e1ede6;
+    color: rgb(39, 53, 47);
+
+
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: red;
+
+    &:hover{
+        background-color: $rust;
+        color: white;
+        cursor: pointer;
+    }
+    &:active {
+        background-color: $rust;
+        color: white;
+    }
+}
