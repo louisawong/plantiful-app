@@ -22,10 +22,6 @@ function signUp() {
     const dispatch = useDispatch();
     const router = useRouter();
 
-    const redirect = () => {
-        window.location.href="/home";
-    }
-
     const checkUsername = async () => {
         fetch('/api/usernameExist', {
             method: 'POST',
@@ -37,7 +33,8 @@ function signUp() {
         .then ((res)=> {
             if (res.status === 200) {
                 alert("Username already exists. Please try another username.")
-                window.location.href = "/signup"
+                //window.location.href = "/signup"
+                router.push("/signup")
             }
             else {
                 console.log("username is valid")
@@ -56,10 +53,10 @@ function signUp() {
                     const message = err.message;
                     if (message === "The email address is already in use by another account."){
                         alert(message);
-                        window.location.href="/login"
+                        router.push("/login")
                     } else {
                         alert(message)
-                        window.location.href="/signup"
+                        router.push("/signup")
                     }
                 })
             }
@@ -70,26 +67,6 @@ function signUp() {
     
     const createHandler = async () => {
         checkUsername();
-        //dispatch(setNewUser({email: email, password:password}));
-        
-        // await firebase.auth().createUserWithEmailAndPassword(email,password)
-        // .then(() => {
-        //     saveToState();
-        //     // dispatch(setNewUser({
-        //     //     isAuthenticated: true,
-        //     //     uid: user.uid
-        //     // }))
-        //     window.location.href = "/home"
-        // })
-        // .catch((err) => {
-        //     const message = err.message;
-        //     if (message ==="The email address is already in use by another account."){
-        //         alert(message);
-        //         window.location.href="/login"
-        //     } else {
-        //         alert(message)
-        //     }
-        // })
     }
 
     return (

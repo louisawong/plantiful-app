@@ -3,8 +3,10 @@ import Head from 'next/head'
 import {useSelector} from 'react-redux';
 
 function home() {
-
-    const {uid,username,lastName,email,firstName} = useSelector((state)=> state.user)
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const userInfo = useSelector((state)=> state.user)
+    const {user} = useAuth(); // replace with line ten
 
     return (
         <div>

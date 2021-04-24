@@ -4,34 +4,41 @@ import Head from 'next/head';
 import {useDispatch, useSelector} from 'react-redux';
 import {loadUser, logoutUser} from '../redux/user';
 import {useAuth} from '../firebase/auth';
+import { Router, useRouter } from 'next/router'
 
 
 function profile() {
     const dispatch = useDispatch();
+    const router = useRouter();
     const userInfo = useSelector((state)=> state.user)
     const {user} = useAuth(); // replace with line ten
-    const [currentUser, setCurrentUser] = useState(null);
+    // const [currentUser, setCurrentUser] = useState(null);
 
 
-    const load = async (uid) => {
-      fetch('/api/users/'+uid)
-      .then ((res)=>res.json())
-      .then((data)=> {
-        console.log(data)
-        setCurrentUser(data);
-      })
-      .catch ((err) => console.log(err))
+    // const load = async (uid) => {
+    //   fetch('/api/users/'+uid)
+    //   .then ((res)=>res.json())
+    //   .then((data)=> {
+    //     console.log(data)
+    //     setCurrentUser(data);
+    //   })
+    //   .catch ((err) => console.log(err))
+    // };
+
+    const addProfileHandler = () => {
+
     };
 
     useEffect (()=> {
       //console.log("UID: ",user?.uid)
       if (!user) {
           dispatch(logoutUser());
-          window.location.href="/login";
-      } else if (!userInfo.uid || user.uid !== userInfo.uid) {
-          dispatch(logoutUser());
+          router.push("/login")
+          //window.location.href="/login";
+      //} else if (!userInfo.uid || user.uid !== userInfo.uid) {
+         // dispatch(logoutUser());
           //load(user.uid)
-          dispatch(loadUser({uid:user.uid}));
+          //dispatch(loadUser({uid:user.uid}));
           //dispatch(loadUser({uid:user.uid}));
       }
     },[])
@@ -51,11 +58,8 @@ function profile() {
                 <div></div>
             :
                 <div className={style.imageContainer}>
-                    <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=4f421773-3a38-484f-8811-c545e2a45f05"></img>
-                    {/* <div className={style.profileOverlay}>
-                        <h2>+</h2>
-                        <h1>Add a profile photo</h1>
-                    </div> */}
+                    <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"></img>
+                    <div onClick={addProfileHandler} className={style.addProfile}>Add A Profile Photo</div>
                 </div>
             }
             <h1>{userInfo.username}</h1>
