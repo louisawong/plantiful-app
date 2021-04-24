@@ -15,7 +15,7 @@ dbConnect();
                res.status(200).send(user);
              }catch (err) {
                console.error(`Couldn't get user: ${uid}`, err)
-               res.status(500).send(err);
+               res.status(500).send("cannot get single user info", err);
              }
              break;
         //making a new account
