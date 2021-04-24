@@ -103,31 +103,6 @@ export const userSlice = createSlice({
         })
       },
       loadUser: (state,action) => {
-        // function load () {
-        // fetch('/api/users/'+action.payload.uid)
-        // .then ((res)=>res.json())
-        // .then((data)=> {
-        //     console.log("DATA FETCH", data)
-        //     state.username = data.username;
-        //     state.email = data.email;
-        //     state.firstName = data.firstName;
-        //     state.lastName = data.lastName;
-        //     state.profile = data.profile;
-        //     state.description = data.description;
-        //     const coords = data.location.coordinates; 
-        //     state.location = coords;
-        //     state.followers = state.followers.concat(data.followers);
-        //     state.numFollowers = data.numFollowers;
-        //     state.inspos = state.inspos.concat(data.inspos);
-        //     state.numInspos = data.numInspos;
-        //     state.trades = state.trades.concat(data.trades);
-        //     state.numTrades= data.numTrades;
-        //     state.chats = state.chats.concat(data.chats);
-        // })
-        // .catch((err) => console.log(err))
-        // };
-        // load();
-        // console.log(state)
         state.isAuthenticated = true;
         state.uid = action.payload.uid;
         state.username = action.payload.username;
