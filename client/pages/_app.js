@@ -7,13 +7,13 @@ import Add from '../components/Add/Add';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AuthProvider>
-      <Provider store={store}>
+    <Provider store={store}>
+      <AuthProvider>
         <Navigation/>
         <Component {...pageProps} />
         <Add/>
-      </Provider>
-    </AuthProvider>
+      </AuthProvider>
+    </Provider>
   )
 }
 

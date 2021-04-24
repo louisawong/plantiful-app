@@ -7,7 +7,6 @@ import "firebase/auth";
 export const userSlice = createSlice({
     name: "user",
     initialState:{
-        authUser: {},
         isAuthenticated: false,
         uid: "",
         username: "",
@@ -26,9 +25,6 @@ export const userSlice = createSlice({
         chats:[],
     },
     reducers:{
-      authUser: (state, action) => {
-        state.authUser = action.payload;
-      },
       setNewUser: (state, action) => {
         state.isAuthenticated = true;
         state.uid = action.payload.uid;
@@ -107,53 +103,52 @@ export const userSlice = createSlice({
         })
       },
       loadUser: (state,action) => {
+        // function load () {
+        // fetch('/api/users/'+action.payload.uid)
+        // .then ((res)=>res.json())
+        // .then((data)=> {
+        //     console.log("DATA FETCH", data)
+        //     state.username = data.username;
+        //     state.email = data.email;
+        //     state.firstName = data.firstName;
+        //     state.lastName = data.lastName;
+        //     state.profile = data.profile;
+        //     state.description = data.description;
+        //     const coords = data.location.coordinates; 
+        //     state.location = coords;
+        //     state.followers = state.followers.concat(data.followers);
+        //     state.numFollowers = data.numFollowers;
+        //     state.inspos = state.inspos.concat(data.inspos);
+        //     state.numInspos = data.numInspos;
+        //     state.trades = state.trades.concat(data.trades);
+        //     state.numTrades= data.numTrades;
+        //     state.chats = state.chats.concat(data.chats);
+        // })
+        // .catch((err) => console.log(err))
+        // };
+        // load();
+        // console.log(state)
         state.isAuthenticated = true;
         state.uid = action.payload.uid;
-        function load () {
-        fetch('/api/users/'+action.payload.uid)
-        .then ((res)=>res.json())
-        .then((data)=> {
-            console.log("DATA FETCH", data)
-            state.username = data.username;
-            state.email = data.email;
-            state.firstName = data.firstName;
-            state.lastName = data.lastName;
-            state.profile = data.profile;
-            state.description = data.description;
-            const coords = data.location.coordinates; 
-            state.location = coords;
-            state.followers = state.followers.concat(data.followers);
-            state.numFollowers = data.numFollowers;
-            state.inspos = state.inspos.concat(data.inspos);
-            state.numInspos = data.numInspos;
-            state.trades = state.trades.concat(data.trades);
-            state.numTrades= data.numTrades;
-            state.chats = state.chats.concat(data.chats);
-        })
-        .catch((err) => console.log(err))
-        };
-        load();
-        console.log(state)
-        // state.isAuthenticated = true;
-        // state.uid = action.payload.uid;
-        // state.username = action.payload.username;
-        // state.email = action.payload.email;
-        // state.firstName = action.payload.firstName;
-        // state.lastName = action.payload.lastName;
-        // state.profile = action.payload.profile;
-        // state.description = action.payload.description;
-        // const coords = action.payload.location.coordinates;  
-        // state.location = coords;
-        // state.followers = state.followers.concat(action.payload.followers);
-        // state.numFollowers = action.payload.numFollowers;
-        // state.inspos = state.inspos.concat(action.payload.inspos);
-        // state.numInspos = action.payload.numInspos;
-        // state.trades = state.trades.concat(action.payload.trades);
-        // state.numTrades= action.payload.numTrades;
-        // state.chats = state.chats.concat(action.payload.chats);
+        state.username = action.payload.username;
+        state.email = action.payload.email;
+        state.firstName = action.payload.firstName;
+        state.lastName = action.payload.lastName;
+        state.profile = action.payload.profile;
+        state.description = action.payload.description;
+        const coords = action.payload.location.coordinates;  
+        state.location = coords;
+        state.followers = state.followers.concat(action.payload.followers);
+        state.numFollowers = action.payload.numFollowers;
+        state.inspos = state.inspos.concat(action.payload.inspos);
+        state.numInspos = action.payload.numInspos;
+        state.trades = state.trades.concat(action.payload.trades);
+        state.numTrades= action.payload.numTrades;
+        state.chats = state.chats.concat(action.payload.chats);
       },
       logoutUser: (state) => {
-        state.isAuthenticated = false,
+        state.authUser = {};
+        state.isAuthenticated = false;
         state.uid = "";
         state.username = "";
         state.email = "";

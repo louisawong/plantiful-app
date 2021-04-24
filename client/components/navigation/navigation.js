@@ -16,7 +16,7 @@ function Navigation() {
     }
     
     const chatHandler = () => {
-      console.log("HANDLING")
+      console.log("HANDLING Chat")
     }
 
     return (
