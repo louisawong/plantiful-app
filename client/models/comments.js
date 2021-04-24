@@ -17,6 +17,10 @@ const CommentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    createdAt: {
+        type:Date,
+        default: Date.now,
+    }
 })
 
 module.exports = CommentSchema;

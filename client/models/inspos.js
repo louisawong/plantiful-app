@@ -51,6 +51,10 @@ const InspoSchema = new mongoose.Schema({
         type: [Comment],
         default: [],
     },
+    createdAt: {
+        type:Date,
+        default:Date.now,
+    }
 })
 
 module.exports = InspoSchema;

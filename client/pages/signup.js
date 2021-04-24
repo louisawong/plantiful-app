@@ -36,7 +36,7 @@ function signUp() {
         .then ((res)=> {
             if (res.status === 200) {
                 alert("Username already exists. Please try another username.")
-                window.location = "/signup"
+                window.location.href = "/signup"
             }
             else {
                 console.log("username is valid")
@@ -48,7 +48,8 @@ function signUp() {
                         email: email, 
                         username:username, 
                         firstName:firstName, 
-                        lastName:lastName}))
+                        lastName:lastName}));
+                        //window.location.href = "/home"
                 })
                 .catch((err) => {
                     const message = err.message;
