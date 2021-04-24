@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {useAuth} from '../firebase/auth';
 
 function home() {
     const dispatch = useDispatch();
