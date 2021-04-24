@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import {useDispatch, useSelector} from 'react-redux';
 import {useAuth} from '../firebase/auth';
+import { Router, useRouter } from 'next/router'
 
 function home() {
     const dispatch = useDispatch();
