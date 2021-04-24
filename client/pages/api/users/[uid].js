@@ -7,6 +7,8 @@ dbConnect();
      const {method} = req;
      const {uid} = req.query;
      console.log(uid);
+     req.body = JSON.parse(req.body)
+     console.log("BODY", req.body)
 
     switch(method) {
         //getting all a user's info by uid
@@ -22,7 +24,7 @@ dbConnect();
         //making a new account
           case 'POST':
             const user = {
-              uid: uid,
+              uid: req.body.uid,
               username: req.body.username,
               email: req.body.email,
               firstName: req.body.firstName,

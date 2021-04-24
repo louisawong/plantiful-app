@@ -7,6 +7,7 @@ dbConnect();
      const {method} = req;
      const {uid} = req.query;
      console.log(uid);
+     req.body = JSON.parse(req.body)
 
     switch(method) {
          // by user uid, add a new Inspo and update numInspos

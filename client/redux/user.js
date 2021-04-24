@@ -35,7 +35,7 @@ export const userSlice = createSlice({
             fetch('/api/users/'+action.payload.uid, {
                 method: 'POST',
                 header:{
-                    "contentType": "application/json"
+                    "Content-Type": "application/json"
              },
                 body: JSON.stringify({
                     uid:action.payload.uid,

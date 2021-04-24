@@ -21,6 +21,10 @@ function signUp() {
  
     const dispatch = useDispatch();
 
+    const redirect = () => {
+        window.location.href="/home";
+    }
+
     const checkUsername = async () => {
         fetch('/api/usernameExist', {
             method: 'POST',
@@ -37,23 +41,23 @@ function signUp() {
             else {
                 console.log("username is valid")
                 firebase.auth().createUserWithEmailAndPassword(email, password)
-                .then ((res)=>{
+                .then (async (res)=>{
                     console.log(res.user.uid);
                     dispatch(setNewUser({
                         uid: res.user.uid,
                         email: email, 
                         username:username, 
                         firstName:firstName, 
-                        lastName:lastName}));
-                    //window.location.href = "/home";
+                        lastName:lastName}))
                 })
                 .catch((err) => {
                     const message = err.message;
-                    if (message ==="The email address is already in use by another account."){
+                    if (message === "The email address is already in use by another account."){
                         alert(message);
                         window.location.href="/login"
                     } else {
                         alert(message)
+                        window.location.href="/signup"
                     }
                 })
             }
