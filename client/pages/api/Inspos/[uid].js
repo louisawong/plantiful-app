@@ -4,7 +4,7 @@ import User from '../../../models/users'
 dbConnect();
 
  export default async (req,res) => {
-     const {method} = req.method;
+     const {method} = req;
      const {uid} = req.query;
      console.log(uid);
 

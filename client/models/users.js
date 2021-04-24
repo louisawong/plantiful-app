@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
     username: {
         type: String,
         required: [true, 'Please enter a username.'],
-        unique: true,
+        unique: [true, 'Username already taken.'],
         maxLength: [30, 'Username cannot be more than 30 characters.']
     },
     followers: {

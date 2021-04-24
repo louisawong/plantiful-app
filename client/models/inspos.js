@@ -53,4 +53,5 @@ const InspoSchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.models.Inspo || mongoose.model('Inspo', InspoSchema)
+module.exports = InspoSchema;
+//module.exports = mongoose.models.Inspo || mongoose.model('Inspo', InspoSchema)

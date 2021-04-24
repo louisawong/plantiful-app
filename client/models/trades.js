@@ -60,4 +60,5 @@ const TradeSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.models.Trade || mongoose.model('Trade', TradeSchema)
+module.exports = TradeSchema;
+//module.exports = mongoose.models.Trade || mongoose.model('Trade', TradeSchema)

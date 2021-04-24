@@ -1,4 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {useAuth} from '../firebase/auth';
+import firebaseClient from '../firebase/config';
+import firebase from 'firebase/app';
+import "firebase/auth";
 
 export const userSlice = createSlice({
     name: "user",
@@ -21,13 +25,26 @@ export const userSlice = createSlice({
         chats:[],
     },
     reducers:{
-      setNewUser: (state,action) => {
-        state.isAuthenticated = action.payload.isAuthenticated;
-        state.uid = action.payload.uid;
-        state.username = action.payload.username;
-        state.email = action.payload.email;
-        state.firstName = action.payload.firstName;
-        state.lastName = action.payload.lastName;
+      setNewUser: (state, action) => {
+          state.isAuthenticated = true;
+          state.uid = action.payload.uid;
+          state.email = action.payload.email;
+          state.username = action.payload.username;
+          state.firstName = action.payload.firstName;
+          state.lastName = action.payload.lastName;
+            fetch('/api/users/'+action.payload.uid, {
+                method: 'POST',
+                header:{
+                    "contentType": "application/json"
+             },
+                body: JSON.stringify({
+                    uid:action.payload.uid,
+                    username:action.payload.username,
+                    email:action.payload.email,
+                    firstName: action.payload.firstName,
+                    lastName: action.payload.lastName
+                })
+            }).catch((err) => console.log(error))
       },
       editProfile: (state, action) => {
         state.profile = action.payload.profile;

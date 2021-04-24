@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
-import Head from 'next/head'
+import Head from 'next/head';
 import firebaseClient from '../firebase/config';
 import firebase from 'firebase/app';
-import "firebase/auth"
-import style from '../styles/Login.module.scss'
-import Link from 'next/link'
+import "firebase/auth";
+import style from '../styles/Login.module.scss';
+import Link from 'next/link';
+import {useDispatch, useSelector} from 'react-redux';
+import {setNewUser} from '../redux/user'
+// import {useAuth} from '../firebase/auth';
+import httpClient from 'axios';
 
 function signUp() {
 
@@ -12,25 +16,74 @@ function signUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName]=useState("")
+    const [lastName, setLastName] = useState("");
+    const [username, setUsername] = useState("");
+ 
+    const dispatch = useDispatch();
 
-    const createHandler = async () => {
-        //e.preventDefault();
-        console.log("HANDLING CREATE")
-        await firebase.auth().createUserWithEmailAndPassword(email,password)
-        .then(() => {
-            console.log("REDIRECTING")
-            window.location.href = "/"
+    const checkUsername = async () => {
+        fetch('/api/usernameExist', {
+            method: 'POST',
+            header:{
+                "contentType": "application/json"
+            },
+            body: JSON.stringify({username:username})
         })
-        .catch((err) => {
-            const message = err.message;
-            if (message ==="The email address is already in use by another account."){
-                alert(message);
-                window.location.href="/login"
-            } else {
-                alert(message)
+        .then ((res)=> {
+            if (res.status === 200) {
+                alert("Username already exists. Please try another username.")
+                window.location = "/signup"
+            }
+            else {
+                console.log("username is valid")
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then ((res)=>{
+                    console.log(res.user.uid);
+                    dispatch(setNewUser({
+                        uid: res.user.uid,
+                        email: email, 
+                        username:username, 
+                        firstName:firstName, 
+                        lastName:lastName}));
+                    //window.location.href = "/home";
+                })
+                .catch((err) => {
+                    const message = err.message;
+                    if (message ==="The email address is already in use by another account."){
+                        alert(message);
+                        window.location.href="/login"
+                    } else {
+                        alert(message)
+                    }
+                })
             }
         })
+        .catch ((error)=> console.log(error));
+
+    }
+    
+    const createHandler = async () => {
+        checkUsername();
+        //dispatch(setNewUser({email: email, password:password}));
+        
+        // await firebase.auth().createUserWithEmailAndPassword(email,password)
+        // .then(() => {
+        //     saveToState();
+        //     // dispatch(setNewUser({
+        //     //     isAuthenticated: true,
+        //     //     uid: user.uid
+        //     // }))
+        //     window.location.href = "/home"
+        // })
+        // .catch((err) => {
+        //     const message = err.message;
+        //     if (message ==="The email address is already in use by another account."){
+        //         alert(message);
+        //         window.location.href="/login"
+        //     } else {
+        //         alert(message)
+        //     }
+        // })
     }
 
     return (
@@ -53,6 +106,10 @@ function signUp() {
                     <div className={style.fields}>
                         <label>Email:</label>
                         <input className={style.input}  required type='email' value={email} onChange={(e)=>setEmail(e.target.value)}></input>
+                    </div>
+                    <div className={style.fields}>
+                        <label>Username:</label>
+                        <input className={style.input}  required type='text' value={username} onChange={(e)=>setUsername(e.target.value)}></input>
                     </div>
                     <div className={style.fields}>
                         <label>Password:</label>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head'
 import nookies from 'nookies';
 import {verifyIdToken} from '../firebase/firebaseAdmin';
 import firebaseClient from '../firebase/config';
