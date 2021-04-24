@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {loadUser, logoutUser} from '../redux/user';
 import {useAuth} from '../firebase/auth';
 import { Router, useRouter } from 'next/router'
+import ProgressBar from '../components/ProgressBar/ProgressBar';
 
 
 function profile() {
@@ -22,17 +23,12 @@ function profile() {
       if (!user) {
           dispatch(logoutUser());
           router.push("/login")
-          //window.location.href="/login";
-      //} else if (!userInfo.uid || user.uid !== userInfo.uid) {
-         // dispatch(logoutUser());
-          //load(user.uid)
-          //dispatch(loadUser({uid:user.uid}));
-          //dispatch(loadUser({uid:user.uid}));
       }
       else {
         fetch('/api/users/'+user.uid)
         .then ((res)=>res.json())
         .then((data)=> {
+            dispatch(logoutUser());
             dispatch(loadUser(data));
             console.log(data)
         })
@@ -61,7 +57,7 @@ function profile() {
             }
             <h1>{userInfo.username}</h1>
             <h1>{userInfo.uid}</h1>
-            <h1>{userInfo.firsName}</h1>
+            <h1>{userInfo.firstName}</h1>
         </div>
     )
 }

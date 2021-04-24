@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Head from 'next/head'
 import {useDispatch, useSelector} from 'react-redux';
 import {useAuth} from '../firebase/auth';
+import {loadUser, logoutUser} from '../redux/user';
 import { Router, useRouter } from 'next/router'
 
 function home() {
@@ -9,6 +10,23 @@ function home() {
     const router = useRouter();
     const userInfo = useSelector((state)=> state.user)
     const {user} = useAuth(); // replace with line ten
+
+    useEffect (()=> {
+        console.log("UID: ",user?.uid)
+        if (!user) {
+            dispatch(logoutUser());
+            router.push("/login")
+        }
+        else {
+          fetch('/api/users/'+user.uid)
+          .then ((res)=>res.json())
+          .then((data)=> {
+              dispatch(loadUser(data));
+              console.log(data)
+          })
+          .catch((err)=>console.log("Loading home:", err))
+        }
+      },[])
 
     return (
         <div>
