@@ -12,7 +12,7 @@ dbConnect();
          case 'GET':
              try {
                const user = await User.findOne({uid: uid })
-               console.log(user)
+               console.log("FROM SERVER", user)
                res.status(200).send(user);
              }catch (err) {
                console.error(`Couldn't get user: ${uid}`, err)

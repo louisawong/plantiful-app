@@ -31,9 +31,9 @@ function profile() {
       }
       else {
         fetch('/api/users/'+user.uid)
-        //.then ((res)=>res.json())
+        .then ((res)=>res.json())
         .then((data)=> {
-            //dispatch(loadUser(data));
+            dispatch(loadUser(data));
             console.log(data)
         })
         .catch((err)=>console.log("Loading profile:", err))

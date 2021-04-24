@@ -25,7 +25,7 @@ export const AuthProvider = ({children}) => {
             }
             const token = await user.getIdToken();
             fetch('/api/users/'+user.uid)
-                //.then ((res)=>res.json())
+                .then ((res)=>res.json())
                 .then((data)=> {
                     dispatch(loadUser(data));
                 })
