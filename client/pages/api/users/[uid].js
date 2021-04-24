@@ -6,9 +6,6 @@ dbConnect();
  export default async (req,res) => {
      const {method} = req;
      const {uid} = req.query;
-     console.log(uid);
-     req.body = JSON.parse(req.body)
-     console.log("BODY", req.body)
 
     switch(method) {
         //getting all a user's info by uid
@@ -23,6 +20,7 @@ dbConnect();
              break;
         //making a new account
           case 'POST':
+            req.body = JSON.parse(req.body)
             const user = {
               uid: req.body.uid,
               username: req.body.username,

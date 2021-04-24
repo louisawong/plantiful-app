@@ -8,7 +8,7 @@ import Link from 'next/link';
 import {useDispatch, useSelector} from 'react-redux';
 import {setNewUser} from '../redux/user'
 // import {useAuth} from '../firebase/auth';
-import httpClient from 'axios';
+import { Router, useRouter } from 'next/router'
 
 function signUp() {
 
@@ -20,6 +20,7 @@ function signUp() {
     const [username, setUsername] = useState("");
  
     const dispatch = useDispatch();
+    const router = useRouter();
 
     const redirect = () => {
         window.location.href="/home";
@@ -49,7 +50,7 @@ function signUp() {
                         username:username, 
                         firstName:firstName, 
                         lastName:lastName}));
-                        //window.location.href = "/home"
+                    router.push("/home")
                 })
                 .catch((err) => {
                     const message = err.message;
