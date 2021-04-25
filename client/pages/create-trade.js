@@ -25,9 +25,9 @@ function createtrade() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [location, setLocation] = useState([]);
-    const [tradeType, setTradeType] = useState("") //sell or trade
+    const [tradeType, setTradeType] = useState(false) //trade=false, sell=true
     const [price, setPrice] = useState(0);
-    const [tradePreference,setTradePreference] = useState("")
+    const [tradePreference,setTradePreference] = useState("") //plant to trade
 
     //state for form
 
@@ -43,6 +43,11 @@ function createtrade() {
         }
       },[])
 
+    //checkbox for trade or sell
+    const handleCheck = (e) => {
+        let selected = e.currentTarget.checked;
+        setTradeType(selected)
+    }
 
     // types allowed for upload;
     const types = ['image/png', 'image/jpeg'];
@@ -161,12 +166,26 @@ function createtrade() {
                 </div>
                 <div className={style.right}>
                     <h1 className={style.header}>Create Your Trade</h1>
-                    <form className={style.createForm} autocomplete="off">
+                    <form className={style.createForm} autoComplete="off">
                         <input className={style.formInput} type="text" placeholder="Title" required/>
                         <textarea className={style.formInput} placeholder="Describe your plant trade"></textarea>
+                        {tradeType ? <label>Selling</label>:<label>Trade</label>}
+                        <label className={style.switch}>
+                            <input className={style.input} type="checkbox" onClick={handleCheck}/>
+                            <span className={`${style.slider} ${style.round}`}></span>
+                        </label>
                         <div className={style.sell}>
-                            {/* <label className={style.formInput}>$</label> */}
+                            {tradeType ?
+                            <div>
+                            <label className={style.formTradeType}>Price ($)</label>
                             <input className={style.formInput} min="0" step="0.01" type="number" placeholder="$ 0" required/>
+                            </div>
+                            :
+                            <div>
+                            <label className={style.formTradeType}>Interested In: </label>
+                            <input className={style.formInput} type="text" placeholder="Your plant wishlist" required/>
+                            </div>
+                            }   
                         </div>
                         <div className={style.autocomplete}>
                             <input className={style.formInput} type="text" placeholder="Location (city)" required/>
