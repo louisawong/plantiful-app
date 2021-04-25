@@ -11,13 +11,6 @@ export const fetchUserById = createAsyncThunk(
   async (userId, thunkAPI) => {
     const response = await axios.get('/api/users/'+userId);
     console.log("THUNK", response.data)
-    
-    // const response = await fetch('/api/users/'+userId)
-    // .then((res)=> res.json())
-    // .then((data) => {
-    //     console.log("IN REDUCING, ", data)
-    //     return data
-    // })
     return response.data
   }
 )

@@ -160,16 +160,17 @@ function createtrade() {
                     </div>
                 </div>
                 <div className={style.right}>
-                    <h2>URI: {process.env.MONGO_URI}</h2>
                     <h1 className={style.header}>Create Your Trade</h1>
-                    <form className={style.createForm}>
+                    <form className={style.createForm} autocomplete="off">
                         <input className={style.formInput} type="text" placeholder="Title" required/>
                         <textarea className={style.formInput} placeholder="Describe your plant trade"></textarea>
                         <div className={style.sell}>
                             {/* <label className={style.formInput}>$</label> */}
                             <input className={style.formInput} min="0" step="0.01" type="number" placeholder="$ 0" required/>
                         </div>
-                        <input className={style.formInput} type="text" placeholder="Location (city)" required/>
+                        <div className={style.autocomplete}>
+                            <input className={style.formInput} type="text" placeholder="Location (city)" required/>
+                        </div>
                     </form>
                 </div>
              </div>
