@@ -167,7 +167,7 @@ function createtrade() {
                         <textarea className={style.formInput} placeholder="Describe your plant trade"></textarea>
                         <div className={style.sell}>
                             {/* <label className={style.formInput}>$</label> */}
-                            <input className={style.formInput} min="0" type="number" placeholder="$ 0" required/>
+                            <input className={style.formInput} min="0" step="0.01" type="number" placeholder="$ 0" required/>
                         </div>
                         <input className={style.formInput} type="text" placeholder="Location (city)" required/>
                     </form>
