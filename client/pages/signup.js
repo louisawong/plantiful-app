@@ -41,6 +41,7 @@ function signUp() {
                 firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then (async (res)=>{
                     console.log(res.user.uid);
+                    localStorage.setItem("uid", `${res.user.uid}`)
                     dispatch(setNewUser({
                         uid: res.user.uid,
                         email: email, 

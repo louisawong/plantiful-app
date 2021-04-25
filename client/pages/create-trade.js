@@ -22,10 +22,12 @@ function createtrade() {
     const [url2, setUrl2] = useState("");
     const [url3, setUrl3] = useState("");
     const [url4, setUrl4] = useState("");
-    const [image1, setImage1] = useState("");
-    const [image2, setImage2] = useState("");
-    const [image3, setImage3] = useState("");
-    const [image4, setImage4] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [location, setLocation] = useState([]);
+    const [tradeType, setTradeType] = useState("") //sell or trade
+    const [price, setPrice] = useState(0);
+    const [tradePreference,setTradePreference] = useState("")
 
     //state for form
 
@@ -158,13 +160,14 @@ function createtrade() {
                     </div>
                 </div>
                 <div className={style.right}>
+                    <h2>URI: {process.env.MONGO_URI}</h2>
                     <h1 className={style.header}>Create Your Trade</h1>
                     <form className={style.createForm}>
                         <input className={style.formInput} type="text" placeholder="Title" required/>
                         <textarea className={style.formInput} placeholder="Describe your plant trade"></textarea>
                         <div className={style.sell}>
                             {/* <label className={style.formInput}>$</label> */}
-                            <input className={style.formInput} type="number" placeholder="$ 0" required/>
+                            <input className={style.formInput} min="0" type="number" placeholder="$ 0" required/>
                         </div>
                         <input className={style.formInput} type="text" placeholder="Location (city)" required/>
                     </form>

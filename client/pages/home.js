@@ -21,8 +21,8 @@ function home() {
           fetch('/api/users/'+user.uid)
           .then ((res)=>res.json())
           .then((data)=> {
-              dispatch(loadUser(data));
               console.log(data)
+              dispatch(loadUser(data));
           })
           .catch((err)=>console.log("Loading home:", err))
         }
