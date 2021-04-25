@@ -5,17 +5,21 @@ import firebase from 'firebase/app';
 import "firebase/auth"
 import style from '../styles/Login.module.scss'
 import Link from 'next/link'
+import { Router, useRouter } from 'next/router'
 
 function login() {
     firebaseClient();
+    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
 
     const loginHandler = async (e) => {
         e.preventDefault();
         await firebase.auth().signInWithEmailAndPassword(email,password)
-        .then(() => {
-            window.location.href = "/"
+        .then((res) => {
+            console.log("LOGGING",res.user.uid);
+            localStorage.setItem("uid", `${res.user.uid}`)
+            router.push("/home")
         })
         .catch((err) => {
             const message = err.message;

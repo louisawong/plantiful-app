@@ -7,6 +7,7 @@ $phthalo-green: #052E26ff;
 $dark-jungle-green: #041910ff;
 
 .container {
+    margin: 0 auto;
     width: 100%;
     height: 100%;
     padding-left: 4vw;
@@ -14,8 +15,9 @@ $dark-jungle-green: #041910ff;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: rgb(65, 65, 65);
 
-    background-color: $rust;
+    //background-color: $rust;
 }
 
 .wrapper {
@@ -24,38 +26,99 @@ $dark-jungle-green: #041910ff;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: $wintergreen-dream;
+    //background-color: $wintergreen-dream;
+    padding: 2vh;
 }
-
-.form{
-    margin: 30px auto 10px;
-    text-align: center;
+.left {
+    //background-color: blue;
+    height: 70vh;
+    width: 50%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
-.label .input{
+.right {
+    //background-color: red;
+    height: 70vh;
+    width: 50%;
+    padding:0;
+}
+.header {
+    margin:0;
+}
+// .imageUpload1 {
+//     height: 200px;
+//     width: 150px;
+// }
+.image1 {
+    width:300px;
+    display: block;
+    margin: auto;
+}
+.image2 {
+    width:85px;
+    //display: block;
+    //margin: auto;
+}
+.input{
     height: 0;
     width: 0;
     opacity: 0;
  }
- .label{
-    display: block;
-    width: 30px;
-    height: 30px;
-    border: 1px solid $rust;
-    border-radius: 50%;
-    margin: 10px auto;
-    line-height: 30px;
-    color: black;
-    font-weight: bold;
-    font-size: 24px;
+ .label1{
+    display:block;
+    height: 300px;
+    width: 300px;
+    //border: 1px solid $rust;
+    border-radius: 10px;
+    //margin: 10px auto;
+    margin: 0;
+
+    &:hover {
+        cursor: pointer;
+    }
  }
-.label:hover{
-    background: $dark-jungle-green;
-    color: white;
+ .label2 {
+    //display:block;
+    height: 85px;
+    width: 85px;
+    //border: 1px solid $rust;
+    border-radius: 10px;
+    //margin: 10px auto;
+
+    background-image: url();
+    &:hover {
+        cursor: pointer;
+    }
+ }
+
+.bottomImages {
+    display: flex;
+    width: 300px;
+    justify-content: space-between; 
+    margin: auto;
+    margin-top: 2vh;
+  
 }
-.output{
-    height: 60px;
-    font-size: 0.8rem;
+.image2 {
+    width: 80px;
+    height: 26px;
 }
-.error{
-    color: $rust;
+
+
+.createForm {
+    display:flex;
+    flex-direction: column;
+    justify-content:space-around;
+    height: 90%;
+
+    //background-color: red;
+}
+
+.formInput {
+    border: 0;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 10px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    padding-left:20px;
 }

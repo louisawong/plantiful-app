@@ -4,7 +4,7 @@ import firebaseClient from './config';
 import firebase from 'firebase/app'
 import 'firebase/auth';
 import {useDispatch, useSelector} from 'react-redux';
-import {loadUser} from '../redux/user';
+import {fetchUserById} from '../redux/user'
 
 const AuthContext = createContext({});
 
@@ -18,18 +18,18 @@ export const AuthProvider = ({children}) => {
     useEffect(()=> {
         return firebase.auth().onIdTokenChanged(async (user) => {
             if (!user) {
-                //dispatch(authUser({}))
                 setUser(null);
                 nookies.set(undefined, "token", "", {});
                 return;
             }
             const token = await user.getIdToken();
-            fetch('/api/users/'+user.uid)
-                .then ((res)=>res.json())
-                .then((data)=> {
-                    dispatch(loadUser(data));
-                })
-                .catch((err)=>console.log("Loading error:", err))
+            dispatch(fetchUserById(user.uid));
+            // fetch('/api/users/'+user.uid)
+            //     .then ((res)=>res.json())
+            //     .then((data)=> {
+            //         dispatch(loadUser(data));
+            //     })
+            //     .catch((err)=>console.log("Loading error:", err))
             //console.log("USER:", user, "TOKEN: ",token);
             setUser(user); // set user in Redux
 

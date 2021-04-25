@@ -5,14 +5,22 @@ import Search from '../Search/Search'
 import firebaseClient from '../../firebase/config';
 import firebase from "firebase/app"
 import {useAuth} from '../../firebase/auth';
+import { Router, useRouter } from 'next/router'
+import {useDispatch, useSelector} from 'react-redux';
+import {logoutUser} from '../..//redux/user';
 
 function Navigation() {
     firebaseClient();
+    const router = useRouter();
+    const dispatch = useDispatch();
     const {user} = useAuth();
     
     const logoutHandler = async() => {
         await firebase.auth().signOut();
-        window.location.href="/";
+        dispatch(logoutUser());
+        localStorage.removeItem("uid");
+        //window.location.href="/";
+        router.push("/");
     }
     
     const chatHandler = () => {

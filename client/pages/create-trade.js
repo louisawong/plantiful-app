@@ -3,7 +3,7 @@ import Head from 'next/head'
 import style from '../styles/CreateTrade.module.scss'
 import {useDispatch, useSelector} from 'react-redux';
 import {useAuth} from '../firebase/auth';
-import {loadUser, logoutUser} from '../redux/user';
+import {fetchUserById, logoutUser} from '../redux/user';
 import { Router, useRouter } from 'next/router'
 import ProgressBar from '../components/ProgressBar/ProgressBar'
 
@@ -13,8 +13,11 @@ function createtrade() {
     const userInfo = useSelector((state)=> state.user)
     const {user} = useAuth();
 
-    const [file, setFile] = useState(null);
-    const [error, setError] = useState(null);
+    //state for images
+    const [file1, setFile1] = useState(null);
+    const [file2, setFile2] = useState(null);
+    const [file3, setFile3] = useState(null);
+    const [file4, setFile4] = useState(null);
     const [url1, setUrl1] = useState("");
     const [url2, setUrl2] = useState("");
     const [url3, setUrl3] = useState("");
@@ -24,20 +27,17 @@ function createtrade() {
     const [image3, setImage3] = useState("");
     const [image4, setImage4] = useState("");
 
+    //state for form
+
     useEffect (()=> {
-        console.log("UID: ",user?.uid)
-        if (!user) {
+        const session = localStorage.getItem("uid")
+        console.log("Local storage get:", session)
+        if (!session) {
             dispatch(logoutUser());
             router.push("/login")
         }
         else {
-          fetch('/api/users/'+user.uid)
-          .then ((res)=>res.json())
-          .then((data)=> {
-              dispatch(loadUser(data));
-              console.log(data)
-          })
-          .catch((err)=>console.log("Loading home:", err))
+          dispatch(fetchUserById(session))
         }
       },[])
 
@@ -45,14 +45,49 @@ function createtrade() {
     // types allowed for upload;
     const types = ['image/png', 'image/jpeg'];
 
-    const handleChange = (e) => {
+    const handleChange1 = (e) => {
         let selected = e.target.files[0];
         if (selected && types.includes(selected.type)) {
-          setFile(selected);
-          setError(null);
+          setFile1(selected);
         } else {
-            setFile(null);
-            setError('Please select an image file(png or jpg)');
+            setFile1(null);
+            alert('Please select an image file (png or jpg)');
+        }
+    }
+    const handleChange2 = (e) => {
+        let selected = e.target.files[0];
+        if (!url1) {
+            alert("Please upload a main image first.")
+        }
+        else if (selected && types.includes(selected.type)) {
+          setFile2(selected);
+        } else {
+            setFile2(null);
+            alert('Please select an image file (png or jpg)');
+        }
+    }
+    const handleChange3 = (e) => {
+        let selected = e.target.files[0];
+        if (!url1) {
+            alert("Please upload a main image first.")
+        }
+        else if (selected && types.includes(selected.type)) {
+          setFile3(selected);
+        } else {
+            setFile3(null);
+            alert('Please select an image file (png or jpg)');
+        }
+    }
+    const handleChange4 = (e) => {
+        let selected = e.target.files[0];
+        if (!url1) {
+            alert("Please upload a main image first.")
+        }
+        else if (selected && types.includes(selected.type)) {
+          setFile4(selected);
+        } else {
+            setFile4(null);
+            alert('Please select an image file (png or jpg)');
         }
     }
 
@@ -69,16 +104,70 @@ function createtrade() {
             <main className={style.container}>
              <div className={style.wrapper}>
                 <div className={style.left}>
-                  <label className={style.label}>
-                    <input className={style.input} type="file" onChange={handleChange}/>
-                    <span className={style.span}>+</span>                
-                  </label>
-                  <div className={style.output}>
-                    { error && <div className={style.error}>{ error }</div>}
-                    { file && <div>{ file.name}</div> }
-                    {file && <ProgressBar file={file} setUrl={setUrl1}/>}
-                    {url1 && <img className={style.upload1}src={url1}></img>}
-                 </div>
+                    <div className={style.image1}>
+                        {!url1 ? 
+                        <label className={style.label1}>
+                            <img className={style.label1} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addImage.png?alt=media&token=c20e10da-e530-4edd-be72-ff2e3998cc99"/>
+                            <input className={style.input} type="file" onChange={handleChange1}/>             
+                        </label>
+                        : 
+                        <div>
+                            {url1 && <img className={style.label1} src={url1}></img>}
+                        </div>
+                        }          
+                        {!url1 && file1 && <ProgressBar file={file1} setUrl={setUrl1}/>}
+                    </div>
+                    <div className={style.bottomImages}>
+                        <div className={style.image2}>
+                            {!url2 ? 
+                            <label className={style.label2}>
+                                <img className={style.label2} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
+                                <input className={style.input} type="file" onChange={handleChange2}/>       
+                            </label>
+                            : 
+                            <div>
+                                {url2 && <img className={style.label2} src={url2}></img>}
+                            </div> }
+                            {!url2 && url1 && file2 && <ProgressBar file={file2} setUrl={setUrl2}/>}
+                        </div>
+                        <div className={style.image2}>
+                            {!url3 ? 
+                            <label className={style.label2}>
+                                <img className={style.label2} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
+                                <input className={style.input} type="file" onChange={handleChange3}/>            
+                            </label>
+                            : 
+                            <div>
+                                {url3 && <img className={style.label2} src={url3}></img>}
+                            </div> }
+                            {!url3 && url1 && file3 && <ProgressBar file={file3} setUrl={setUrl3}/>}
+                        </div>
+                        <div className={style.image2}>
+                            {!url4 ? 
+                            <label className={style.label2}>
+                                <img className={style.label2} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
+                                
+                                <input className={style.input} type="file" onChange={handleChange4}/>             
+                            </label>
+                            : 
+                            <div>
+                                {url4 && <img className={style.label2} src={url4}></img>}
+                            </div> }
+                            {!url4 && url1 && file4 && <ProgressBar file={file4} setUrl={setUrl4}/>}
+                        </div>
+                    </div>
+                </div>
+                <div className={style.right}>
+                    <h1 className={style.header}>Create Your Trade</h1>
+                    <form className={style.createForm}>
+                        <input className={style.formInput} type="text" placeholder="Title" required/>
+                        <textarea className={style.formInput} placeholder="Describe your plant trade"></textarea>
+                        <div className={style.sell}>
+                            {/* <label className={style.formInput}>$</label> */}
+                            <input className={style.formInput} type="number" placeholder="$ 0" required/>
+                        </div>
+                        <input className={style.formInput} type="text" placeholder="Location (city)" required/>
+                    </form>
                 </div>
              </div>
             </main>

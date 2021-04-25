@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import style from '../styles/Profile.module.scss';
 import Head from 'next/head';
 import {useDispatch, useSelector} from 'react-redux';
-import {loadUser, logoutUser} from '../redux/user';
+import {loadUser, logoutUser, fetchUserById} from '../redux/user';
 import {useAuth} from '../firebase/auth';
 import { Router, useRouter } from 'next/router'
 import ProgressBar from '../components/ProgressBar/ProgressBar';
@@ -19,20 +19,14 @@ function profile() {
     };
 
     useEffect (()=> {
-      console.log("UID: ",user?.uid)
-      if (!user) {
+      const session = localStorage.getItem("uid")
+      console.log("Local storage get:", session)
+      if (!session) {
           dispatch(logoutUser());
           router.push("/login")
       }
       else {
-        fetch('/api/users/'+user.uid)
-        .then ((res)=>res.json())
-        .then((data)=> {
-            dispatch(logoutUser());
-            dispatch(loadUser(data));
-            console.log(data)
-        })
-        .catch((err)=>console.log("Loading profile:", err))
+        dispatch(fetchUserById(session))
       }
     },[])
 

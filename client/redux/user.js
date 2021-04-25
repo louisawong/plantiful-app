@@ -1,13 +1,31 @@
-import {createSlice} from '@reduxjs/toolkit';
 import {useAuth} from '../firebase/auth';
 import firebaseClient from '../firebase/config';
 import firebase from 'firebase/app';
 import "firebase/auth";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
+
+// First, create the thunk
+export const fetchUserById = createAsyncThunk(
+  'users/fetchByIdStatus',
+  async (userId, thunkAPI) => {
+    const response = await axios.get('/api/users/'+userId);
+    console.log("THUNK", response.data)
+    
+    // const response = await fetch('/api/users/'+userId)
+    // .then((res)=> res.json())
+    // .then((data) => {
+    //     console.log("IN REDUCING, ", data)
+    //     return data
+    // })
+    return response.data
+  }
+)
 
 export const userSlice = createSlice({
     name: "user",
     initialState:{
-        isAuthenticated: false,
+        isAuthenticated: true,
         uid: "",
         username: "",
         email: "",
@@ -24,7 +42,7 @@ export const userSlice = createSlice({
         numTrades: 0,
         chats:[],
     },
-    reducers:{
+    reducers:{ 
       setNewUser: (state, action) => {
         state.isAuthenticated = true;
         state.uid = action.payload.uid;
@@ -140,6 +158,28 @@ export const userSlice = createSlice({
         state.numTrades = 0;
         state.chats = [];
       }
+    },
+    extraReducers: {
+        [fetchUserById.fulfilled]: (state, action) => {
+          // Add user to the state array
+          state.isAuthenticated = true;
+          state.uid = action.payload.uid;
+          state.username = action.payload.username;
+          state.email = action.payload.email;
+          state.firstName = action.payload.firstName;
+          state.lastName = action.payload.lastName;
+          state.profile = action.payload.profile;
+          state.description = action.payload.description;
+          const coords = action.payload.location.coordinates;  
+          state.location = coords;
+          state.followers = state.followers.concat(action.payload.followers);
+          state.numFollowers = action.payload.numFollowers;
+          state.inspos = state.inspos.concat(action.payload.inspos);
+          state.numInspos = action.payload.numInspos;
+          state.trades = state.trades.concat(action.payload.trades);
+          state.numTrades= action.payload.numTrades;
+          state.chats = state.chats.concat(action.payload.chats);
+        },
     }
 });
 
