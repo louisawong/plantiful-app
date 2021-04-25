@@ -25,12 +25,14 @@ function createtrade() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [location, setLocation] = useState([]);
+    const [city, setCity] = useState("");
+    const [country, setCountry] = useState("")
+    const [currentLocattion, setCurrentLocation] = useState([]);
     const [tradeType, setTradeType] = useState(false) //trade=false, sell=true
     const [price, setPrice] = useState(0);
     const [tradePreference,setTradePreference] = useState("") //plant to trade
 
     //state for form
-
     useEffect (()=> {
         const session = localStorage.getItem("uid")
         console.log("Local storage get:", session)
@@ -43,10 +45,26 @@ function createtrade() {
         }
       },[])
 
-    //checkbox for trade or sell
-    const handleCheck = (e) => {
-        let selected = e.currentTarget.checked;
-        setTradeType(selected)
+    //handle currentLocation
+    const handleCurrentLocation = (e) => {
+      fetch("/api/geolocation")
+      .then(res => res.json())
+      .then((data)=>{
+        setCurrentLocation(data.ll);
+      })
+      .catch((err)=>{
+          console.log(err)
+      })
+    }
+
+    //handle typed location city
+    const handleLocation = (e) => {
+
+    }
+
+    //handle submit button
+    const handleSubmit = (e) => {
+
     }
 
     // types allowed for upload;
@@ -167,29 +185,66 @@ function createtrade() {
                 <div className={style.right}>
                     <h1 className={style.header}>Create Your Trade</h1>
                     <form className={style.createForm} autoComplete="off">
-                        <input className={style.formInput} type="text" placeholder="Title" required/>
-                        <textarea className={style.formInput} placeholder="Describe your plant trade"></textarea>
+                        <input className={style.formInput} 
+                            type="text" 
+                            placeholder="Title" 
+                            onChange={(e)=>setTitle(e.target.value)}
+                            value={title}
+                            required/>
+                        <textarea className={style.formInput} 
+                            placeholder="Describe your plant trade"
+                            onChange={(e)=>setDescription(e.target.value)}
+                            value={description}
+                        ></textarea>
                         {tradeType ? <label>Selling</label>:<label>Trade</label>}
                         <label className={style.switch}>
-                            <input className={style.input} type="checkbox" onClick={handleCheck}/>
+                            <input className={style.input} 
+                                type="checkbox" 
+                                onClick={(e)=>setTradeType(e.currentTarget.checked)}/>
                             <span className={`${style.slider} ${style.round}`}></span>
                         </label>
                         <div className={style.sell}>
                             {tradeType ?
                             <div>
-                            <label className={style.formTradeType}>Price ($)</label>
-                            <input className={style.formInput} min="0" step="0.01" type="number" placeholder="$ 0" required/>
+                            <label className={style.formTradeType}>Price</label>
+                            <input className={style.formInput} 
+                                onChange={(e)=>setPrice(e.target.value)} 
+                                value={'$'+price} 
+                                min="0" 
+                                step="0.01" 
+                                type="number" 
+                                placeholder="$ 0" 
+                                required/>
                             </div>
                             :
                             <div>
                             <label className={style.formTradeType}>Interested In: </label>
-                            <input className={style.formInput} type="text" placeholder="Your plant wishlist" required/>
+                            <input className={style.formInput} 
+                                type="text" 
+                                value={tradePreference} 
+                                onChange={(e)=>setTradePreference(e.target.value)} 
+                                placeholder="Your plant wishlist" 
+                                required
+                            />
                             </div>
                             }   
                         </div>
                         <div className={style.autocomplete}>
-                            <input className={style.formInput} type="text" placeholder="Location (city)" required/>
+                            <input className={style.formInput} 
+                                type="text" 
+                                placeholder="Location (city)" 
+                                value = {location}
+                                onChange={handleLocation}
+                                required/>
+                            <div className={style.currentLocation} 
+                                onClick={handleCurrentLocation}>
+                                    Use Current Location
+                            </div>
                         </div>
+                        <button 
+                            className={style.buttonSubmit}
+                            onClick={handleSubmit}
+                            type="button">Create Trade</button>
                     </form>
                 </div>
              </div>

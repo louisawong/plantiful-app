@@ -12,7 +12,7 @@ function profile() {
     const dispatch = useDispatch();
     const router = useRouter();
     const userInfo = useSelector((state)=> state.user)
-    const {user} = useAuth(); 
+    //const {user} = useAuth(); 
 
     const addProfileHandler = () => {
 
