@@ -80,24 +80,27 @@ function editProfile() {
                 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"/>
             </Head>
             <main className={style.container}>
-              <div className={style.profilePic}>
+              <div className={style.left}>
                 {!userInfo.profile ? 
-                    <label>
-                        <img className={style.profile} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addImage.png?alt=media&token=c20e10da-e530-4edd-be72-ff2e3998cc99"/>
+                    <label className={style.profileWrapper}>
+                        <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=96cfd706-f6ec-48ab-9452-ec212d8b7b2b"/>
                         <input className={style.input} type="file" onChange={handleEditProfile}/>             
+                        <span className={style.addImage}>Edit Your Profile Photo</span>
                     </label>
                     : 
                     <div>
-                        {url1 && <img className={style.label1} src={url1}></img>}
+                        {url1 && <img className={style.profilePic} src={url1}></img>}
                     </div>
                 }
                 {!url && file && <ProgressBar file={file} setUrl={setUrl} />}   
               </div>
-                
-
-
-
-
+              <div className={style.right}>
+                 <h1 className={style.header}>Edit Your Profile</h1>
+                 <div className={style.setInfo}>
+                   <span className={style.bolded} >Username: {' '}</span>  
+                     {userInfo.username}{' | | '}
+                     <span className={style.bolded} >Email: {' '}</span>{userInfo.email}</div>
+              </div>
             </main>
                 {/* <div className={style.left}>
                     <div className={style.image1}>

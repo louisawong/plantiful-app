@@ -32,7 +32,6 @@ dbConnect();
             }
             try {
               const result = await User.create(user);
-              console.log("Post new user", result)
               res.status(201).send(result)
             } catch(err) {
               console.error(`Couldn't add new user ${uid}`,err)

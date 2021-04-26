@@ -199,37 +199,36 @@ function createtrade() {
                         <div className={style.image2}>
                             {!url2 ? 
                             <label className={style.label2}>
-                                <img className={style.label2} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
+                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
                                 <input className={style.input} type="file" onChange={handleChange2}/>       
                             </label>
                             : 
                             <div>
-                                {url2 && <img className={style.label2} src={url2}></img>}
+                                {url2 && <img className={style.labelImage} src={url2}></img>}
                             </div> }
                             {!url2 && url1 && file2 && <ProgressBar file={file2} setUrl={setUrl2} />}
                         </div>
                         <div className={style.image2}>
                             {!url3 ? 
                             <label className={style.label2}>
-                                <img className={style.label2} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
+                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
                                 <input className={style.input} type="file" onChange={handleChange3}/>            
                             </label>
                             : 
                             <div>
-                                {url3 && <img className={style.label2} src={url3}></img>}
+                                {url3 && <img className={style.labelImage} src={url3}></img>}
                             </div> }
                             {!url3 && url1 && file3 && <ProgressBar file={file3} setUrl={setUrl3} />}
                         </div>
                         <div className={style.image2}>
                             {!url4 ? 
                             <label className={style.label2}>
-                                <img className={style.label2} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
-                                
+                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
                                 <input className={style.input} type="file" onChange={handleChange4}/>             
                             </label>
                             : 
                             <div>
-                                {url4 && <img className={style.label2} src={url4}></img>}
+                                {url4 && <img className={style.labelImage} src={url4}></img>}
                             </div> }
                             {!url4 && url1 && file4 && <ProgressBar file={file4} setUrl={setUrl4} />}
                         </div>

@@ -43,11 +43,11 @@ function signUp() {
                     console.log(res.user.uid);
                     localStorage.setItem("uid", `${res.user.uid}`)
                     // dispatch(setNewUser({
-                    //     uid: res.user.uid,
-                    //     email: email, 
-                    //     username:username, 
-                    //     firstName:firstName, 
-                    //     lastName:lastName}));
+                        //     uid: res.user.uid,
+                        //     email: email, 
+                        //     username:username, 
+                        //     firstName:firstName, 
+                        //     lastName:lastName}));
                     dispatch(createNewUser({
                         uid: res.user.uid,
                         email: email, 
