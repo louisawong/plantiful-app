@@ -29,9 +29,13 @@ dbConnect();
               email: req.body.email,
               firstName: req.body.firstName,
               lastName: req.body.lastName,
+              city:req.body.city,
+              country: req.body.country,
+              location: req.body.location
             }
             try {
               const result = await User.create(user);
+              console.log("FROM USER, ", result)
               res.status(201).send(result)
             } catch(err) {
               console.error(`Couldn't add new user ${uid}`,err)

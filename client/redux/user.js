@@ -20,13 +20,16 @@ export const fetchUserById = createAsyncThunk(
 export const createNewUser = createAsyncThunk(
   'users/createNewUserStatus',
   async (user, thunkAPI) => {
-    //console.log("THUNK USER: ", user)
+    console.log("THUNK USER: ", user)
     const response = await axios.post(`/api/users/${user.uid}`,{
       uid:user.uid,
       username:user.username,
       email:user.email,
       firstName: user.firstName,
-      lastName: user.lastName
+      lastName: user.lastName,
+      location: {type:"Point", coordinates: user.location},
+      country: user.country,
+      city: user.city,
     })
     //console.log("THUNKRESULT",response)
     return response.data
@@ -131,7 +134,7 @@ export const userSlice = createSlice({
         state.lastName = action.payload.lastName;
         state.profile = action.payload.profile;
         state.description = action.payload.description;
-        const coords = action.payload.location.coordinates;  
+        const coords = action.payload.location?.coordinates;  
         state.location = coords;
         state.city = action.payload.city;
         state.country = action.payload.country;
@@ -177,7 +180,7 @@ export const userSlice = createSlice({
           state.lastName = action.payload.lastName;
           state.profile = action.payload.profile;
           state.description = action.payload.description;
-          const coords = action.payload.location.coordinates;  
+          const coords = action.payload.location?.coordinates;  
           state.location = coords;
           state.city = action.payload.city;
           state.country = action.payload.country;
@@ -196,6 +199,9 @@ export const userSlice = createSlice({
           state.username = action.payload.username;
           state.firstName = action.payload.firstName;
           state.lastName = action.payload.lastName;
+          state.city = action.payload.city;
+          state.country = action.payload.country;
+          state.location = action.payload.location;
         },
         [updateUser.fulfilled]: (state,action) => {
           state.isAuthenticated = true;
@@ -206,7 +212,7 @@ export const userSlice = createSlice({
           state.lastName = action.payload.lastName;
           state.profile = action.payload.profile;
           state.description = action.payload.description;
-          const coords = action.payload.location.coordinates;  
+          const coords = action.payload.location?.coordinates;  
           state.location = coords;
           state.followers = action.payload.followers;
           state.numFollowers = action.payload.numFollowers;

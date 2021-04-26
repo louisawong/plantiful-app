@@ -42,20 +42,24 @@ function signUp() {
                 .then (async (res)=>{
                     console.log(res.user.uid);
                     localStorage.setItem("uid", `${res.user.uid}`)
-                    // dispatch(setNewUser({
-                        //     uid: res.user.uid,
-                        //     email: email, 
-                        //     username:username, 
-                        //     firstName:firstName, 
-                        //     lastName:lastName}));
+                    fetch("/api/geolocation")
+                    .then(res => res.json())
+                    .then((data)=>{
                     dispatch(createNewUser({
                         uid: res.user.uid,
                         email: email, 
                         username:username, 
                         firstName:firstName, 
-                        lastName:lastName
-                    }))
+                        lastName:lastName,
+                        country: data.country,
+                        city: data.city,
+                        location:data.ll
+                    }));
                     router.push("/edit-profile")
+          })
+          .catch((err)=>{
+            console.log(err);
+          });
                 })
                 .catch((err) => {
                     const message = err.message;
