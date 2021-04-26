@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import style from './navigation.module.scss'
 import Link from 'next/link'
 import Search from '../Search/Search'
@@ -13,7 +13,22 @@ function Navigation() {
     firebaseClient();
     const router = useRouter();
     const dispatch = useDispatch();
-    const {user} = useAuth();
+    //const {user} = useAuth();
+    const [session, setSession] = useState(false);
+
+    useEffect (()=> {
+        const session = localStorage.getItem("uid")
+        //console.log("Local storage get:", session)
+        if (!session) {
+            dispatch(logoutUser());
+            setSession(false);
+            router.push("/login")
+        }
+        else {
+          //dispatch(fetchUserById(session))
+          setSession(true);
+        }
+      },[router])
     
     const logoutHandler = async() => {
         await firebase.auth().signOut();
@@ -29,7 +44,7 @@ function Navigation() {
 
     return (
         <div>
-        {!user? 
+        {!session? 
         //Show this nav if no user
         <div className={style.navigation}>
             <div className={style.left}>
