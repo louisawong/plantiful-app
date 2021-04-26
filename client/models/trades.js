@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const TradeSchema = new mongoose.Schema({
-    _id: {
+    tradeId: {
         type: String,
         required: true,
     },
-    userId: {
+    uid: {
         type: String,
         required: true,
     },
@@ -46,10 +46,13 @@ const TradeSchema = new mongoose.Schema({
             type: [Number],
         }
     },
+    city: String,
+    country: String,
     minOffer: {
         type: Number,
         default: 0,
     },
+    tradePreference: String,
     trade: {
         type: Boolean,
         default: true,

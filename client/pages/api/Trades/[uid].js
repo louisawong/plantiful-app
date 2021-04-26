@@ -6,29 +6,35 @@ dbConnect();
  export default async (req,res) => {
      const {method} = req;
      const {uid} = req.query;
-     console.log(uid);
-     req.body = JSON.parse(req.body)
-
-    switch(method) {
-         // by user uid, add a new Inspo and update numInspos
-          case 'POST':
-            const trade = {
-              _id: req.body.id,
-              userId: uid,
+     console.log("REQUEST: ", req.body );
+     
+     switch(method) {
+       // by user uid, add a new Inspo and update numInspos
+       case 'POST':
+            req.body = JSON.parse(req.body)
+            const newTrade = {
+              tradeId: req.body.tradeId,
+              uid: uid,
               username: req.body.username,
               title: req.body.title,
               description: req.body.description,
               images: req.body.images,
-              location: req.body.location,
+              location: {type: 'Point', coordinates: req.body.location},
+              city: req.body.city,
+              country: req.body.country,
               minOffer: req.body.minOffer,
+              tradePreference: req.body.tradePreference,
               trade: req.body.trade,
-              sell: req.body.sell,
+              sell: req.body.sell
             }
             try {
-              const user = await User.findOne({uid:uid})
-              const update = user.trades.push(trade);
-              const newNum = user.numTrades + 1;
-              const result = await User.findOneAndUpdate({uid},{trades:update, numTrades:newNum},{new:true});
+              // const user = await User.findOne({uid:uid})
+              // console.log("USER",user)
+              await User.updateOne({uid},{$push: {trades: newTrade}});
+              const result = await User.findOneAndUpdate({uid},{$inc: {numTrades:1}},{new:true});
+              //const newNum = user.numTrades + 1;
+              //const result = await User.findOneAndUpdate({uid},{trades:update, numTrades:newNum},{new:true});
+              console.log("POST TRADE: ", result)
               res.status(201).send(result)
             } catch(err) {
               console.error(`Couldn't add new trade ${uid}`,err)

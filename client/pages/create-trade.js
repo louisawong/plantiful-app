@@ -3,9 +3,10 @@ import Head from 'next/head'
 import style from '../styles/CreateTrade.module.scss'
 import {useDispatch, useSelector} from 'react-redux';
 import {useAuth} from '../firebase/auth';
-import {fetchUserById, logoutUser} from '../redux/user';
+import {addTrade, fetchUserById, logoutUser} from '../redux/user';
 import { Router, useRouter } from 'next/router'
 import ProgressBar from '../components/ProgressBar/ProgressBar'
+import uuid from 'react-uuid'
 
 function createtrade() {
     const dispatch = useDispatch();
@@ -22,14 +23,15 @@ function createtrade() {
     const [url2, setUrl2] = useState("");
     const [url3, setUrl3] = useState("");
     const [url4, setUrl4] = useState("");
+    const [imageArray, setImageArray] = useState([]);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [location, setLocation] = useState([]);
+    //const [location, setLocation] = useState([]);
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("")
-    const [currentLocattion, setCurrentLocation] = useState([]);
+    const [currentLocation, setCurrentLocation] = useState([]);
     const [tradeType, setTradeType] = useState(false) //trade=false, sell=true
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState(null);
     const [tradePreference,setTradePreference] = useState("") //plant to trade
 
     //state for form
@@ -51,10 +53,18 @@ function createtrade() {
       .then(res => res.json())
       .then((data)=>{
         setCurrentLocation(data.ll);
+        setCity(data.city);
+        setCountry(data.country)
       })
       .catch((err)=>{
           console.log(err)
       })
+    }
+
+    //handle price
+    const handlePrice = (e) => {
+        let amount = e.target.value;
+        setPrice(amount);
     }
 
     //handle typed location city
@@ -64,7 +74,50 @@ function createtrade() {
 
     //handle submit button
     const handleSubmit = (e) => {
-
+        let tradeBool = (tradeType ? false : true);
+        let sellBool = (tradeType ? true: false);
+        let id = uuid();
+        let imagesArr = [url1];
+        if(url2) imagesArr.push(url2);
+        if(url3) imagesArr.push(url3);
+        if(url4) imagesArr.push(url4);
+        dispatch(addTrade({
+                tradeId: id,
+                uid: userInfo.uid,
+                username:userInfo.username,
+                title,
+                description,
+                images: imagesArr,
+                location:currentLocation,
+                city,
+                country,
+                minOffer: Number(price).toFixed(2),
+                tradePreference,
+                trade: tradeBool,
+                sell: sellBool
+        }));
+        fetch('/api/trades/'+userInfo.uid , {
+            method: 'POST',
+            header:{
+                "contentType": "application/json"
+            },
+            body: JSON.stringify({
+                tradeId: id,
+                username:userInfo.username,
+                title,
+                location:currentLocation,
+                city,
+                country,
+                images: imagesArr,
+                description,
+                minOffer: Number(price).toFixed(2),
+                tradePreference,
+                trade: tradeBool,
+                sell: sellBool
+            })
+        })
+        .catch((err) => console.log(error))
+        router.push("/profile")
     }
 
     // types allowed for upload;
@@ -140,7 +193,7 @@ function createtrade() {
                             {url1 && <img className={style.label1} src={url1}></img>}
                         </div>
                         }          
-                        {!url1 && file1 && <ProgressBar file={file1} setUrl={setUrl1}/>}
+                        {!url1 && file1 && <ProgressBar file={file1} setUrl={setUrl1} />}
                     </div>
                     <div className={style.bottomImages}>
                         <div className={style.image2}>
@@ -153,7 +206,7 @@ function createtrade() {
                             <div>
                                 {url2 && <img className={style.label2} src={url2}></img>}
                             </div> }
-                            {!url2 && url1 && file2 && <ProgressBar file={file2} setUrl={setUrl2}/>}
+                            {!url2 && url1 && file2 && <ProgressBar file={file2} setUrl={setUrl2} />}
                         </div>
                         <div className={style.image2}>
                             {!url3 ? 
@@ -165,7 +218,7 @@ function createtrade() {
                             <div>
                                 {url3 && <img className={style.label2} src={url3}></img>}
                             </div> }
-                            {!url3 && url1 && file3 && <ProgressBar file={file3} setUrl={setUrl3}/>}
+                            {!url3 && url1 && file3 && <ProgressBar file={file3} setUrl={setUrl3} />}
                         </div>
                         <div className={style.image2}>
                             {!url4 ? 
@@ -178,7 +231,7 @@ function createtrade() {
                             <div>
                                 {url4 && <img className={style.label2} src={url4}></img>}
                             </div> }
-                            {!url4 && url1 && file4 && <ProgressBar file={file4} setUrl={setUrl4}/>}
+                            {!url4 && url1 && file4 && <ProgressBar file={file4} setUrl={setUrl4} />}
                         </div>
                     </div>
                 </div>
@@ -206,15 +259,14 @@ function createtrade() {
                         <div className={style.sell}>
                             {tradeType ?
                             <div>
-                            <label className={style.formTradeType}>Price</label>
+                            <label className={style.formTradeType}>Price ($):</label>
                             <input className={style.formInput} 
-                                onChange={(e)=>setPrice(e.target.value)} 
-                                value={'$'+price} 
+                                onChange={handlePrice} 
+                                value={price} 
                                 min="0" 
                                 step="0.01" 
                                 type="number" 
-                                placeholder="$ 0" 
-                                required/>
+                            />
                             </div>
                             :
                             <div>
@@ -229,11 +281,11 @@ function createtrade() {
                             </div>
                             }   
                         </div>
-                        <div className={style.autocomplete}>
+                        <div className={style.locationField}>
                             <input className={style.formInput} 
                                 type="text" 
                                 placeholder="Location (city)" 
-                                value = {location}
+                                value = {city? `${city}, ${country}`: null}
                                 onChange={handleLocation}
                                 required/>
                             <div className={style.currentLocation} 
@@ -243,6 +295,7 @@ function createtrade() {
                         </div>
                         <button 
                             className={style.buttonSubmit}
+                            disabled={title===""||city===""|| url1==="" || (tradePreference===""&&price===null)}
                             onClick={handleSubmit}
                             type="button">Create Trade</button>
                     </form>
