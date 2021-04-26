@@ -14,10 +14,6 @@ function profile() {
     const userInfo = useSelector((state)=> state.user)
     //const {user} = useAuth(); 
 
-    const addProfileHandler = () => {
-
-    };
-
     useEffect (()=> {
       const session = localStorage.getItem("uid")
       console.log("Local storage get:", session)
@@ -30,6 +26,9 @@ function profile() {
       }
     },[])
 
+    const handleChangeProfile = () => {
+
+    }
 
     return (
         <div>
@@ -41,34 +40,22 @@ function profile() {
                 <link rel="preconnect" href="https://fonts.gstatic.com"/>
                 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"/>
             </Head>
-            {userInfo.profile ? 
-                <div></div>
-            :
-                <div className={style.imageContainer}>
+            <main>
+                <div className={style.header}>
+                    {userInfo.profile ? 
+                    <img className={style.profilePic} src={userInfo.profile}/>
+                    :
                     <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"></img>
-                    <div onClick={addProfileHandler} className={style.addProfile}>Add A Profile Photo</div>
+                    }
+                    <div className={style.editProfile} onClick={handleChangeProfile}>Change Your Profile Photo</div>
+                    <div className={style.username}>{userInfo.username}</div>
+                    
                 </div>
-            }
-            <h1>{userInfo.username}</h1>
-            <h1>{userInfo.uid}</h1>
-            <h1>{userInfo.firstName}</h1>
+                <div className={style.tabs}></div>
+                <div className={style.posts}></div>
+            </main>
         </div>
     )
 }
-
-// export async function getServerSideProps(context){
-//     try {
-//         const cookies = nookies.get(context);
-//         const token = await verifyIdToken(cookies.token);
-//         const {uid,email} = token;
-//         return {
-//             props: {session: uid}
-//         };
-//     } catch (err) {
-//         context.res.writeHead(302, {location: "/login"})
-//         context.res.end();
-//         return {props:[]};
-//     }
-// }
 
 export default profile

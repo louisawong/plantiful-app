@@ -51,6 +51,8 @@ const UserSchema = new mongoose.Schema({
             type: [Number],
         }
     },
+    city: String,
+    country:String,
     chats: {
         type: [Chat],
         default: [],

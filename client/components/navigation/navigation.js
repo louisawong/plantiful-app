@@ -18,7 +18,7 @@ function Navigation() {
     const logoutHandler = async() => {
         await firebase.auth().signOut();
         dispatch(logoutUser());
-        localStorage.removeItem("uid");
+        // localStorage.removeItem("uid");
         //window.location.href="/";
         router.push("/");
     }

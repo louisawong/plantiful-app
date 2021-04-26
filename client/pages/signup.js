@@ -6,7 +6,7 @@ import "firebase/auth";
 import style from '../styles/Login.module.scss';
 import Link from 'next/link';
 import {useDispatch, useSelector} from 'react-redux';
-import {setNewUser} from '../redux/user'
+import {createNewUser} from '../redux/user'
 // import {useAuth} from '../firebase/auth';
 import { Router, useRouter } from 'next/router'
 
@@ -42,13 +42,20 @@ function signUp() {
                 .then (async (res)=>{
                     console.log(res.user.uid);
                     localStorage.setItem("uid", `${res.user.uid}`)
-                    dispatch(setNewUser({
+                    // dispatch(setNewUser({
+                    //     uid: res.user.uid,
+                    //     email: email, 
+                    //     username:username, 
+                    //     firstName:firstName, 
+                    //     lastName:lastName}));
+                    dispatch(createNewUser({
                         uid: res.user.uid,
                         email: email, 
                         username:username, 
                         firstName:firstName, 
-                        lastName:lastName}));
-                    router.push("/home")
+                        lastName:lastName
+                    }))
+                    router.push("/edit-profile")
                 })
                 .catch((err) => {
                     const message = err.message;

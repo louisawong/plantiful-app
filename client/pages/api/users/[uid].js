@@ -6,6 +6,7 @@ dbConnect();
  export default async (req,res) => {
      const {method} = req;
      const {uid} = req.query;
+     console.log("METHOD", method);
 
     switch(method) {
         //getting all a user's info by uid
@@ -21,7 +22,7 @@ dbConnect();
              break;
         //making a new account
           case 'POST':
-            req.body = JSON.parse(req.body)
+            //req.body = JSON.parse(req.body)
             const user = {
               uid: req.body.uid,
               username: req.body.username,
@@ -31,6 +32,7 @@ dbConnect();
             }
             try {
               const result = await User.create(user);
+              console.log("Post new user", result)
               res.status(201).send(result)
             } catch(err) {
               console.error(`Couldn't add new user ${uid}`,err)

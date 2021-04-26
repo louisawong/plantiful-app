@@ -15,6 +15,23 @@ export const fetchUserById = createAsyncThunk(
   }
 )
 
+//post a new user
+export const createNewUser = createAsyncThunk(
+  'users/createNewUserStatus',
+  async (user, thunkAPI) => {
+    console.log("THUNK USER: ", user)
+    const response = await axios.post(`/api/users/${user.uid}`,{
+      uid:user.uid,
+      username:user.username,
+      email:user.email,
+      firstName: user.firstName,
+      lastName: user.lastName
+    })
+    console.log("THUNKRESULT",response)
+    return response.data
+  }
+)
+
 export const userSlice = createSlice({
     name: "user",
     initialState:{
@@ -36,27 +53,27 @@ export const userSlice = createSlice({
         chats:[],
     },
     reducers:{ 
-      setNewUser: (state, action) => {
-        state.isAuthenticated = true;
-        state.uid = action.payload.uid;
-        state.email = action.payload.email;
-        state.username = action.payload.username;
-        state.firstName = action.payload.firstName;
-        state.lastName = action.payload.lastName;
-        fetch('/api/users/'+action.payload.uid, {
-          method: 'POST',
-          header:{
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            uid:action.payload.uid,
-            username:action.payload.username,
-            email:action.payload.email,
-            firstName: action.payload.firstName,
-            lastName: action.payload.lastName
-          })
-        }).catch((err) => console.log(error))
-      },
+      // setNewUser: (state, action) => {
+      //   state.isAuthenticated = true;
+      //   state.uid = action.payload.uid;
+      //   state.email = action.payload.email;
+      //   state.username = action.payload.username;
+      //   state.firstName = action.payload.firstName;
+      //   state.lastName = action.payload.lastName;
+        // fetch('/api/users/'+action.payload.uid, {
+        //   method: 'POST',
+        //   header:{
+        //     "Content-Type": "application/json"
+        //   },
+        //   body: JSON.stringify({
+        //     uid:action.payload.uid,
+        //     username:action.payload.username,
+        //     email:action.payload.email,
+        //     firstName: action.payload.firstName,
+        //     lastName: action.payload.lastName
+        //   })
+        // }).catch((err) => console.log(error))
+      //},
       editProfile: (state, action) => {
         state.profile = action.payload.profile;
       },
@@ -133,6 +150,7 @@ export const userSlice = createSlice({
         state.chats = state.chats.concat(action.payload.chats);
       },
       logoutUser: (state) => {
+        localStorage.removeItem("uid");
         state.authUser = {};
         state.isAuthenticated = false;
         state.uid = "";
@@ -173,6 +191,14 @@ export const userSlice = createSlice({
           state.numTrades= action.payload.numTrades;
           state.chats = state.chats.concat(action.payload.chats);
         },
+        [createNewUser.fulfilled]: (state,action) => {
+          state.isAuthenticated = true;
+          state.uid = action.payload.uid;
+          state.email = action.payload.email;
+          state.username = action.payload.username;
+          state.firstName = action.payload.firstName;
+          state.lastName = action.payload.lastName;
+        }
     }
 });
 
