@@ -2,7 +2,7 @@ import React, {useEffect,useState} from 'react'
 import Head from 'next/head'
 import style from '../styles/EditProfile.module.scss'
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchUserById, logoutUser} from '../redux/user';
+import user, {fetchUserById, logoutUser, updateUser} from '../redux/user';
 import {useRouter } from 'next/router'
 import ProgressBar from '../components/ProgressBar/ProgressBar'
 import moment from 'moment'
@@ -13,15 +13,19 @@ function editProfile() {
     const userInfo = useSelector((state)=> state.user)
     //const {user} = useAuth();
 
-    //state for images
-    const [file, setFile] = useState(null);
+    //state 
+    const [file, setFile] = useState("");
     const [url, setUrl] = useState("");
     const [location, setLocation] = useState([]);
     const [firstName, setFirstName] = useState("");
+    const [editFirst, setEditFirst] = useState(false)
     const [lastName, setLastName] = useState("");
+    const [editLast, setEditLast] = useState(false)
     const [description, setDescription] = useState("");
+    const [editDescription, setEditDescription] = useState(false);
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
+    const [locationCheck, setLocationCheck] = useState(false)
 
     //check auth session
     useEffect (()=> {
@@ -36,22 +40,51 @@ function editProfile() {
         }
       },[])
 
-    //handle currentLocation
-    const handleCurrentLocation = (e) => {
-      fetch("/api/geolocation")
-      .then(res => res.json())
-      .then((data)=>{
-        setCurrentLocation(data.ll);
-        setCity(data.city);
-        setCountry(data.country)
-      })
-      .catch((err)=>{
-          console.log(err)
-      })
+    //handle Location
+    const handleLocation = (e) => {
+        if (e.target.checked) {
+            setLocationCheck(e.target.checked)
+            fetch("/api/geolocation")
+            .then(res => res.json())
+            .then((data)=>{
+              setLocation(data.ll);
+              setCity(data.city);
+              setCountry(data.country)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+        } else {
+            setLocationCheck(e.target.checked)
+            setLocation([]);
+            setCity("");
+            setCountry("")
+        }
     }
 
     //handle submit button
     const handleSubmit = (e) => {
+        let update={};
+        update.firstName=(firstName.length>=2 ? firstName : userInfo.firstName)
+        update.lastName= (editLast ? lastName : userInfo.lastName)
+        if (!userInfo.description && !editDescription) { 
+            update.description =  `Welcome to ${userInfo.firstName}'s greenhouse! 🪴 `
+        }
+        if (editDescription && description!=="") {
+            update.description =  description;
+        }
+        if (userInfo.description && !editDescription) {
+            update.description =  userInfo.description;
+        }
+        if (locationCheck) {
+            update.location = location;
+            update.city = city;
+            update.country = country;
+        }
+        dispatch(updateUser({
+            uid: userInfo.uid,
+            update: update
+        }))
 
         router.push("/profile")
     }
@@ -62,9 +95,9 @@ function editProfile() {
     const handleEditProfile = (e) => {
         let selected = e.target.files[0];
         if (selected && types.includes(selected.type)) {
-          setFile1(selected);
+          setFile(selected);
         } else {
-            setFile1(null);
+            setFile(null);
             alert('Please select an image file (png or jpg)');
         }
     }
@@ -81,148 +114,67 @@ function editProfile() {
             </Head>
             <main className={style.container}>
               <div className={style.left}>
-                {!userInfo.profile ? 
+                {!url ? 
                     <label className={style.profileWrapper}>
                         <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=96cfd706-f6ec-48ab-9452-ec212d8b7b2b"/>
                         <input className={style.input} type="file" onChange={handleEditProfile}/>             
                         <span className={style.addImage}>Edit Your Profile Photo</span>
                     </label>
                     : 
-                    <div>
-                        {url1 && <img className={style.profilePic} src={url1}></img>}
+                    <div className={style.profileWrapper}>
+                        {url && <img className={style.profilePic} src={url}></img>}
                     </div>
                 }
                 {!url && file && <ProgressBar file={file} setUrl={setUrl} />}   
               </div>
               <div className={style.right}>
-                 <h1 className={style.header}>Edit Your Profile</h1>
-                 <div className={style.setInfo}>
-                   <span className={style.bolded} >Username: {' '}</span>  
-                     {userInfo.username}{' | | '}
-                     <span className={style.bolded} >Email: {' '}</span>{userInfo.email}</div>
+                <h1 className={style.header}>Edit Your Profile</h1>
+                <div className={style.setInfo}>
+                    <span className={style.bolded} >Username: {' '}</span>  
+                    {userInfo.username}{' | | '}
+                    <span className={style.bolded} >Email: {' '}</span>{userInfo.email}
+                </div>
+                <div className={style.name}>
+                    <label> First Name: {' '}
+                        <input className={style.firstName} 
+                        value={firstName} 
+                        onChange={(e)=>{setEditFirst(true); setFirstName(e.target.value)}} 
+                        placeholder={userInfo.firstName}
+                        />
+                    </label>
+                    <label>Last Name: {' '}
+                        <input className={style.lastName} 
+                        value={lastName} 
+                        onChange={(e)=>{setEditLast(true); setLastName(e.target.value)}} 
+                        placeholder={userInfo.lastName? userInfo.lastName : "Add last name"}
+                        />
+                    </label>
+                </div>
+                <div className={style.description}>
+                    <label> Your Profile's Description: {' '}
+                        <textarea className={style.descriptionText} 
+                        value={description} 
+                        onChange={(e)=>{setEditDescription(true); setDescription(e.target.value)}}
+                        placeholder={userInfo.description? userInfo.description : `Welcome to ${userInfo.firstName}'s greenhouse! 🪴 `}>
+                        </textarea>
+                    </label>
+                </div>
+                <div className={style.location}>
+                    <div className={style.locationData}>
+                        {userInfo.city? userInfo.city : "No Previous Location Information"}
+                    </div>
+                    <label> Do you want to use current location as your home city? {' '}
+                        <input className={style.locationCheck} 
+                        type="checkbox"
+                        onClick={handleLocation}></input>
+                    </label>
+                    {locationCheck? <div className={style.currentLocation}>{`${city}, ${country}`}</div> : <div></div>}
+                </div>
+                <button className={style.buttonSubmit}
+                onClick={handleSubmit}
+                type="button">Update Profile</button>
               </div>
             </main>
-                {/* <div className={style.left}>
-                    <div className={style.image1}>
-                        {!url1 ? 
-                        <label className={style.label1}>
-                            <img className={style.label1} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addImage.png?alt=media&token=c20e10da-e530-4edd-be72-ff2e3998cc99"/>
-                            <input className={style.input} type="file" onChange={handleChange1}/>             
-                        </label>
-                        : 
-                        <div>
-                            {url1 && <img className={style.label1} src={url1}></img>}
-                        </div>
-                        }   
-                        {!url1 && file1 && <ProgressBar file={file1} setUrl={setUrl1} />}
-                    </div>
-                    <div className={style.bottomImages}>
-                        <div className={style.image2}>
-                            {!url2 ? 
-                            <label className={style.label2}>
-                                <img className={style.label2} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
-                                <input className={style.input} type="file" onChange={handleChange2}/>       
-                            </label>
-                            : 
-                            <div>
-                                {url2 && <img className={style.label2} src={url2}></img>}
-                            </div> }
-                            {!url2 && url1 && file2 && <ProgressBar file={file2} setUrl={setUrl2} />}
-                        </div>
-                        <div className={style.image2}>
-                            {!url3 ? 
-                            <label className={style.label2}>
-                                <img className={style.label2} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
-                                <input className={style.input} type="file" onChange={handleChange3}/>            
-                            </label>
-                            : 
-                            <div>
-                                {url3 && <img className={style.label2} src={url3}></img>}
-                            </div> }
-                            {!url3 && url1 && file3 && <ProgressBar file={file3} setUrl={setUrl3} />}
-                        </div>
-                        <div className={style.image2}>
-                            {!url4 ? 
-                            <label className={style.label2}>
-                                <img className={style.label2} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
-                                
-                                <input className={style.input} type="file" onChange={handleChange4}/>             
-                            </label>
-                            : 
-                            <div>
-                                {url4 && <img className={style.label2} src={url4}></img>}
-                            </div> }
-                            {!url4 && url1 && file4 && <ProgressBar file={file4} setUrl={setUrl4} />}
-                        </div>
-                    </div>
-                </div>
-                <div className={style.right}>
-                    <h1 className={style.header}>Create Your Trade</h1>
-                    <form className={style.createForm} autoComplete="off">
-                        <input className={style.formInput} 
-                            type="text" 
-                            placeholder="Title" 
-                            onChange={(e)=>setTitle(e.target.value)}
-                            value={title}
-                            required/>
-                        <textarea className={style.formInput} 
-                            placeholder="Describe your plant trade"
-                            onChange={(e)=>setDescription(e.target.value)}
-                            value={description}
-                        ></textarea>
-                        {tradeType ? <label>Selling</label>:<label>Trade</label>}
-                        <label className={style.switch}>
-                            <input className={style.input} 
-                                type="checkbox" 
-                                onClick={(e)=>setTradeType(e.currentTarget.checked)}/>
-                            <span className={`${style.slider} ${style.round}`}></span>
-                        </label>
-                        <div className={style.sell}>
-                            {tradeType ?
-                            <div>
-                            <label className={style.formTradeType}>Price ($):</label>
-                            <input className={style.formInput} 
-                                onChange={handlePrice} 
-                                value={price} 
-                                min="0" 
-                                step="0.01" 
-                                type="number" 
-                            />
-                            </div>
-                            :
-                            <div>
-                            <label className={style.formTradeType}>Interested In: </label>
-                            <input className={style.formInput} 
-                                type="text" 
-                                value={tradePreference} 
-                                onChange={(e)=>setTradePreference(e.target.value)} 
-                                placeholder="Your plant wishlist" 
-                                required
-                            />
-                            </div>
-                            }   
-                        </div>
-                        <div className={style.locationField}>
-                            <input className={style.formInput} 
-                                type="text" 
-                                placeholder="Location (city)" 
-                                value = {city? `${city}, ${country}`: null}
-                                onChange={handleLocation}
-                                required/>
-                            <div className={style.currentLocation} 
-                                onClick={handleCurrentLocation}>
-                                    Use Current Location
-                            </div>
-                        </div>
-                        <button 
-                            className={style.buttonSubmit}
-                            disabled={title===""||city===""|| url1==="" || (tradePreference===""&&price===null)}
-                            onClick={handleSubmit}
-                            type="button">Create Trade</button>
-                    </form>
-                </div>
-             </div>
-            </main> */}
         </div>
     )
 }

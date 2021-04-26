@@ -15,10 +15,10 @@ function createtrade() {
     const {user} = useAuth();
 
     //state for images
-    const [file1, setFile1] = useState(null);
-    const [file2, setFile2] = useState(null);
-    const [file3, setFile3] = useState(null);
-    const [file4, setFile4] = useState(null);
+    const [file1, setFile1] = useState("");
+    const [file2, setFile2] = useState("");
+    const [file3, setFile3] = useState("");
+    const [file4, setFile4] = useState("");
     const [url1, setUrl1] = useState("");
     const [url2, setUrl2] = useState("");
     const [url3, setUrl3] = useState("");

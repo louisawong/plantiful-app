@@ -6,6 +6,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 // First, create the thunk
+//fetch session user info from database
 export const fetchUserById = createAsyncThunk(
   'users/fetchByIdStatus',
   async (userId, thunkAPI) => {
@@ -32,6 +33,16 @@ export const createNewUser = createAsyncThunk(
   }
 )
 
+export const updateUser = createAsyncThunk(
+  'users/updateUserStatus',
+  async (user, thunkAPI) => {
+    console.log("THUNK Update: ", user)
+    const response = await axios.put(`/api/users/${user.uid}`,user.update)
+    console.log("THUNKUPDATERESULT",response)
+    return response.data
+  }
+)
+
 export const userSlice = createSlice({
     name: "user",
     initialState:{
@@ -53,27 +64,6 @@ export const userSlice = createSlice({
         chats:[],
     },
     reducers:{ 
-      // setNewUser: (state, action) => {
-      //   state.isAuthenticated = true;
-      //   state.uid = action.payload.uid;
-      //   state.email = action.payload.email;
-      //   state.username = action.payload.username;
-      //   state.firstName = action.payload.firstName;
-      //   state.lastName = action.payload.lastName;
-        // fetch('/api/users/'+action.payload.uid, {
-        //   method: 'POST',
-        //   header:{
-        //     "Content-Type": "application/json"
-        //   },
-        //   body: JSON.stringify({
-        //     uid:action.payload.uid,
-        //     username:action.payload.username,
-        //     email:action.payload.email,
-        //     firstName: action.payload.firstName,
-        //     lastName: action.payload.lastName
-        //   })
-        // }).catch((err) => console.log(error))
-      //},
       editProfile: (state, action) => {
         state.profile = action.payload.profile;
       },
@@ -198,6 +188,25 @@ export const userSlice = createSlice({
           state.username = action.payload.username;
           state.firstName = action.payload.firstName;
           state.lastName = action.payload.lastName;
+        },
+        [updateUser.fulfilled]: (state,action) => {
+          state.isAuthenticated = true;
+          state.uid = action.payload.uid;
+          state.username = action.payload.username;
+          state.email = action.payload.email;
+          state.firstName = action.payload.firstName;
+          state.lastName = action.payload.lastName;
+          state.profile = action.payload.profile;
+          state.description = action.payload.description;
+          const coords = action.payload.location.coordinates;  
+          state.location = coords;
+          state.followers = state.followers.concat(action.payload.followers);
+          state.numFollowers = action.payload.numFollowers;
+          state.inspos = state.inspos.concat(action.payload.inspos);
+          state.numInspos = action.payload.numInspos;
+          state.trades = state.trades.concat(action.payload.trades);
+          state.numTrades= action.payload.numTrades;
+          state.chats = state.chats.concat(action.payload.chats);
         }
     }
 });

@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {loadUser, logoutUser, fetchUserById} from '../redux/user';
 import {useAuth} from '../firebase/auth';
 import { Router, useRouter } from 'next/router'
+import Link from 'next/link'
 import ProgressBar from '../components/ProgressBar/ProgressBar';
 
 
@@ -45,10 +46,18 @@ function profile() {
                     {userInfo.profile ? 
                     <img className={style.profilePic} src={userInfo.profile}/>
                     :
-                    <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"></img>
+                    <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/MVQLddp5dofO4mxECB85KGcPUjj1.1619417879256.Plantiful_icon.png?alt=media&token=c973879c-722d-43b6-a78f-971be61f55f5"></img>
                     }
-                    <div className={style.editProfile} onClick={handleChangeProfile}>Change Your Profile Photo</div>
-                    <div className={style.username}>{userInfo.username}</div>
+                    <Link href="/edit-profile">
+                    <div className={style.editProfile} >Edit Your Profile</div>
+                    </Link>
+                    <div className={style.username}>{`@${userInfo.username}`}</div>
+                    <div className={style.basicInfo}>
+                        <span>{`${userInfo.firstName} ${userInfo.lastName}`}</span>
+                        {userInfo.city ? <span>{` || ${userInfo.city}, ${userInfo.country}`}</span> : <div></div>}
+                    </div>
+                    <div className={style.description}>{userInfo.description}</div>
+
                     
                 </div>
                 <div className={style.tabs}></div>
