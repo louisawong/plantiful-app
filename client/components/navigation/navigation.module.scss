@@ -24,10 +24,11 @@ $dark-jungle-green: #041910ff;
 }
 
 .logo {
-    width: 15vw;
+    width: 100%;
     max-width: 200px;
     min-width: 100px;
     margin-right: 1vw;
+    //background-color: aquamarine;
 
     &:hover {
         cursor: pointer;
@@ -37,7 +38,7 @@ $dark-jungle-green: #041910ff;
 .left {
     display: flex;
     align-items: center;
-    width: 25%;
+    width: 30%;
     justify-content: space-between;
     height: 100%;
 
