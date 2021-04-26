@@ -22,7 +22,7 @@ $dark-jungle-green: #041910ff;
 
 .wrapper {
     width: 80vw;
-    height: 75vh;
+    height: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -36,12 +36,20 @@ $dark-jungle-green: #041910ff;
     display:flex;
     flex-direction: column;
     align-items: center;
+
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: red;  
 }
 .right {
     //background-color: red;
     height: 70vh;
     width: 50%;
     padding:0;
+
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: red;  
 }
 .header {
     margin:0;
@@ -53,7 +61,11 @@ $dark-jungle-green: #041910ff;
 .image1 {
     width:300px;
     display: block;
-    margin: auto;
+    //margin: auto;
+
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: red;  
 }
 .image2 {
     width:85px;
@@ -95,8 +107,11 @@ $dark-jungle-green: #041910ff;
     display: flex;
     width: 300px;
     justify-content: space-between; 
-    margin: auto;
-    margin-top: 2vh;
+    //margin: auto;
+    margin-top: 18px;
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: red;  
   
 }
 .image2 {
@@ -128,7 +143,6 @@ $dark-jungle-green: #041910ff;
     display: inline-block;
     width: 3rem;
     height: 1rem;
-    margin: 0;
     //box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
   }
   
@@ -214,7 +228,7 @@ $dark-jungle-green: #041910ff;
   border-radius: 10px;
   padding: 0.25rem 0.5rem;
   font-family: 'Poppins', sans-serif;
-  border: 0;
+  border:0;
 
   &:hover {
     cursor: pointer;
