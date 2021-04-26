@@ -192,7 +192,7 @@ function createtrade() {
                         <div>
                             {url1 && <img className={style.label1} src={url1}></img>}
                         </div>
-                        }          
+                        }   
                         {!url1 && file1 && <ProgressBar file={file1} setUrl={setUrl1} />}
                     </div>
                     <div className={style.bottomImages}>
