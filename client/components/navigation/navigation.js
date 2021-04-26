@@ -20,9 +20,9 @@ function Navigation() {
         const session = localStorage.getItem("uid")
         //console.log("Local storage get:", session)
         if (!session) {
-            dispatch(logoutUser());
+            //dispatch(logoutUser());
             setSession(false);
-            router.push("/login")
+            //router.push("/login")
         }
         else {
           //dispatch(fetchUserById(session))
