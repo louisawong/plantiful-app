@@ -24,7 +24,7 @@ export default function Home() {
       <main>
         {/* <img className={style.logo} src="/images/Plantiful.png"/> */}
         {/* <Image src="/images/Plantiful.png" width={200} height={200} /> */}
-        <UploadForm/>
+        {/* <UploadForm/>
         <h2>{`User ID: ${user ? user.uid : "No user signed in"}`}</h2>
         <div>
           <button disabled={!user}>
@@ -37,7 +37,7 @@ export default function Home() {
               <a>Log In</a>
             </Link>
           </button>
-        </div>
+        </div> */}
       </main>
     </div>
   )

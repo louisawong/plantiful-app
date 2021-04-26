@@ -8,6 +8,7 @@ import { Router, useRouter } from 'next/router'
 import Link from 'next/link'
 import ProgressBar from '../components/ProgressBar/ProgressBar';
 import TradePost from '../components/TradePost/TradePost';
+import TradePostList from '../components/TradePostList/TradePostList';
 
 
 function profile() {
@@ -34,12 +35,18 @@ function profile() {
       if (selected === "trade") {
           if (userInfo.trades.length == 0) {
               return (
-                  <div>You have no trades.</div>
+                  <div className={style.announcement}>You have no trade posts yet.</div>
               )
           }
-          userInfo.trades.map((trade)=> <TradePost trade={trade}/> )
+          return <TradePostList tradeList={userInfo.trades}/>
       }
-      else {}
+      else {
+        if (userInfo.inspos.length == 0) {
+            return (
+                <div className={style.announcement}>You have no inspiration posts yet.</div>
+            )
+        }
+    }
     }
 
     return (

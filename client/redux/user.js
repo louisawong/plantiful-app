@@ -181,13 +181,13 @@ export const userSlice = createSlice({
           state.location = coords;
           state.city = action.payload.city;
           state.country = action.payload.country;
-          state.followers = state.followers.concat(action.payload.followers);
+          state.followers = action.payload.followers;
           state.numFollowers = action.payload.numFollowers;
-          state.inspos = state.inspos.concat(action.payload.inspos);
+          state.inspos = action.payload.inspos;
           state.numInspos = action.payload.numInspos;
-          state.trades = state.trades.concat(action.payload.trades);
+          state.trades = action.payload.trades;
           state.numTrades= action.payload.numTrades;
-          state.chats = state.chats.concat(action.payload.chats);
+          state.chats = action.payload.chats;
         },
         [createNewUser.fulfilled]: (state,action) => {
           state.isAuthenticated = true;
@@ -208,13 +208,13 @@ export const userSlice = createSlice({
           state.description = action.payload.description;
           const coords = action.payload.location.coordinates;  
           state.location = coords;
-          state.followers = state.followers.concat(action.payload.followers);
+          state.followers = action.payload.followers;
           state.numFollowers = action.payload.numFollowers;
-          state.inspos = state.inspos.concat(action.payload.inspos);
+          state.inspos = action.payload.inspos;
           state.numInspos = action.payload.numInspos;
-          state.trades = state.trades.concat(action.payload.trades);
+          state.trades = action.payload.trades;
           state.numTrades= action.payload.numTrades;
-          state.chats = state.chats.concat(action.payload.chats);
+          state.chats = action.payload.chats;
         }
     }
 });

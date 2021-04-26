@@ -1,0 +1,19 @@
+.card {
+    width: 20%;
+    height: fit-content;
+    margin: 0 5px;
+    border-radius: 10px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    padding: 0.5em;
+}
+
+.postImage {
+    width: 95%;
+    border-radius: 10px;
+}
+
+.tradeType {
+    font-size: 0.75em;
+    color:rgb(108, 108, 108);
+    margin-bottom: 3px;
+}
