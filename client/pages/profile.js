@@ -7,6 +7,7 @@ import {useAuth} from '../firebase/auth';
 import { Router, useRouter } from 'next/router'
 import Link from 'next/link'
 import ProgressBar from '../components/ProgressBar/ProgressBar';
+import TradePost from '../components/TradePost/TradePost';
 
 
 function profile() {
@@ -14,6 +15,8 @@ function profile() {
     const router = useRouter();
     const userInfo = useSelector((state)=> state.user)
     //const {user} = useAuth(); 
+
+    const [selected,setSelected] = useState("trade")
 
     useEffect (()=> {
       const session = localStorage.getItem("uid")
@@ -26,6 +29,18 @@ function profile() {
         dispatch(fetchUserById(session))
       }
     },[])
+
+    const showPosts = () => {
+      if (selected === "trade") {
+          if (userInfo.trades.length == 0) {
+              return (
+                  <div>You have no trades.</div>
+              )
+          }
+          userInfo.trades.map((trade)=> <TradePost trade={trade}/> )
+      }
+      else {}
+    }
 
     return (
         <div>
@@ -58,10 +73,13 @@ function profile() {
                 </div>
                 <div className={style.allPosts}>
                     <div className={style.postTabs}>
-                        <div className={style.tabs}>Trades</div>
-                        <div className={style.tabs}>Inspo</div>
+                        <div className={style.tabs} onClick={()=>setSelected("trade")}>Trades</div>
+                        <div className={style.tabs} onClick={()=>setSelected("inspo")}>Inspo</div>
                     </div>
-                    
+                    <div className={style.postList}>
+                        {showPosts()}
+                    </div>
+
                 </div>
                 <div className={style.posts}></div>
             </main>
