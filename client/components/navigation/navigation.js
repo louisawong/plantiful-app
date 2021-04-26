@@ -20,12 +20,9 @@ function Navigation() {
         const session = localStorage.getItem("uid")
         //console.log("Local storage get:", session)
         if (!session) {
-            //dispatch(logoutUser());
             setSession(false);
-            //router.push("/login")
         }
         else {
-          //dispatch(fetchUserById(session))
           setSession(true);
         }
       },[router])
@@ -33,13 +30,7 @@ function Navigation() {
     const logoutHandler = async() => {
         await firebase.auth().signOut();
         dispatch(logoutUser());
-        // localStorage.removeItem("uid");
-        //window.location.href="/";
         router.push("/");
-    }
-    
-    const chatHandler = () => {
-      console.log("HANDLING Chat")
     }
 
     return (
@@ -85,9 +76,11 @@ function Navigation() {
             </div>
             <Search/>
             <div className={style.right}>
-                <div className={style.container_nav2} onClick={chatHandler}>
+                <Link href="/messages">
+                <div className={style.container_nav2}>
                     <span className={`material-icons ${style.icon}`}>question_answer</span>
                 </div>
+                </Link>
                 <Link href="/profile">
                 <div className={style.container_nav2}>
                     <span className={`material-icons ${style.icon}`}>account_circle</span>

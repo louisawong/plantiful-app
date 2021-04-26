@@ -31,12 +31,16 @@ function Add() {
             <div className={style.wrapper}>
             <Link href="/create-trade">
             <div className={style.container}>
-                <span className={`material-icons ${style.icon}`}>sell</span>
+                <div className={`material-icons ${style.icon}`}>sell
+                </div>
+                <div className={style.appear}>Create Trade</div>
+                
             </div>
             </Link>
             <Link href="/create-inspo">
             <div className={style.container}>
-            <span className={`material-icons ${style.icon}`}>auto_awesome</span>
+            <div className={`material-icons ${style.icon}`}>auto_awesome</div>
+            <div className={style.appear2}>Create Inspo</div>
             </div>
             </Link>
             </div>

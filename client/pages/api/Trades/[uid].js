@@ -34,7 +34,7 @@ dbConnect();
               const result = await User.findOneAndUpdate({uid},{$inc: {numTrades:1}},{new:true});
               //const newNum = user.numTrades + 1;
               //const result = await User.findOneAndUpdate({uid},{trades:update, numTrades:newNum},{new:true});
-              console.log("POST TRADE: ", result)
+              //console.log("POST TRADE: ", result)
               res.status(201).send(result)
             } catch(err) {
               console.error(`Couldn't add new trade ${uid}`,err)
