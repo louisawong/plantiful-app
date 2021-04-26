@@ -81,6 +81,7 @@ function editProfile() {
             update.city = city;
             update.country = country;
         }
+        if(url) update.profile = url;
         dispatch(updateUser({
             uid: userInfo.uid,
             update: update
@@ -116,13 +117,18 @@ function editProfile() {
               <div className={style.left}>
                 {!url ? 
                     <label className={style.profileWrapper}>
+                        {userInfo.profile ? 
+                        <img className={style.profilePic} src={userInfo.profile}/>
+                        :
                         <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=96cfd706-f6ec-48ab-9452-ec212d8b7b2b"/>
+                        }
                         <input className={style.input} type="file" onChange={handleEditProfile}/>             
                         <span className={style.addImage}>Edit Your Profile Photo</span>
                     </label>
                     : 
                     <div className={style.profileWrapper}>
                         {url && <img className={style.profilePic} src={url}></img>}
+                        <span className={style.addImage}>New Profile Photo</span>
                     </div>
                 }
                 {!url && file && <ProgressBar file={file} setUrl={setUrl} />}   

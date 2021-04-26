@@ -31,6 +31,7 @@ $dark-jungle-green: #041910ff;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    object-fit: cover;
     &:hover {
         cursor: pointer;
     }
@@ -41,6 +42,7 @@ $dark-jungle-green: #041910ff;
     font-weight: 300;
     text-align: center;
     margin-top: 16px;
+    object-fit: cover;
 }
 .profilePic {
     border-radius: 50%;
@@ -48,6 +50,7 @@ $dark-jungle-green: #041910ff;
     height: 30vw;
     overflow: hidden; 
     //margin: 0 auto;
+    object-fit: cover;
 }
 .input {
     height:0;
@@ -112,7 +115,7 @@ $dark-jungle-green: #041910ff;
     line-height: 2em;
 }
 .buttonSubmit{
-   color: white;
+  color: white;
   background-color: $rust;
   border-radius: 10px;
   padding: 0.25rem 0.5rem;

@@ -27,10 +27,6 @@ function profile() {
       }
     },[])
 
-    const handleChangeProfile = () => {
-
-    }
-
     return (
         <div>
             <Head>
@@ -60,7 +56,13 @@ function profile() {
 
                     
                 </div>
-                <div className={style.tabs}></div>
+                <div className={style.allPosts}>
+                    <div className={style.postTabs}>
+                        <div className={style.tabs}>Trades</div>
+                        <div className={style.tabs}>Inspo</div>
+                    </div>
+                    
+                </div>
                 <div className={style.posts}></div>
             </main>
         </div>

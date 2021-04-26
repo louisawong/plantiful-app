@@ -55,6 +55,8 @@ export const userSlice = createSlice({
         profile: "",
         description: "",
         location: [],
+        city:"",
+        country: "",
         followers: [],
         numFollowers: 0,
         inspos: [],
@@ -131,6 +133,8 @@ export const userSlice = createSlice({
         state.description = action.payload.description;
         const coords = action.payload.location.coordinates;  
         state.location = coords;
+        state.city = action.payload.city;
+        state.country = action.payload.country;
         state.followers = state.followers.concat(action.payload.followers);
         state.numFollowers = action.payload.numFollowers;
         state.inspos = state.inspos.concat(action.payload.inspos);
@@ -151,6 +155,8 @@ export const userSlice = createSlice({
         state.profile = "";
         state.description = "";
         state.location = [];
+        state.city = "";
+        state.countru = "";
         state.followers = [];
         state.numFollowers = 0;
         state.inspos = [];
@@ -173,6 +179,8 @@ export const userSlice = createSlice({
           state.description = action.payload.description;
           const coords = action.payload.location.coordinates;  
           state.location = coords;
+          state.city = action.payload.city;
+          state.country = action.payload.country;
           state.followers = state.followers.concat(action.payload.followers);
           state.numFollowers = action.payload.numFollowers;
           state.inspos = state.inspos.concat(action.payload.inspos);
