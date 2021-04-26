@@ -7,7 +7,7 @@ export default function TradePost({trade}) {
             <div className={style.tradeType}>{trade.trade ? "Trade" : "Selling"}</div>
             <div className={style.tradePreference}>{trade.trade ? `Looking for ${trade.tradePreference}` : `$${trade.minOffer}`}</div>
             
-            <img className={style.postImage} src={trade.images[0]}></img>
+            <img className={style.postImage} src={(trade.images ? trade.images[0]: trade.images)}></img>
             <div className={style.title}>{trade.title}</div>
             <div className={style.location}>{`${trade.city}, ${trade.country}`}</div>
             <div className={style.createdBy}>

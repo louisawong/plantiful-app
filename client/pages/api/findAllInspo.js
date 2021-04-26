@@ -5,7 +5,7 @@ dbConnect();
 
 //to find all inspo posts  - filter for users own client side
 export default async (req,res) => {
-    const {method} = req.method;
+    const {method} = req;
     if (method==='GET') {
         try {
             let result = await User.find();

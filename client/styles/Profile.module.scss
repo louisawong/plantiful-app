@@ -9,6 +9,12 @@ $dark-jungle-green: #041910ff;
 .mainWrapper{
     overflow-x: hidden;
 }
+.wrapper {
+    padding-left: 4vw;
+    padding-right: 4vw;
+    padding-top: 2vh;
+    background-color: $rust;
+}
 .header {
     display: flex;
     flex-direction: column;

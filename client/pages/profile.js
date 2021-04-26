@@ -29,7 +29,7 @@ function profile() {
       else {
         dispatch(fetchUserById(session))
       }
-    },[])
+    },[router])
 
     const showPosts = () => {
       if (selected === "trade") {
@@ -38,7 +38,7 @@ function profile() {
                   <div className={`${style.announcement} ${style.trades}`}>You have no trade posts yet.</div>
               )
           }
-          return <TradePostList type="trade" tradeList={userInfo.trades}/>
+          return <div className={style.wrapper}><TradePostList type="trade" tradeList={userInfo.trades}/></div>
       }
       else {
         if (userInfo.inspos.length == 0) {

@@ -5,13 +5,15 @@ dbConnect();
 
 //find all trade posts and filter out users own posts client side
 export default async (req,res) => {
-    const {method} = req.method;
-    if (method==='GET') {
+    const {method} = req;
+    if (method==='POST') {
         try {
-            let result = await User.find();
-            let tradesArr = result.map((user) => user.inspos);
+            // console.log("REQ:", req.body)
+            let result = await User.find({location: {$near: {$maxDistance: 10000, $geometry: {type: "Point", coordinates: req.body.location}}}});
+            //console.log('RESULT find trades: ',result)
+            let tradesArr = result.map((user) => user.trades);
             let trades = tradesArr.flat();
-            console.log(trades); 
+            console.log("TRADES", trades); 
             res.status(200).send(trades)
         } catch (err) {
             console.error("Couldn't find all trades", err);

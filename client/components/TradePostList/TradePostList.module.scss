@@ -8,17 +8,23 @@ $phthalo-green: #052E26ff;
 $dark-jungle-green: #041910ff;
 
 .container {
-    padding-left: 4vw;
-    padding-right: 4vw;
-    padding-top: 2vh;
-    padding-bottom: 10px;
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: top;
-    height:fit-content;
-    //margin-bottom: 10px;
-    overflow-x: hidden;
+    // padding-left: 4vw;
+    // padding-right: 4vw;
+    // padding-top: 2vh;
+    // padding-bottom: 10px;
+    // display:flex;
+    // flex-wrap: wrap;
+    // justify-content: flex-start;
+    // align-items: top;
+    // height:fit-content;
+    // //margin-bottom: 10px;
+    // overflow-x: hidden;
+    width: 100%;
+    column-count: 3;
+    column-gap:10px;
+    // padding-left: 4vw;
+    // padding-right: 4vw;
+    // padding-top: 2vh;
 }
 .trade {
     background-color: $rust;

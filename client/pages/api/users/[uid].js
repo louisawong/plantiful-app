@@ -6,14 +6,14 @@ dbConnect();
  export default async (req,res) => {
      const {method} = req;
      const {uid} = req.query;
-     console.log("METHOD", method);
+     //console.log("METHOD", method);
 
     switch(method) {
         //getting all a user's info by uid
          case 'GET':
              try {
                const user = await User.findOne({uid: uid })
-               console.log("FROM SERVER", user)
+               //console.log("FROM SERVER", user)∂
                res.status(200).send(user);
              }catch (err) {
                console.error(`Couldn't get user: ${uid}`, err)

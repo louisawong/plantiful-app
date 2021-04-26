@@ -1,5 +1,17 @@
 //stores all trades to load on main trades page
-import {createSlice} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
+
+export const fetchAllTrades = createAsyncThunk(
+  'users/fetchAllTradesStatus',
+  async (user, thunkAPI) => {
+    const response = await axios.post('/api/allTrades',{
+      location: user.location
+    });
+    console.log("THUNK", response.data)
+    return {data:response.data,uid:user.uid}
+  }
+)
 
 export const tradesSlice = createSlice({
     name: "trades",
@@ -12,9 +24,17 @@ export const tradesSlice = createSlice({
         let mostRecentTrades = allTradesExcludeUsers.sort((a,b) => new Date(a.createdAt)- new Date(b.createdAt))
         state.trades = mostRecentTrades;
       }
-    }
+    },
+    extraReducers: {
+      [fetchAllTrades.fulfilled]: (state, action) => {
+        console.log("action.payload", action.payload)
+        let allTradesExcludeUsers = action.payload.data.filter((trade)=>trade.uid !== action.payload.uid);
+        let mostRecentTrades = allTradesExcludeUsers.sort((a,b) => new Date(a.createdAt)- new Date(b.createdAt))
+        state.trades = mostRecentTrades;
+      }
+    },
 });
 
-export const {} = tradesSlice.actions;
+export const {loadTrades} = tradesSlice.actions;
 
 export default tradesSlice.reducer;

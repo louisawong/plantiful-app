@@ -11,7 +11,7 @@ export const fetchUserById = createAsyncThunk(
   'users/fetchByIdStatus',
   async (userId, thunkAPI) => {
     const response = await axios.get('/api/users/'+userId);
-    console.log("THUNK", response.data)
+    //console.log("THUNK", response.data)
     return response.data
   }
 )
@@ -20,7 +20,7 @@ export const fetchUserById = createAsyncThunk(
 export const createNewUser = createAsyncThunk(
   'users/createNewUserStatus',
   async (user, thunkAPI) => {
-    console.log("THUNK USER: ", user)
+    //console.log("THUNK USER: ", user)
     const response = await axios.post(`/api/users/${user.uid}`,{
       uid:user.uid,
       username:user.username,
@@ -28,7 +28,7 @@ export const createNewUser = createAsyncThunk(
       firstName: user.firstName,
       lastName: user.lastName
     })
-    console.log("THUNKRESULT",response)
+    //console.log("THUNKRESULT",response)
     return response.data
   }
 )
@@ -36,9 +36,9 @@ export const createNewUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
   'users/updateUserStatus',
   async (user, thunkAPI) => {
-    console.log("THUNK Update: ", user)
+    //console.log("THUNK Update: ", user)
     const response = await axios.put(`/api/users/${user.uid}`,user.update)
-    console.log("THUNKUPDATERESULT",response)
+    //console.log("THUNKUPDATERESULT",response)
     return response.data
   }
 )
