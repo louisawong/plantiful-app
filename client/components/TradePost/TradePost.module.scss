@@ -1,7 +1,17 @@
+
+$chocolate-web: #C86931ff;
+$rust: #A44815ff;
+$morning-blue: #899B9Bff;
+$wintergreen-dream: #50837Eff;
+$msu-green: #134842ff;
+$phthalo-green: #052E26ff;
+$dark-jungle-green: #041910ff;
+
 .card {
     width: 20%;
+    min-width: 175px;
     height: fit-content;
-    margin: 0 5px;
+    margin: 5px 5px;
     border-radius: 10px;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
     padding: 0.5em;
@@ -15,5 +25,32 @@
 .tradeType {
     font-size: 0.75em;
     color:rgb(108, 108, 108);
-    margin-bottom: 3px;
+    font-weight: 300;
+}
+
+.tradePreference {
+    margin-bottom: 5px;
+    color:rgb(108, 108, 108);
+}
+
+.title {
+    color: $rust;
+    font-weight: 500;
+    font-size: 1em;
+}
+.location {
+    font-size: 0.75em;
+    color:rgb(108, 108, 108);
+    font-weight: 300;
+}
+
+.createdBy {
+    font-size: 0.75em;
+    color:rgb(108, 108, 108);
+    font-weight: 300;
+
+    .username {
+        font-weight: 500;
+        color: $rust
+    }
 }
