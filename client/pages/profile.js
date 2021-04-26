@@ -35,15 +35,15 @@ function profile() {
       if (selected === "trade") {
           if (userInfo.trades.length == 0) {
               return (
-                  <div className={style.announcement}>You have no trade posts yet.</div>
+                  <div className={`${style.announcement} ${style.trades}`}>You have no trade posts yet.</div>
               )
           }
-          return <TradePostList tradeList={userInfo.trades}/>
+          return <TradePostList type="trade" tradeList={userInfo.trades}/>
       }
       else {
         if (userInfo.inspos.length == 0) {
             return (
-                <div className={style.announcement}>You have no inspiration posts yet.</div>
+                <div className={`${style.announcement} ${style.inspos}`}>You have no inspiration posts yet.</div>
             )
         }
     }
@@ -59,7 +59,7 @@ function profile() {
                 <link rel="preconnect" href="https://fonts.gstatic.com"/>
                 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"/>
             </Head>
-            <main>
+            <main className={style.mainWrapper}>
                 <div className={style.header}>
                     {userInfo.profile ? 
                     <img className={style.profilePic} src={userInfo.profile}/>
@@ -80,8 +80,8 @@ function profile() {
                 </div>
                 <div className={style.allPosts}>
                     <div className={style.postTabs}>
-                        <div className={style.tabs} onClick={()=>setSelected("trade")}>Trades</div>
-                        <div className={style.tabs} onClick={()=>setSelected("inspo")}>Inspo</div>
+                        <div className={style.tradeTab} onClick={()=>setSelected("trade")}>Trades</div>
+                        <div className={style.inspoTab} onClick={()=>setSelected("inspo")}>Inspo</div>
                     </div>
                     <div className={style.postList}>
                         {showPosts()}

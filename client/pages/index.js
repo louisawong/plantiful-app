@@ -1,15 +1,32 @@
 import Head from 'next/head'
 import UploadForm from '../components/UploadForm/UploadForm'
-import style from '../styles/Home.module.scss'
+import style from '../styles/Root.module.scss'
 //import Image from 'next/image'
 import {useAuth} from '../firebase/auth';
 import Link from 'next/link'
+import {useDispatch, useSelector} from 'react-redux';
+import {loadUser, logoutUser, fetchUserById} from '../redux/user';
 import React, {useEffect,useState} from 'react'
+import { Router, useRouter } from 'next/router'
 import Navigation from '../components/navigation/navigation';
 
 export default function Home() {
 
-  const {user} = useAuth();
+  //const {user} = useAuth();
+  const dispatch = useDispatch();
+    const router = useRouter();
+
+  useEffect (()=> {
+    const session = localStorage.getItem("uid")
+    console.log("Local storage get:", session)
+    if (!session) {
+        dispatch(logoutUser());
+    }
+    else {
+      dispatch(fetchUserById(session))
+      router.push("/home")
+    }
+  },[])
 
   return (
     <div className={style.container}>
@@ -22,22 +39,21 @@ export default function Home() {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"/>
       </Head>
       <main>
-        {/* <img className={style.logo} src="/images/Plantiful.png"/> */}
-        {/* <Image src="/images/Plantiful.png" width={200} height={200} /> */}
-        {/* <UploadForm/>
-        <h2>{`User ID: ${user ? user.uid : "No user signed in"}`}</h2>
-        <div>
-          <button disabled={!user}>
-            <Link href="/authenticated">
-              <a>Authorized Page</a>
-            </Link>
-          </button>
-          <button disabled={user}>
-            <Link href="/login">
-              <a>Log In</a>
-            </Link>
-          </button>
-        </div> */}
+        <div className={style.hero}>
+          <img className={style.heroImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/GwOEyvvS43PVbifQPG57ViQ0Z0l2.1619447191404.hero-background.jpg?alt=media&token=ce0d4385-0575-4a00-828a-523b3ca83352"></img>
+          <div className={style.overlay}></div>
+          <div className={style.header}>Plant Trading Made Easy
+          <p className={`${style.tagline} ${style.firstTagline}`}>
+            An app designed for plant enthusiasts.
+          </p>
+          <p className={style.tagline}>
+            To inspire you & to discover the plants around you.
+          </p>
+          <p className={`${style.tagline} ${style.lastTagline}`}>
+            Created for the love of plants!
+          </p>
+          </div>
+        </div>
       </main>
     </div>
   )

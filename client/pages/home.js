@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useAuth} from '../firebase/auth';
 import {loadUser, logoutUser} from '../redux/user';
 import { Router, useRouter } from 'next/router'
+import style from '../styles/Home.module.scss'
 
 function home() {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function home() {
     return (
         <div>
             <Head>
-                <title>Plantiful-Home</title>
+                <title>Plantiful</title>
                 <link rel="icon" href="/favicon.ico" />
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
                   rel="stylesheet"></link>

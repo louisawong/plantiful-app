@@ -1,11 +1,28 @@
+
+$chocolate-web: #C86931ff;
+$rust: #A44815ff;
+$morning-blue: #899B9Bff;
+$wintergreen-dream: #50837Eff;
+$msu-green: #134842ff;
+$phthalo-green: #052E26ff;
+$dark-jungle-green: #041910ff;
+
 .container {
     padding-left: 4vw;
     padding-right: 4vw;
     padding-top: 2vh;
+    padding-bottom: 10px;
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: top;
     height:fit-content;
-    margin-bottom: 10px;
+    //margin-bottom: 10px;
+    overflow-x: hidden;
+}
+.trade {
+    background-color: $rust;
+}
+.inspo {
+    background-color: #e1ede6;
 }

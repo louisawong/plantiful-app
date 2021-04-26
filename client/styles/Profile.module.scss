@@ -6,6 +6,9 @@ $msu-green: #134842ff;
 $phthalo-green: #052E26ff;
 $dark-jungle-green: #041910ff;
 
+.mainWrapper{
+    overflow-x: hidden;
+}
 .header {
     display: flex;
     flex-direction: column;
@@ -46,16 +49,62 @@ $dark-jungle-green: #041910ff;
     font-weight: 600;
     font-size: 2em;
     margin-top: 10px;
+    margin-bottom: 10px;
     padding: 0;
-    line-height: 0.8em;
+    line-height: 1em;
+}
 
+.basicInfo {
+    font-weight: 300;
+    color:rgb(108, 108, 108);
+    font-size: 0.75em;
+}
+
+.description {
+    font-weight: 300;
+    color:rgb(108, 108, 108);
+    font-size: 1em;
+}
+
+.postTabs {
+    margin: 0 auto;
+    margin-top: 10px;
+    display:flex;
+    justify-content: center;
+}
+.tradeTab {
+  padding: 5px 25px;
+  background-color: $rust;
+  color:white;
+  border-radius: 10px 10px 0 0;
+
+  &:hover {
+      cursor:pointer;
+  }
+}
+.inspoTab {
+  padding: 5px 25px;
+  background-color: #e1ede6;
+  color:rgb(65, 65, 65);
+  border-radius: 10px 10px 0 0;
+
+  &:hover {
+    cursor:pointer;
+  }   
 }
 .announcement {
     //display: flex;
     padding-top: 10px;
+    padding-bottom: 10px;
     //align-items: center;
     font-weight: 300;
     font-size: 1em;
     text-align: center;
     color: rgb(65, 65, 65);;
+}
+.trades {
+    background-color: $rust;
+}
+.inspos {
+    background-color: #e1ede6;
 }
