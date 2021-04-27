@@ -16,7 +16,7 @@ function profile() {
     const dispatch = useDispatch();
     const router = useRouter();
     const userInfo = useSelector((state)=> state.user)
-    //const {user} = useAuth(); 
+    //=const {user} = useAuth(); 
 
     const [selected,setSelected] = useState("trade")
 
@@ -92,7 +92,6 @@ function profile() {
                     </div>
 
                 </div>
-                <div className={style.posts}></div>
             </main>
         </div>
     )

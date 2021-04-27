@@ -13,6 +13,12 @@ $dark-jungle-green: #041910ff;
 //   padding-right: 4vw;
 //   padding-top: 2vh;
 // }
+.announcement {
+  background-color: $rust;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+}
 
 .mainboard__container {
   column-gap:10px;
@@ -66,149 +72,5 @@ $dark-jungle-green: #041910ff;
 //     .mainboard__container {
 //       width: 2016px;
 //       column-count: 8;
-//     }
-//   }
-  
-//   @media (min-width: 2268px) and (max-width: 2519px) {
-//     .mainboard__container {
-//       width: 2268px;
-//       column-count: 9;
-//     }
-//   }
-  
-//   @media (min-width: 2520px) and (max-width: 2771px) {
-//     .mainboard__container {
-//       width: 2520px;
-//       column-count: 10;
-//     }
-//   }
-  
-//   @media (min-width: 2772px) and (max-width: 3023px) {
-//     .mainboard__container {
-//       width: 2772px;
-//       column-count: 11;
-//     }
-//   }
-  
-//   @media (min-width: 3024px) and (max-width: 3275px) {
-//     .mainboard__container {
-//       width: 3024px;
-//       column-count: 12;
-//     }
-//   }
-  
-//   @media (min-width: 3276px) and (max-width: 3527px) {
-//     .mainboard__container {
-//       width: 3276px;
-//       column-count: 13;
-//     }
-//   }
-  
-//   @media (min-width: 3528px) and (max-width: 3779px) {
-//     .mainboard__container {
-//       width: 3528px;
-//       column-count: 14;
-//     }
-//   }
-  
-//   @media (min-width: 3780px) and (max-width: 4031px) {
-//     .mainboard__container {
-//       width: 3780px;
-//       column-count: 15;
-//     }
-//   }
-  
-//   @media (min-width: 4032px) and (max-width: 4283px) {
-//     .mainboard__container {
-//       width: 4032px;
-//       column-count: 16;
-//     }
-//   }
-  
-//   @media (min-width: 4284px) and (max-width: 4535px) {
-//     .mainboard__container {
-//       width: 4284px;
-//       column-count: 17;
-//     }
-//   }
-  
-//   @media (min-width: 4536px) and (max-width: 4787px) {
-//     .mainboard__container {
-//       width: 4536px;
-//       column-count: 18;
-//     }
-//   }
-  
-//   @media (min-width: 4788px) and (max-width: 5039px) {
-//     .mainboard__container {
-//       width: 4788px;
-//       column-count: 19;
-//     }
-//   }
-  
-//   @media (min-width: 5040px) and (max-width: 5291px) {
-//     .mainboard__container {
-//       width: 5040px;
-//       column-count: 20;
-//     }
-//   }
-  
-//   @media (min-width: 5292px) and (max-width: 5543px) {
-//     .mainboard__container {
-//       width: 5292px;
-//       column-count: 21;
-//     }
-//   }
-  
-//   @media (min-width: 5544) and (max-width: 5795px) {
-//     .mainboard__container {
-//       width: 5544px;
-//       column-count: 22;
-//     }
-//   }
-  
-//   @media (min-width: 5796px) and (max-width: 6047px) {
-//     .mainboard__container {
-//       width: 5796px;
-//       column-count: 23;
-//     }
-//   }
-  
-//   @media (min-width: 6048px) and (max-width: 6299px) {
-//     .mainboard__container {
-//       width: 6048px;
-//       column-count: 24;
-//     }
-//   }
-  
-//   @media (min-width: 6300px) and (max-width: 6551px) {
-//     .mainboard__container {
-//       width: 6300px;
-//       column-count: 25;
-//     }
-//   }
-//   @media (min-width: 6552px) and (max-width: 6803px) {
-//     .mainboard__container {
-//       width: 6552px;
-//       column-count: 26;
-//     }
-//   }
-  
-//   @media (min-width: 6804px) and (max-width: 7055px) {
-//     .mainboard__container {
-//       width: 6804px;
-//       column-count: 27;
-//     }
-//   }
-//   @media (min-width: 7056px) and (max-width: 7307px) {
-//     .mainboard__container {
-//       width: 7056px;
-//       column-count: 28;
-//     }
-//   }
-//   @media (min-width: 7308px) and (max-width: 7559px) {
-//     .mainboard__container {
-//       width: 7308px;
-//       column-count: 29;
 //     }
 //   }

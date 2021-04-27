@@ -76,11 +76,11 @@ function Navigation() {
             </div>
             <Search/>
             <div className={style.right}>
-                <Link href="/messages">
+                {/* <Link href="/messages">
                 <div className={style.container_nav2}>
                     <span className={`material-icons ${style.icon}`}>question_answer</span>
                 </div>
-                </Link>
+                </Link> */}
                 <Link href="/profile">
                 <div className={style.container_nav2}>
                     <span className={`material-icons ${style.icon}`}>account_circle</span>

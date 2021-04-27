@@ -11,9 +11,9 @@ import axios from 'axios'
 function trades() {
     const dispatch = useDispatch();
     const router = useRouter();
-    //const userInfo = useSelector((state)=> state.user);
+    const userInfo = useSelector((state)=> state.user);
     const {nearbyTrades, trades} = useSelector((state)=> state.trades);
-    //const [location, setLocation] = useState([]);
+    const [city, setCity] = useState("");
 
     useEffect (()=> {
         const session = localStorage.getItem("uid")
@@ -27,6 +27,7 @@ function trades() {
           fetch("/api/geolocation")
           .then(res => res.json())
           .then((data)=>{
+            setCity(data.city)
             dispatch(fetchAllNearbyTrades({
                 location: data.ll , 
             uid: session
@@ -44,12 +45,12 @@ function trades() {
 
     const showNearbyPosts = () => {
       console.log("SHPWING NEARBY",nearbyTrades)
-      return <MainTradeList tradeList={nearbyTrades}/>
+      return <MainTradeList tradeList={nearbyTrades} none={false} city=""/>
     }
 
     const showAllPosts = () => {
       console.log("SHPWING ALL", trades)
-      return <MainTradeList tradeList={trades}/>
+      return  <MainTradeList tradeList={trades} none={true} city={city}/>
     }
 
     return (

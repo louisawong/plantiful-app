@@ -6,7 +6,7 @@ import uuid from 'react-uuid'
 function InspoPostList({inspoList, type}) {
 
     const showPosts = (inspoList) => {
-        return inspoList.map((inspo)=><InspoPost key={uuid()} inspo={inspo}/>)
+        return inspoList?.map((inspo)=><InspoPost key={uuid()} inspo={inspo}/>)
     }
 
     return (

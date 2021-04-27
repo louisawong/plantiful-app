@@ -6,7 +6,7 @@ import uuid from 'react-uuid'
 function TradePostList({tradeList, type}) {
 
     const showPosts = (tradeList) => {
-        return tradeList.map((trade)=><TradePost key={uuid()} trade={trade}/>)
+        return tradeList?.map((trade)=><TradePost key={uuid()} trade={trade}/>)
     }
 
     return (
