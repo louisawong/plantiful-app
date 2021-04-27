@@ -1,5 +1,15 @@
 //store all inspos to load on homepage
-import {createSlice} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
+
+export const fetchAllInspos = createAsyncThunk(
+  'users/fetchAllInsposStatus',
+  async (user, thunkAPI) => {
+    const response = await axios.get('/api/allInspos');
+    //console.log("THUNK", response.data)
+  return {data:response.data,uid:user.uid}
+  }
+)
 
 export const insposSlice = createSlice({
     name: "inspos",
@@ -7,11 +17,14 @@ export const insposSlice = createSlice({
       inspos: []
     },
     reducers:{
-      loadInspos: (state, action) => {
-        let allInsposExcludeUsers = action.payload.inspos.filter((inspo)=> inspo.userId !== action.payload.uid);
-        let mostRecentInspos = allInsposExcludeUsers.sort((a,b) => new Date(a.createdAt)- new Date(b.createdAt))
+    },
+    extraReducers: {
+      [fetchAllInspos.fulfilled]: (state, action) => {
+        //console.log("action.payload", action.payload)
+        let allInsposExcludeUsers = action.payload.data.filter((inspo)=>inspo.uid !== action.payload.uid);
+        let mostRecentInspos = allInsposExcludeUsers.sort((a,b) => new Date(b.createdAt)- new Date(a.createdAt))
         state.inspos = mostRecentInspos;
-      }
+      },
     }
 });
 

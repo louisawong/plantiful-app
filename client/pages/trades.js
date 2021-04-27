@@ -1,17 +1,19 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import Head from 'next/head'
 import style from '../styles/Trades.module.scss'
 import {useDispatch, useSelector} from 'react-redux';
 import {loadUser, logoutUser, fetchUserById} from '../redux/user';
-import {fetchAllNearbyTrades} from '../redux/trades';
+import {fetchAllNearbyTrades, fetchAllTrades} from '../redux/trades';
 import { Router, useRouter } from 'next/router'
 import MainTradeList from '../components/MainTradeList/MainTradeList'
+import axios from 'axios'
 
 function trades() {
     const dispatch = useDispatch();
     const router = useRouter();
-    const userInfo = useSelector((state)=> state.user);
-    const trades = useSelector((state)=> state.trades)
+    //const userInfo = useSelector((state)=> state.user);
+    const {nearbyTrades, trades} = useSelector((state)=> state.trades);
+    //const [location, setLocation] = useState([]);
 
     useEffect (()=> {
         const session = localStorage.getItem("uid")
@@ -27,8 +29,12 @@ function trades() {
           .then((data)=>{
             dispatch(fetchAllNearbyTrades({
                 location: data.ll , 
-                uid: session
-              }));
+            uid: session
+            }));
+            dispatch(fetchAllTrades({
+              location: data.ll , 
+              uid: session
+            }));
           })
           .catch((err)=>{
             console.log(err);
@@ -36,8 +42,14 @@ function trades() {
         }
     },[router]);
 
-    const showPosts = () => {
-            return <MainTradeList tradeList={trades.trades}/>
+    const showNearbyPosts = () => {
+      console.log("SHPWING NEARBY",nearbyTrades)
+      return <MainTradeList tradeList={nearbyTrades}/>
+    }
+
+    const showAllPosts = () => {
+      console.log("SHPWING ALL", trades)
+      return <MainTradeList tradeList={trades}/>
     }
 
     return (
@@ -51,7 +63,8 @@ function trades() {
                 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"/>
             </Head>
             <main className={style.mainWrapper}>
-                {showPosts()}
+              {/* {showNearbyPosts()} */}
+                {(trades.length > 1) ? showNearbyPosts() : showAllPosts()}
             </main>
         </div>
     )
