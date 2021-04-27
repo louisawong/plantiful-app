@@ -31,7 +31,7 @@ function createtrade() {
     const [country, setCountry] = useState("")
     const [currentLocation, setCurrentLocation] = useState([]);
     const [tradeType, setTradeType] = useState(false) //trade=false, sell=true
-    const [price, setPrice] = useState(null);
+    const [price, setPrice] = useState(0);
     const [tradePreference,setTradePreference] = useState("") //plant to trade
 
     //state for form
@@ -185,7 +185,7 @@ function createtrade() {
                     <div className={style.image1}>
                         {!url1 ? 
                         <label className={style.label1}>
-                            <img className={style.label1} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addImage.png?alt=media&token=c20e10da-e530-4edd-be72-ff2e3998cc99"/>
+                            <img className={style.label1} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/tradeaddimage.png?alt=media&token=8f7cc8d5-d717-44ec-a10f-7359777b1d37"/>
                             <input className={style.input} type="file" onChange={handleChange1}/>             
                         </label>
                         : 
@@ -199,7 +199,7 @@ function createtrade() {
                         <div className={style.image2}>
                             {!url2 ? 
                             <label className={style.label2}>
-                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
+                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/tradeadd.png?alt=media&token=4592d3dc-9965-4cc7-a21f-0c5bfbcf6a37"/>
                                 <input className={style.input} type="file" onChange={handleChange2}/>       
                             </label>
                             : 
@@ -211,7 +211,7 @@ function createtrade() {
                         <div className={style.image2}>
                             {!url3 ? 
                             <label className={style.label2}>
-                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
+                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/tradeadd.png?alt=media&token=4592d3dc-9965-4cc7-a21f-0c5bfbcf6a37"/>
                                 <input className={style.input} type="file" onChange={handleChange3}/>            
                             </label>
                             : 
@@ -223,7 +223,7 @@ function createtrade() {
                         <div className={style.image2}>
                             {!url4 ? 
                             <label className={style.label2}>
-                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
+                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/tradeadd.png?alt=media&token=4592d3dc-9965-4cc7-a21f-0c5bfbcf6a37"/>
                                 <input className={style.input} type="file" onChange={handleChange4}/>             
                             </label>
                             : 
@@ -284,10 +284,10 @@ function createtrade() {
                             <input className={style.formInput} 
                                 type="text" 
                                 placeholder="Location (city)" 
-                                value = {city? `${city}, ${country}`: null}
+                                value = {city? `${city}, ${country}`: ''}
                                 onChange={handleLocation}
                                 required
-                                disabled="true"/>
+                                disabled={true}/>
                             <div className={style.currentLocation} 
                                 onClick={handleCurrentLocation}>
                                     Use Current Location

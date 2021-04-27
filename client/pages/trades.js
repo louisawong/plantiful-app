@@ -3,7 +3,7 @@ import Head from 'next/head'
 import style from '../styles/Trades.module.scss'
 import {useDispatch, useSelector} from 'react-redux';
 import {loadUser, logoutUser, fetchUserById} from '../redux/user';
-import {fetchAllTrades} from '../redux/trades';
+import {fetchAllNearbyTrades} from '../redux/trades';
 import { Router, useRouter } from 'next/router'
 import MainTradeList from '../components/MainTradeList/MainTradeList'
 
@@ -25,7 +25,7 @@ function trades() {
           fetch("/api/geolocation")
           .then(res => res.json())
           .then((data)=>{
-            dispatch(fetchAllTrades({
+            dispatch(fetchAllNearbyTrades({
                 location: data.ll , 
                 uid: session
               }));

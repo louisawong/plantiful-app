@@ -120,15 +120,15 @@ function editProfile() {
                         {userInfo.profile ? 
                         <img className={style.profilePic} src={userInfo.profile}/>
                         :
-                        <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=96cfd706-f6ec-48ab-9452-ec212d8b7b2b"/>
+                        <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfileImage.png?alt=media&token=3c067200-cfee-4ccc-8986-28888a41b31e"/>
                         }
                         <input className={style.input} type="file" onChange={handleEditProfile}/>             
-                        <span className={style.addImage}>Edit Your Profile Photo</span>
+                        <span className={style.addImage}>Edit Your Profile Image</span>
                     </label>
                     : 
                     <div className={style.profileWrapper}>
                         {url && <img className={style.profilePic} src={url}></img>}
-                        <span className={style.addImage}>New Profile Photo</span>
+                        <span className={style.addImage}>New Profile Image</span>
                     </div>
                 }
                 {!url && file && <ProgressBar file={file} setUrl={setUrl} />}   

@@ -6,9 +6,10 @@ import {loadUser, logoutUser, fetchUserById} from '../redux/user';
 import {useAuth} from '../firebase/auth';
 import { Router, useRouter } from 'next/router'
 import Link from 'next/link'
-import ProgressBar from '../components/ProgressBar/ProgressBar';
-import TradePost from '../components/TradePost/TradePost';
+//import ProgressBar from '../components/ProgressBar/ProgressBar';
+//import TradePost from '../components/TradePost/TradePost';
 import TradePostList from '../components/TradePostList/TradePostList';
+import InspoPostList from '../components/InspoPostList/InspoPostList';
 
 
 function profile() {
@@ -38,7 +39,8 @@ function profile() {
                   <div className={`${style.announcement} ${style.trades}`}>You have no trade posts yet.</div>
               )
           }
-          return <div className={style.wrapper}><TradePostList type="trade" tradeList={userInfo.trades}/></div>
+          let profileTrades = userInfo.trades.slice().sort((a,b) => new Date(b.createdAt)- new Date(a.createdAt))
+          return <div className={style.wrapper}><TradePostList type="trade" tradeList={profileTrades}/></div>
       }
       else {
         if (userInfo.inspos.length == 0) {
@@ -46,6 +48,8 @@ function profile() {
                 <div className={`${style.announcement} ${style.inspos}`}>You have no inspiration posts yet.</div>
             )
         }
+        let profileInspos = userInfo.inspos.slice().sort((a,b) => new Date(b.createdAt)- new Date(a.createdAt))
+        return <div className={style.wrapper}><InspoPostList type="inspo" inspoList={profileInspos}/></div>
     }
     }
 

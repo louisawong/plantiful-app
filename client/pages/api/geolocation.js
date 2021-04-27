@@ -5,7 +5,7 @@ export default (req, res) => {
     try {
     const clientIp = requestIp.getClientIp(req)
         .replace('::1', '')
-        .replace('127.0.0.1', '') || '72.1.69.153' // <-- default location `KY`
+        .replace('127.0.0.1', '') || '70.54.50.203' // <-- default location `Mississauga`
     //console.log("Geo,", clientIp)
     const geo = geoip.lookup(clientIp)
     //console.log(geo);

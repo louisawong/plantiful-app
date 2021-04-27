@@ -1,9 +1,9 @@
 import React, {useEffect,useState} from 'react'
 import Head from 'next/head'
-import style from '../styles/CreateTrade.module.scss'
+import style from '../styles/CreateInspo.module.scss'
 import {useDispatch, useSelector} from 'react-redux';
 import {useAuth} from '../firebase/auth';
-import {addTrade, fetchUserById, logoutUser} from '../redux/user';
+import {addInspo, fetchUserById, logoutUser} from '../redux/user';
 import { Router, useRouter } from 'next/router'
 import ProgressBar from '../components/ProgressBar/ProgressBar'
 import uuid from 'react-uuid'
@@ -15,6 +15,7 @@ function createInspo() {
     const {user} = useAuth();
 
     //state for images
+
     const [file1, setFile1] = useState("");
     const [file2, setFile2] = useState("");
     const [file3, setFile3] = useState("");
@@ -25,7 +26,7 @@ function createInspo() {
     const [url4, setUrl4] = useState("");
     const [imageArray, setImageArray] = useState([]);
     const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
+    const [caption, setCaption] = useState("");
     //const [location, setLocation] = useState([]);
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("")
@@ -57,16 +58,9 @@ function createInspo() {
           console.log(err)
       })
     }
-
-    //handle price
-    const handlePrice = (e) => {
-        let amount = e.target.value;
-        setPrice(amount);
-    }
-
     //handle submit button
     const handleSubmit = (e) => {
-        let id = uuid();
+        let inspoId = uuid();
         let imagesArr = [url1];
         if(url2) imagesArr.push(url2);
         if(url3) imagesArr.push(url3);
@@ -76,34 +70,12 @@ function createInspo() {
                 uid: userInfo.uid,
                 username:userInfo.username,
                 title,
-                description,
+                caption,
                 images: imagesArr,
                 location:currentLocation,
                 city,
                 country,
-    
         }));
-        fetch('/api/trades/'+userInfo.uid , {
-            method: 'POST',
-            header:{
-                "contentType": "application/json"
-            },
-            body: JSON.stringify({
-                tradeId: id,
-                username:userInfo.username,
-                title,
-                location:currentLocation,
-                city,
-                country,
-                images: imagesArr,
-                description,
-                minOffer: Number(price).toFixed(2),
-                tradePreference,
-                trade: tradeBool,
-                sell: sellBool
-            })
-        })
-        .catch((err) => console.log(error))
         router.push("/profile")
     }
 
@@ -172,7 +144,7 @@ function createInspo() {
                     <div className={style.image1}>
                         {!url1 ? 
                         <label className={style.label1}>
-                            <img className={style.label1} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addImage.png?alt=media&token=c20e10da-e530-4edd-be72-ff2e3998cc99"/>
+                            <img className={style.label1} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/inspoaddimage.png?alt=media&token=c40278ff-41ea-46b9-898c-99251d5040cc"/>
                             <input className={style.input} type="file" onChange={handleChange1}/>             
                         </label>
                         : 
@@ -186,7 +158,7 @@ function createInspo() {
                         <div className={style.image2}>
                             {!url2 ? 
                             <label className={style.label2}>
-                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
+                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/inspoadd.png?alt=media&token=e08eee4f-f0ff-4b7c-a0e3-9e0773a952cf"/>
                                 <input className={style.input} type="file" onChange={handleChange2}/>       
                             </label>
                             : 
@@ -198,7 +170,7 @@ function createInspo() {
                         <div className={style.image2}>
                             {!url3 ? 
                             <label className={style.label2}>
-                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
+                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/inspoadd.png?alt=media&token=e08eee4f-f0ff-4b7c-a0e3-9e0773a952cf"/>
                                 <input className={style.input} type="file" onChange={handleChange3}/>            
                             </label>
                             : 
@@ -210,7 +182,7 @@ function createInspo() {
                         <div className={style.image2}>
                             {!url4 ? 
                             <label className={style.label2}>
-                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfile.png?alt=media&token=d07d6e93-bf85-4dc9-8d7b-79ade4dc13cc"/>
+                                <img className={style.labelImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/inspoadd.png?alt=media&token=e08eee4f-f0ff-4b7c-a0e3-9e0773a952cf"/>
                                 <input className={style.input} type="file" onChange={handleChange4}/>             
                             </label>
                             : 
@@ -231,17 +203,17 @@ function createInspo() {
                             value={title}
                             required/>
                         <textarea className={style.formInput} 
-                            placeholder="Describe your plant trade"
-                            onChange={(e)=>setDescription(e.target.value)}
-                            value={description}
+                            placeholder="Caption your plants"
+                            onChange={(e)=>setCaption(e.target.value)}
+                            value={caption}
                         ></textarea>
                         <div className={style.locationField}>
                             <input className={style.formInput} 
                                 type="text" 
                                 placeholder="Location (city)" 
-                                value = {city? `${city}, ${country}`: null}
+                                value = {city? `${city}, ${country}`: ''}
                                 required
-                                disabled="true"/>
+                                disabled={true}/>
                             <div className={style.currentLocation} 
                                 onClick={handleCurrentLocation}>
                                     Use Current Location
@@ -249,7 +221,7 @@ function createInspo() {
                         </div>
                         <button 
                             className={style.buttonSubmit}
-                            disabled={title===""||city===""|| url1==="" || (tradePreference===""&&price===null)}
+                            disabled={title===""||city===""|| url1===""}
                             onClick={handleSubmit}
                             type="button">Create Inspiration</button>
                     </form>

@@ -7,24 +7,26 @@ dbConnect();
      const {method} = req;
      const {uid} = req.query;
      console.log(uid);
-     req.body = JSON.parse(req.body)
+     //req.body = JSON.parse(req.body)
 
     switch(method) {
          // by user uid, add a new Inspo and update numInspos
           case 'POST':
-            const inspo = {
-              _id: req.body.id,
-              userId: uid,
+            console.log("POSTING:", req.body)
+            const newInspo = {
+              inspoId: req.body.inspoId,
+              uid: uid,
               username: req.body.username,
               title: req.body.title,
               caption: req.body.caption,
-              images: req.body.images
+              images: req.body.images,
+              location: {type: 'Point', coordinates: req.body.location},
+              city: req.body.city,
+              country: req.body.country,
             }
             try {
-              const user = await User.findOne({uid:uid})
-              const update = user.inspos.push(inspo);
-              const newNum = user.numInspos + 1;
-              const result = await User.findOneAndUpdate({uid},{inspos:update, numInspos:newNum},{new:true});
+              await User.updateOne({uid},{$push: {inspos: newInspo}});
+              const result = await User.findOneAndUpdate({uid},{$inc: {numInspos:1}},{new:true});
               res.status(201).send(result)
             } catch(err) {
               console.error(`Couldn't add new inspo ${uid}`,err)

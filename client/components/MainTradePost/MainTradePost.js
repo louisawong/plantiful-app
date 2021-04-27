@@ -12,7 +12,7 @@ export default function TradePost({trade}) {
     const [x,setX] = useState(window.innerWidth/2);
     const [y,setY] = useState(window.innerHeight/2);
 
-    const [ownerInfo,setOwnerInfo] = useState(null)
+    const [ownerInfo,setOwnerInfo] = useState({})
     const dispatch = useDispatch();
 
     useEffect(()=>{

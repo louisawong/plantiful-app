@@ -6,17 +6,17 @@ dbConnect();
 //find all trade posts and filter out users own posts client side
 export default async (req,res) => {
     const {method} = req;
-    //console.log("REQ",req.body)
+    console.log("REQ",req.body)
     if (method==='POST') {
         try {
-            const tradeId = req.body.tradeId
+            const inspoId = req.body.inspoId
             const uid = req.body.uid
             const user = await User.findOne({uid:uid});
-            const update = user.trades.filter((trade)=> trade.tradeId!==tradeId);
-            const newTrades = await User.findOneAndUpdate({uid},{$inc: {numTrades:-1}, trades:update},{new:true});
-            res.status(200).send(newTrades);
+            const update = user.inspos.filter((inspo)=> inspo.inspoId!==inspoId);
+            const newInpos = await User.findOneAndUpdate({uid},{$inc: {numInspos:-1}, inspos:update},{new:true});
+            res.status(200).send(newInspos);
           } catch (err) {
-            console.error(`Couldn't remove trade: ${uid}`, err);
+            console.error(`Couldn't remove inspo: ${uid}`, err);
             res.status(500).send(err);
           }
     } else {

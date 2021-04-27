@@ -47,12 +47,41 @@ export const updateUser = createAsyncThunk(
 )
 
 export const deleteTrade = createAsyncThunk(
-  'users/deleteTaskStatus',
+  'users/deleteTradeStatus',
   async (trade, thunkAPI) => {
-    //console.log("THUNK Update: ", user)
+    console.log("THUNK Update: ", trade)
     const response = await axios.post(`/api/deleteTrade`,trade)
     //console.log("THUNKUPDATERESULT",response)
     return response.data;
+  }
+)
+
+export const deleteInspo = createAsyncThunk(
+  'users/deleteInspoStatus',
+  async (inspo, thunkAPI) => {
+    console.log("THUNK Update: ", inspo)
+    const response = await axios.post(`/api/deleteInspo`,inspo)
+    //console.log("THUNKUPDATERESULT",response)
+    return response.data;
+  }
+)
+
+export const addInspo = createAsyncThunk(
+  'users/addInspoStatus',
+  async(inspo,thunkAPI) => {
+    const response = await axios.post('api/inspos/'+inspo.uid, {
+      inspoId: inspo.inspoId,
+      uid: inspo.uid,
+      username: inspo.username,
+      title: inspo.title,
+      caption: inspo.caption,
+      images: inspo.images,
+      location: inspo.location,
+      city: inspo.city, 
+      country: inspo.country,
+    })
+    console.log("THUNK res:", response.data)
+    return response.data
   }
 )
 
@@ -100,14 +129,14 @@ export const userSlice = createSlice({
         state.numFollowers -= 1;
         state.followers = state.followers.filter((follower) => {follower.uid !== action.payload.uid});
       },
-      addInspo: (state, action) => {
-        state.numInspos +=1;
-        state.inspos = state.inspos.concat(action.payload.inspo);
-      },
-      removeInspo: (state, action) => {
-        state.numInspos -=1;
-        state.inspos = state.inspos.filter((inspo) => inspo.id !== action.payload.id);
-      },
+      // addInspo: (state, action) => {
+      //   state.numInspos +=1;
+      //   state.inspos = state.inspos.concat(action.payload.inspo);
+      // },
+      // removeInspo: (state, action) => {
+      //   state.numInspos -=1;
+      //   state.inspos = state.inspos.filter((inspo) => inspo.id !== action.payload.id);
+      // },
       addTrade: (state, action) => {
         state.numTrades +=1;
         state.trades = state.trades.concat(action.payload.trade);
@@ -234,13 +263,22 @@ export const userSlice = createSlice({
         },
         [deleteTrade.fulfilled]: (state,action) => {
           state.trades=action.payload.trades;
-        }
+          state.numTrades=action.payload.numTrades;
+        },
+        [deleteInspo.fulfilled]: (state,action) => {
+          state.inspos=action.payload.inspos;
+          state.numInspos=action.payload.numInspos;
+        },
+        [addInspo.fulfilled]: (state,action) => {
+          state.inspos=action.payload.inspos;
+          state.numInspos=action.payload.numInspos;
+        },
     }
 });
 
 export const {setNewUser, logoutUser, editProfile, editDescription,
     editLastName, editLocation, addFollower, removeFollower,
-    addInspo, removeInspo, addTrade, removeTrade,
+    removeInspo, addTrade, removeTrade,
     addChat, removeChat, addMessage, loadUser} = userSlice.actions;
 
 export default userSlice.reducer;

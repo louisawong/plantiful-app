@@ -2,7 +2,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const fetchAllTrades = createAsyncThunk(
+export const fetchAllNearbyTrades = createAsyncThunk(
   'users/fetchAllTradesStatus',
   async (user, thunkAPI) => {
     const response = await axios.post('/api/allTrades',{
@@ -27,7 +27,7 @@ export const tradesSlice = createSlice({
       }
     },
     extraReducers: {
-      [fetchAllTrades.fulfilled]: (state, action) => {
+      [fetchAllNearbyTrades.fulfilled]: (state, action) => {
         console.log("action.payload", action.payload)
         let allTradesExcludeUsers = action.payload.data.filter((trade)=>trade.uid !== action.payload.uid);
         let mostRecentTrades = allTradesExcludeUsers.sort((a,b) => new Date(b.createdAt)- new Date(a.createdAt))
