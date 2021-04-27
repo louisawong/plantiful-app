@@ -46,6 +46,16 @@ export const updateUser = createAsyncThunk(
   }
 )
 
+export const deleteTrade = createAsyncThunk(
+  'users/deleteTaskStatus',
+  async (trade, thunkAPI) => {
+    //console.log("THUNK Update: ", user)
+    const response = await axios.post(`/api/deleteTrade`,trade)
+    //console.log("THUNKUPDATERESULT",response)
+    return response.data;
+  }
+)
+
 export const userSlice = createSlice({
     name: "user",
     initialState:{
@@ -221,6 +231,9 @@ export const userSlice = createSlice({
           state.trades = action.payload.trades;
           state.numTrades= action.payload.numTrades;
           state.chats = action.payload.chats;
+        },
+        [deleteTrade.fulfilled]: (state,action) => {
+          state.trades=action.payload.trades;
         }
     }
 });

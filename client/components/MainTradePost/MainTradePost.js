@@ -1,15 +1,12 @@
 import React,{useState,useEffect} from 'react'
-import style from './TradePost.module.scss'
+import style from './MainTradePost.module.scss'
 import moment from 'moment';
-import {deleteTrade} from '../../redux/user'
 import {useDispatch, useSelector} from 'react-redux';
 import { Router, useRouter } from 'next/router'
 import axios from 'axios'
-import trades from '../../redux/trades';
 
 
 export default function TradePost({trade}) {
-
     const [active, setActive] = useState(false);
     const [side,setSide] = useState("right");
     const [x,setX] = useState(window.innerWidth/2);
@@ -18,6 +15,12 @@ export default function TradePost({trade}) {
     const [ownerInfo,setOwnerInfo] = useState(null)
     const dispatch = useDispatch();
 
+    useEffect(()=>{
+        return axios.get('api/users/'+trade.uid)
+        .then((res)=>setOwnerInfo(res.data))
+        .catch((err)=>console.error(err))
+    },[])
+
     const clickHandler = (e) => {
         setActive(!active);
         let windowSize = window.innerWidth/2;
@@ -25,17 +28,10 @@ export default function TradePost({trade}) {
         setX(e.clientX);
         setY(e.clientY+window.pageYOffset)
         setSide((mouseSide>windowSize ? "right" : "left"))
-        
-        setTimeout(()=>setActive(false),9000)
-    }
-    const deleteHandler = ()=> {
-        const res = confirm (`Are you sure you want to delete "${trade.title}"?`)
-        if (res) {
-            dispatch(deleteTrade({
-                uid: trade.uid,
-                tradeId:trade.tradeId,
-            }))
-        } 
+        setTimeout(()=>setActive(false),10000)
+        // axios.get('api/users/'+trade.uid)
+        // .then((res)=>setOwnerInfo(res.data))
+        // .catch((err)=>console.error(err))
     }
 
     return (
@@ -64,7 +60,8 @@ export default function TradePost({trade}) {
                 {trade.images[3] && <img className={style.detailImage} src={trade.images[3]}/>}
             </div>
             <div className={style.buttonContainer}>
-                <button onClick={deleteHandler}className={style.delete} type="button">Delete Trade</button>
+            <a className={style.email} href={`mailto:${ownerInfo.email}?subject=${trade.title}`} target="_blank" rel="noopener noreferrer">{`Email ${ownerInfo.firstName}`}</a>
+                {/* <button onClick={emailHandler}className={style.email} type="button">Email {ownerInfo.firstName}</button> */}
             </div>
         </div>
         : 

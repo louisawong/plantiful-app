@@ -9,7 +9,7 @@ dbConnect();
      console.log("REQUEST: ", req.body );
      
      switch(method) {
-       // by user uid, add a new Inspo and update numInspos
+       // by user uid, add a new trade and update numInspos
        case 'POST':
             req.body = JSON.parse(req.body)
             const newTrade = {
@@ -66,11 +66,11 @@ dbConnect();
           //remove trade by id in req.body
           case 'DELETE':
             try {
-              const {id} = req.body.id
+              const {tradeId} = req.body.id
               const user = await User.findOne({uid:uid});
-              const update = user.trades.filter((trade)=> trade._id!=id);
-              await User.findOneAndUpdate({uid},{trades:update},{new:true});
-              res.status(204).send();
+              const update = user.trades.filter((trade)=> trade.tradeId!=tradeId);
+              const newTrades = await User.findOneAndUpdate({uid},{trades:update},{new:true});
+              res.status(200).send(newTrades);
             } catch (err) {
               console.error(`Couldn't remove trade: ${uid}`, err);
               res.status(500).send(err);

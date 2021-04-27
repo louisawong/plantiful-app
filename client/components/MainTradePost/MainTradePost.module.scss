@@ -1,25 +1,12 @@
-
 $chocolate-web: #C86931ff;
-$rust: #a44815;
+$rust: #A44815ff;
 $morning-blue: #899B9Bff;
 $wintergreen-dream: #50837Eff;
 $msu-green: #134842ff;
 $phthalo-green: #052E26ff;
 $dark-jungle-green: #041910ff;
 
-// .wrapper {
-//     //position: relative;
-// }
 .card {
-    // width: 20%;
-    // min-width: 175px;
-    // height: fit-content;
-    // margin: 5px 5px;
-    // border-radius: 10px;
-    // box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
-    // padding: 0.5em;
-    // background-color: white;
-
     display: inline-block;
     height: auto;
     width: 100%;
@@ -80,16 +67,17 @@ $dark-jungle-green: #041910ff;
 
 .moreInfo {
     position: absolute;
+    width: 20vw;
+    max-width: 300px;
     background-color: white;
     color:rgb(108, 108, 108);
     z-index: 1;
     top: 0;
     padding: 10px;
-    width: 20vw;
-    box-shadow:0 0 15px 4px rgba(0, 0, 0, 0.06);
+    box-shadow:0 0 15px 4px rgba(0, 0, 0, 0.274);
     border-radius: 10px;
 }
-.delete{
+.email{
     color:rgb(65, 65, 65);
     font-size: 0.8em;
     font-weight: 300;
@@ -115,7 +103,6 @@ $dark-jungle-green: #041910ff;
 .description {
     font-weight: 300;
     font-size: 0.75em;
-    overflow-wrap: break-word;
 }
 
 .buttonContainer {

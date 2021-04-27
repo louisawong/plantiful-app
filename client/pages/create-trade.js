@@ -286,7 +286,8 @@ function createtrade() {
                                 placeholder="Location (city)" 
                                 value = {city? `${city}, ${country}`: null}
                                 onChange={handleLocation}
-                                required/>
+                                required
+                                disabled="true"/>
                             <div className={style.currentLocation} 
                                 onClick={handleCurrentLocation}>
                                     Use Current Location

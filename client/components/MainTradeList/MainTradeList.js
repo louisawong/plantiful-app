@@ -1,12 +1,12 @@
 import React from 'react'
-import TradePost from '../TradePost/TradePost'
+import MainTradePost from '../MainTradePost/MainTradePost'
 import style from './MainTradeList.module.scss'
 import uuid from 'react-uuid'
 
 function TradePostList({tradeList}) {
 
     const showPosts = (tradeList) => {
-        return tradeList.map((trade)=><TradePost key={uuid()} trade={trade}/>)
+        return tradeList.map((trade)=><MainTradePost key={uuid()} trade={trade}/>)
     }
 
     return (
