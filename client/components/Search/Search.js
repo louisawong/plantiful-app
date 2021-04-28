@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import style from './Search.module.scss'
 
 function Search() {
+    
+    const [search, setSearch] = useState("")
+
     return (
         <div className={style.searchBarContainer}>
             <span className={`material-icons ${style.icon}`}>search</span>
