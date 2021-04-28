@@ -11,7 +11,7 @@ function TradePostList({tradeList, none, city}) {
 
     return (
         <div>
-            {none? <div className={style.announcement}>No trades within 10kms of {city}.</div>:<div></div>}
+            {none? <div className={style.announcement}>No trades within 20kms of {city}.</div>:<div></div>}
             <div className={`${style.mainboard__container}`}>
                 {showPosts(tradeList)}
             </div>
