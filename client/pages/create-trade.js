@@ -52,7 +52,7 @@ function createtrade() {
       fetch("/api/geolocation")
       .then(res => res.json())
       .then((data)=>{
-        setCurrentLocation(data.ll);
+        setCurrentLocation(data.location);
         setCity(data.city);
         setCountry(data.country)
       })
@@ -281,7 +281,7 @@ function createtrade() {
                             }   
                         </div>
                         <div className={style.locationField}>
-                            <input className={style.formInput} 
+                            <input className={style.formLocation} 
                                 type="text" 
                                 placeholder="Location (city)" 
                                 value = {city? `${city}, ${country}`: ''}

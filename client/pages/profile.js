@@ -2,12 +2,10 @@ import React,{useEffect,useState} from 'react';
 import style from '../styles/Profile.module.scss';
 import Head from 'next/head';
 import {useDispatch, useSelector} from 'react-redux';
-import {loadUser, logoutUser, fetchUserById} from '../redux/user';
-import {useAuth} from '../firebase/auth';
-import { Router, useRouter } from 'next/router'
+import {logoutUser, fetchUserById} from '../redux/user';
+//import {useAuth} from '../firebase/auth';
+import {useRouter } from 'next/router'
 import Link from 'next/link'
-//import ProgressBar from '../components/ProgressBar/ProgressBar';
-//import TradePost from '../components/TradePost/TradePost';
 import TradePostList from '../components/TradePostList/TradePostList';
 import InspoPostList from '../components/InspoPostList/InspoPostList';
 
@@ -16,7 +14,7 @@ function profile() {
     const dispatch = useDispatch();
     const router = useRouter();
     const userInfo = useSelector((state)=> state.user)
-    //=const {user} = useAuth(); 
+    //const {user} = useAuth(); 
 
     const [selected,setSelected] = useState("trade")
 

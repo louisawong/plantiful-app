@@ -1,0 +1,15 @@
+.mainWrapper {
+    padding: 0 4vw;
+    padding-top: 2vh;
+    height: fit-content;
+    column-gap:10px;
+    column-count: 4;
+    width: 100%;
+}
+
+@media (min-width: 0px) and (max-width: 755px) {
+    .mainWrapper {
+      //max-width: 504px;
+      column-count: 2;
+    }
+}

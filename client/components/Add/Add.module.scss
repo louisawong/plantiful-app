@@ -7,7 +7,7 @@ $phthalo-green: #052E26ff;
 $dark-jungle-green: #041910ff;
 
 .wrapper {
-    position: absolute;
+    position: fixed;
     right: 4vw;
     bottom: 2vh;
 }
@@ -16,6 +16,7 @@ $dark-jungle-green: #041910ff;
     margin-top: 0.5rem;
     padding: 0.5rem;
     border-radius: 50%;
+    border: solid 3px white;
     display: grid;
     place-content: center;
     width: 40px;

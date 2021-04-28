@@ -19,7 +19,7 @@ $dark-jungle-green: #041910ff;
     outline: 0;
     padding: 0.3rem;
     padding-left: 1rem;
-    width: 90%;
+    width: 100%;
 
     &:hover {
         box-shadow:0 0 5px 3px #e1ede6;
@@ -43,5 +43,9 @@ $dark-jungle-green: #041910ff;
 .icon {
     width: 1vw;
     margin-right: 1rem;
+}
+
+.form {
+    width:90%;
 }
 

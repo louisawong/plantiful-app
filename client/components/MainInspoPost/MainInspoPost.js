@@ -17,7 +17,7 @@ export default function InspoPost({inspo}) {
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        return axios.get('api/users/'+inspo.uid)
+        return axios.get('/api/users/'+inspo.uid)
         .then((res)=>setOwnerInfo(res.data))
         .catch((err)=>console.error(err))
     },[])
@@ -40,7 +40,9 @@ export default function InspoPost({inspo}) {
             <div className={style.location}>{`${inspo.city}, ${inspo.country}`}</div>
             <div className={style.createdBy}>
                 {`Created by `}
+                <Link href={`/profile/${inspo.username}`}>
                 <span className={style.username}>{`@${inspo.username}`}</span>
+                </Link>
                 {` on `}
                 <span className={style.date}>{`${moment(inspo.createdAt).format('ll')}`}</span>
             </div>

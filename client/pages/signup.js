@@ -53,7 +53,7 @@ function signUp() {
                         lastName:lastName,
                         country: data.country,
                         city: data.city,
-                        location:data.ll
+                        location:data.location
                     }));
                     router.push("/edit-profile")
           })

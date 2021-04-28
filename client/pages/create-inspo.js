@@ -50,7 +50,7 @@ function createInspo() {
       fetch("/api/geolocation")
       .then(res => res.json())
       .then((data)=>{
-        setCurrentLocation(data.ll);
+        setCurrentLocation(data.location);
         setCity(data.city);
         setCountry(data.country)
       })

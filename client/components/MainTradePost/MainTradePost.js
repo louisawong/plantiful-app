@@ -4,20 +4,25 @@ import moment from 'moment';
 import {useDispatch, useSelector} from 'react-redux';
 import { Router, useRouter } from 'next/router'
 import axios from 'axios'
+import Link from 'next/link';
 
 
 export default function TradePost({trade}) {
     const [active, setActive] = useState(false);
     const [side,setSide] = useState("right");
-    const [x,setX] = useState(window.innerWidth/2);
-    const [y,setY] = useState(window.innerHeight/2);
+    const [x,setX] = useState(0);
+    const [y,setY] = useState(0);
 
     const [ownerInfo,setOwnerInfo] = useState({})
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        return axios.get('api/users/'+trade.uid)
-        .then((res)=>setOwnerInfo(res.data))
+        return axios.get('/api/users/'+trade.uid)
+        .then((res)=>{
+            setOwnerInfo(res.data);
+            setY(window.innerHeight/2);
+            setX(window.innerWidth/2)
+        })
         .catch((err)=>console.error(err))
     },[])
 
@@ -45,7 +50,9 @@ export default function TradePost({trade}) {
             <div className={style.location}>{`${trade.city}, ${trade.country}`}</div>
             <div className={style.createdBy}>
                 {`Created by `}
+                <Link href={`/profile/${trade.username}`}>
                 <span className={style.username}>{`@${trade.username}`}</span>
+                </Link>
                 {` on `}
                 <span className={style.date}>{`${moment(trade.createdAt).format('ll')}`}</span>
             </div>

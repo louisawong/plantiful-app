@@ -47,7 +47,8 @@ function editProfile() {
             fetch("/api/geolocation")
             .then(res => res.json())
             .then((data)=>{
-              setLocation(data.ll);
+                console.log(data)
+              setLocation(data.location);
               setCity(data.city);
               setCountry(data.country)
             })

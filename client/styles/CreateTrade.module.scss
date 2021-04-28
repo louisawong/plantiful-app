@@ -27,6 +27,7 @@ $dark-jungle-green: #041910ff;
 .wrapper {
     width: 90vw;
     height: 100%;
+    max-width: 960px;
     display: flex;
     //justify-content: space-around;
     align-items: top;
@@ -36,53 +37,60 @@ $dark-jungle-green: #041910ff;
     // border-width: 1px;
     // border-color: red;  
 }
+.left {
+  //background-color: blue;
+  height: 70vh;
+  width: 50%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 18px;
+  // border-style: solid;
+  // border-width: 1px;
+  // border-color: red;  
+}
+.right {
+  //background-color: red;
+  //height: 100vh;
+  height: 70vh;
+  width: 50%;
+  max-width: 500px;
+  padding:0;
+  // border-style: solid;
+  // border-width: 1px;
+  // border-color: red;  
+
+}
 @media only screen and (max-width: 799px) {
   .wrapper{
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
     // border-style: solid;
     // border-width: 1px;
     // border-color: red; 
+    width: 90vw;
   }
 
   .image1 .label1{
     width: 100%;
   }
   .right {
-    width: 100%;
-    align-items: flex-start;
+    //align-items: flex-start;
     margin: 0;
+    transform: translateY(25%);
+    //width: 100%
+    height: fit-content;
+    min-width: 330px;
+    text-align: center;
+    max-width: 380px;
 
   }
 }
 
-.left {
-    //background-color: blue;
-    height: 70vh;
-    width: 50%;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 18px;
-    // border-style: solid;
-    // border-width: 1px;
-    // border-color: red;  
-}
-.right {
-    //background-color: red;
-    //height: 100vh;
-    height: 70vh;
-    width: 50%;
-    padding:0;
-    // border-style: solid;
-    // border-width: 1px;
-    // border-color: red;  
- 
-}
 .header {
     margin:0;
-    margin-bottom: 10px;;
+    margin-bottom: 2rem;
     padding:0;
     line-height: 1em;
     // border-style: solid;
@@ -101,7 +109,8 @@ $dark-jungle-green: #041910ff;
     // border-color: red;  
 }
 .image2 {
-    width:85px;
+    width:auto;
+    height: 70%
     //display: block;
     //margin: auto;
 }
@@ -153,6 +162,7 @@ $dark-jungle-green: #041910ff;
 .bottomImages {
     display: flex;
     width: 300px;
+    height: 30%;
     justify-content: space-between; 
     //margin: auto;
     margin-top: 18px;
@@ -171,20 +181,24 @@ $dark-jungle-green: #041910ff;
   padding:0;
 }
 .createForm {
-    display:flex;
-    flex-direction: column;
-    justify-content:space-around;
-    height: 90%;
-
-    //background-color: red;
+  display: flex;
+  flex-direction: column;
 }
 
 .formInput {
-    border: 0;
-    font-family: 'Poppins', sans-serif;
-    border-radius: 10px;
-    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
-    padding-left:20px;
+  border: 0;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 10px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  padding-left:20px;
+  margin-bottom: 1rem;
+}
+.formLocation {
+  border: 0;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 10px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  padding-left:20px;
 }
 
 /* The switch - the box around the slider */
@@ -193,6 +207,7 @@ $dark-jungle-green: #041910ff;
     display: inline-block;
     width: 3rem;
     height: 1rem;
+    margin: 0.4rem 0
     //box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
   }
   
@@ -269,7 +284,7 @@ $dark-jungle-green: #041910ff;
 
 .locationField {
   display: flex;
-
+  margin-bottom: 2rem;
 }
 
 .buttonSubmit {
@@ -279,6 +294,7 @@ $dark-jungle-green: #041910ff;
   padding: 0.25rem 0.5rem;
   font-family: 'Poppins', sans-serif;
   border:0;
+  margin-bottom: 1rem;
 
   &:hover {
     cursor: pointer;

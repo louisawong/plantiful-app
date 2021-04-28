@@ -29,11 +29,11 @@ function trades() {
           .then((data)=>{
             setCity(data.city)
             dispatch(fetchAllNearbyTrades({
-                location: data.ll , 
+                location: data.location , 
             uid: session
             }));
             dispatch(fetchAllTrades({
-              location: data.ll , 
+              location: data.location, 
               uid: session
             }));
           })

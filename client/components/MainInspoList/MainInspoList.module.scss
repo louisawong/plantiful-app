@@ -21,11 +21,11 @@ $dark-jungle-green: #041910ff;
   //background-color: aquamarine;
 }
 @media (min-width: 0px) and (max-width: 755px) {
-    .mainboard__container {
-      //max-width: 504px;
-      column-count: 2;
-    }
+  .mainboard__container {
+    //max-width: 504px;
+    column-count: 2;
   }
+}
   
 //   @media (min-width: 756px) and (max-width: 1007px) {
 //     .mainboard__container {

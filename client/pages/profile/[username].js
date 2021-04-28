@@ -10,13 +10,11 @@ import TradePostList from '../../components/TradePostList/TradePostList'
 import InspoPostList from '../../components/InspoPostList/InspoPostList'
 
 function profile() {
-    //console.log("PROPS:", props)
-    //const {userProfile, username} = props;
     const dispatch = useDispatch();
     const router = useRouter();
     const userInfo = useSelector((state)=> state.user)
-     const {username} = router.query;
-     const [profileUser, setProfileUser] = useState(null)
+    const {username} = router.query;
+    const [profileUser, setProfileUser] = useState(null)
     const [selected,setSelected] = useState("trade")
     
     useEffect (()=> {
@@ -76,7 +74,6 @@ function profile() {
                     <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/MVQLddp5dofO4mxECB85KGcPUjj1.1619417879256.Plantiful_icon.png?alt=media&token=c973879c-722d-43b6-a78f-971be61f55f5"></img>
                     }
                     
-                    {/* <div className={style.editProfile} >Edit Your Profile</div> */}
                     <div className={style.username}>{`@${profileUser?.username}`}</div>
                     <div className={style.basicInfo}>
                         <span>{`${profileUser?.firstName} ${profileUser?.lastName}`}</span>
@@ -104,19 +101,4 @@ function profile() {
     )
 }
 
-
-// profile.getInitialProps = async ({query}) => {
-//     //console.log(query.username)
-//     const {username} = query;
-//     const res = await fetch('/api/getUser/'+username)
-//     const user = await res.json()
-//     //const res = await axios.get();
-//     console.log("res")
-//     return { 
-        
-//             username:username,
-//             userProfile: user,
-        
-//     }
-//   }
 export default profile

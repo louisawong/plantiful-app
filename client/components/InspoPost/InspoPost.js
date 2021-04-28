@@ -4,6 +4,7 @@ import moment from 'moment';
 import {deleteInspo} from '../../redux/user'
 import {useDispatch, useSelector} from 'react-redux';
 import { Router, useRouter } from 'next/router'
+import Link from 'next/link'
 import axios from 'axios'
 import trades from '../../redux/trades';
 
@@ -51,7 +52,9 @@ export default function InspoPost({inspo, belongs}) {
             <div className={style.location}>{`${inspo.city}, ${inspo.country}`}</div>
             <div className={style.createdBy}>
                 {`Created by `}
+                <Link href={`/profile/${inspo.username}`}>
                 <span className={style.username}>{`@${inspo.username}`}</span>
+                </Link>
                 {` on `}
                 <span className={style.date}>{`${moment(inspo.createdAt).format('ll')}`}</span>
             </div>
