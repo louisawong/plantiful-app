@@ -9,7 +9,7 @@ export default async (req,res) => {
     if (method==='POST') {
         try {
             //console.log("REQ:", req.body)
-            let result = await User.find({location: {$geoNear: {$maxDistance: 20000, $geometry: {type: "Point", coordinates: req.body.location}}}});
+            let result = await User.find({location: {$geoNear: {$maxDistance: 25000, $geometry: {type: "Point", coordinates: req.body.location}}}});
             //console.log('RESULT find trades: ',result)
             let tradesArr = result.map((user) => user.trades);
             let trades = tradesArr.flat();
