@@ -65,7 +65,7 @@ function trades() {
             </Head>
             <main className={style.mainWrapper}>
               {/* {showNearbyPosts()} */}
-                {(nearbyTrades.length >= 1) ? showNearbyPosts() : showAllPosts()}
+                {(nearbyTrades?.length >= 1) ? showNearbyPosts() : showAllPosts()}
             </main>
         </div>
     )
