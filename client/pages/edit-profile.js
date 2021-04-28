@@ -121,7 +121,7 @@ function editProfile() {
                         {userInfo.profile ? 
                         <img className={style.profilePic} src={userInfo.profile}/>
                         :
-                        <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/addProfileImage.png?alt=media&token=3c067200-cfee-4ccc-8986-28888a41b31e"/>
+                        <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/websiteSources%2FaddProfileImage.png?alt=media&token=8e09b8fe-7d89-4543-842b-631c844c814d"/>
                         }
                         <input className={style.input} type="file" onChange={handleEditProfile}/>             
                         <span className={style.addImage}>Edit Your Profile Image</span>

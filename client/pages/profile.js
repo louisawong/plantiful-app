@@ -66,7 +66,7 @@ function profile() {
                     {userInfo.profile ? 
                     <img className={style.profilePic} src={userInfo.profile}/>
                     :
-                    <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/MVQLddp5dofO4mxECB85KGcPUjj1.1619417879256.Plantiful_icon.png?alt=media&token=c973879c-722d-43b6-a78f-971be61f55f5"></img>
+                    <img className={style.profilePic} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/websiteSources%2FPlantiful_icon.png?alt=media&token=f7daf430-c9d2-471c-8271-e8e2e833abf2"></img>
                     }
                     <Link href="/edit-profile">
                     <div className={style.editProfile} >Edit Your Profile</div>

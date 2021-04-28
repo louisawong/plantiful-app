@@ -40,7 +40,7 @@ export default function Home() {
       </Head>
       <main>
         <div className={style.hero}>
-          <img className={style.heroImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/GwOEyvvS43PVbifQPG57ViQ0Z0l2.1619447191404.hero-background.jpg?alt=media&token=ce0d4385-0575-4a00-828a-523b3ca83352"></img>
+          <img className={style.heroImage} src="https://firebasestorage.googleapis.com/v0/b/plantiful-ec98d.appspot.com/o/websiteSources%2Fhero-background.jpg?alt=media&token=03720e4d-8341-40eb-aa36-8b3ee74ae980"></img>
           <div className={style.overlay}></div>
           <div className={style.header}>Plant Trading Made Easy
           <p className={`${style.tagline} ${style.firstTagline}`}>
