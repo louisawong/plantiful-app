@@ -11,7 +11,7 @@ dbConnect();
      switch(method) {
        // by user uid, add a new trade and update numInspos
        case 'POST':
-            req.body = JSON.parse(req.body)
+            //req.body = JSON.parse(req.body)
             const newTrade = {
               tradeId: req.body.tradeId,
               uid: uid,

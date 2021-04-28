@@ -85,6 +85,29 @@ export const addInspo = createAsyncThunk(
   }
 )
 
+export const addTrade = createAsyncThunk(
+  'users/addTradeStatus',
+  async(trade,thunkAPI) => {
+    const response = await axios.post('api/trades/'+trade.uid, {
+      tradeId: trade.tradeId,
+      uid: trade.uid,
+      username: trade.username,
+      title: trade.title,
+      description: trade.description,
+      images: trade.images,
+      location: trade.location,
+      city: trade.city, 
+      country: trade.country,
+      minOffer: trade.minOffer,
+      tradePreference: trade.tradePreference,
+      trade: trade.trade,
+      sell: trade.sell,
+    })
+    console.log("THUNK res:", response.data)
+    return response.data
+  }
+)
+
 export const userSlice = createSlice({
     name: "user",
     initialState:{
@@ -137,10 +160,10 @@ export const userSlice = createSlice({
       //   state.numInspos -=1;
       //   state.inspos = state.inspos.filter((inspo) => inspo.id !== action.payload.id);
       // },
-      addTrade: (state, action) => {
-        state.numTrades +=1;
-        state.trades = state.trades.concat(action.payload.trade);
-      },
+      // addTrade: (state, action) => {
+      //   state.numTrades +=1;
+      //   state.trades = state.trades.concat(action.payload.trade);
+      // },
       removeTrade: (state, action) => {
         state.numTrades -=1;
         state.trades = state.trades.filter((trade) => trade.id !== action.payload.id);
@@ -273,12 +296,16 @@ export const userSlice = createSlice({
           state.inspos=action.payload.inspos;
           state.numInspos=action.payload.numInspos;
         },
+        [addTrade.fulfilled]: (state, action) => {
+          state.trades = action.payload.trades;
+          state.numTrades = action.payload.numTrades;
+        },
     }
 });
 
 export const {setNewUser, logoutUser, editProfile, editDescription,
     editLastName, editLocation, addFollower, removeFollower,
-    removeInspo, addTrade, removeTrade,
+    removeInspo, removeTrade,
     addChat, removeChat, addMessage, loadUser} = userSlice.actions;
 
 export default userSlice.reducer;

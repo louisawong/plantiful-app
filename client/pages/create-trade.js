@@ -96,27 +96,27 @@ function createtrade() {
                 trade: tradeBool,
                 sell: sellBool
         }));
-        fetch('/api/trades/'+userInfo.uid , {
-            method: 'POST',
-            header:{
-                "contentType": "application/json"
-            },
-            body: JSON.stringify({
-                tradeId: id,
-                username:userInfo.username,
-                title,
-                location:currentLocation,
-                city,
-                country,
-                images: imagesArr,
-                description,
-                minOffer: Number(price).toFixed(2),
-                tradePreference,
-                trade: tradeBool,
-                sell: sellBool
-            })
-        })
-        .catch((err) => console.log(error))
+        // fetch('/api/trades/'+userInfo.uid , {
+        //     method: 'POST',
+        //     header:{
+        //         "contentType": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //         tradeId: id,
+        //         username:userInfo.username,
+        //         title,
+        //         location:currentLocation,
+        //         city,
+        //         country,
+        //         images: imagesArr,
+        //         description,
+        //         minOffer: Number(price).toFixed(2),
+        //         tradePreference,
+        //         trade: tradeBool,
+        //         sell: sellBool
+        //     })
+        // })
+        // .catch((err) => console.log(error))
         router.push("/profile")
     }
 
