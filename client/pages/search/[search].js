@@ -37,7 +37,7 @@ function search() {
           .then(res => res.json())
           .then((data)=>{
             dispatch(fetchAllTrades({
-                location: data.ll , 
+                location: data.location , 
                 uid: session
             }));
           })
@@ -49,7 +49,7 @@ function search() {
         let regex = new RegExp(`${search}`, 'i')
         let sortedAllPosts = trades.concat(inspos).sort((a,b) => new Date(b.createdAt)- new Date(a.createdAt));
         if (sortedAllPosts.length===0) {
-            return <div>No results found.</div>
+            return <div className={style.noResults}>No results found.</div>
         }
         return  sortedAllPosts.map((post)=>{
             //check if post is trade or inspo
