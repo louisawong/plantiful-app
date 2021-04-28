@@ -49,7 +49,7 @@ function search() {
         let regex = new RegExp(`${search}`, 'i')
         let sortedAllPosts = trades.concat(inspos).sort((a,b) => new Date(b.createdAt)- new Date(a.createdAt));
         if (sortedAllPosts.length===0) {
-            alert("No results found")
+            window.alert("No results found")
             router.push("/home")
             return <div>No results found.</div>
         }
