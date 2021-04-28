@@ -48,7 +48,11 @@ function search() {
     const showPosts = () => {
         let regex = new RegExp(`${search}`, 'i')
         let sortedAllPosts = trades.concat(inspos).sort((a,b) => new Date(b.createdAt)- new Date(a.createdAt));
-        if (sortedAllPosts.length===0) return <div>No results found.</div>
+        if (sortedAllPosts.length===0) {
+            alert("No results found")
+            router.push("/home")
+            return <div>No results found.</div>
+        }
         return  sortedAllPosts.map((post)=>{
             //check if post is trade or inspo
             //then check if contains search word
