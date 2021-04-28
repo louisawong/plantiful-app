@@ -208,7 +208,7 @@ function createInspo() {
                             value={caption}
                         ></textarea>
                         <div className={style.locationField}>
-                            <input className={style.formInput} 
+                            <input className={style.formLocation} 
                                 type="text" 
                                 placeholder="Location (city)" 
                                 value = {city? `${city}, ${country}`: ''}

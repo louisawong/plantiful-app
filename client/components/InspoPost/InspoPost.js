@@ -8,12 +8,14 @@ import axios from 'axios'
 import trades from '../../redux/trades';
 
 
-export default function InspoPost({inspo}) {
+export default function InspoPost({inspo, belongs}) {
 
     const [active, setActive] = useState(false);
     const [side,setSide] = useState("right");
     const [x,setX] = useState(window.innerWidth/2);
     const [y,setY] = useState(window.innerHeight/2);
+
+    const userInfo = useSelector((state)=> state.user)
 
     const [ownerInfo,setOwnerInfo] = useState({})
     const dispatch = useDispatch();
@@ -63,9 +65,11 @@ export default function InspoPost({inspo}) {
                 {inspo.images[2] && <img className={style.detailImage} src={inspo.images[2]}/>}
                 {inspo.images[3] && <img className={style.detailImage} src={inspo.images[3]}/>}
             </div>
+            {userInfo.username===inspo.username &&
             <div className={style.buttonContainer}>
                 <button onClick={deleteHandler}className={style.delete} type="button">Delete Inspo</button>
             </div>
+            }
         </div>
         : 
         <div></div>

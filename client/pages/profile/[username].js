@@ -44,7 +44,7 @@ function profile() {
                 )
             }
             let profileTrades = profileUser?.trades?.slice().sort((a,b) => new Date(b.createdAt)- new Date(a.createdAt))
-            return <div className={style.wrapper}><TradePostList type="trade" tradeList={profileTrades}/></div>
+            return <div className={style.wrapper}><TradePostList type="trade"  tradeList={profileTrades}/></div>
         }
         else {
           if (profileUser?.inspos?.length == 0) {

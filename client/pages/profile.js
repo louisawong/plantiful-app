@@ -50,7 +50,7 @@ function profile() {
         }
         let profileInspos = userInfo.inspos.slice().sort((a,b) => new Date(b.createdAt)- new Date(a.createdAt))
         return <div className={style.wrapper}><InspoPostList type="inspo" inspoList={profileInspos}/></div>
-    }
+        }
     }
 
     return (

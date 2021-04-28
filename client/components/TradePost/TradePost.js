@@ -8,7 +8,7 @@ import axios from 'axios'
 import trades from '../../redux/trades';
 
 
-export default function TradePost({trade}) {
+export default function TradePost({trade, belongs}) {
 
     const [active, setActive] = useState(false);
     const [side,setSide] = useState("right");
@@ -16,6 +16,7 @@ export default function TradePost({trade}) {
     const [y,setY] = useState(window.innerHeight/2);
 
     const [ownerInfo,setOwnerInfo] = useState({})
+    const userInfo = useSelector((state)=> state.user)
     const dispatch = useDispatch();
 
     const clickHandler = (e) => {
@@ -63,9 +64,11 @@ export default function TradePost({trade}) {
                 {trade.images[2] && <img className={style.detailImage} src={trade.images[2]}/>}
                 {trade.images[3] && <img className={style.detailImage} src={trade.images[3]}/>}
             </div>
+            {userInfo.username===trade.username &&
             <div className={style.buttonContainer}>
                 <button onClick={deleteHandler}className={style.delete} type="button">Delete Trade</button>
             </div>
+            }
         </div>
         : 
         <div></div>
