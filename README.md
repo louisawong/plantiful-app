@@ -21,6 +21,8 @@ Open http://localhost:3000 with your browser to see the result.
 
 Framework: React and Next JS
 
+Styling: Sass & Google Icons
+
 Server: Next JS API
 
 Database: MongoDB and Mongoose
