@@ -14,10 +14,9 @@ function login() {
     const [password, setPassword] = useState("")
 
     const loginHandler = async (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         await firebase.auth().signInWithEmailAndPassword(email,password)
         .then((res) => {
-            console.log("LOGGING",res.user.uid);
             localStorage.setItem("uid", `${res.user.uid}`)
             router.push("/home")
         })
@@ -46,13 +45,26 @@ function login() {
                 <form className={style.form}>
                     <div className={style.fields}>
                         <label>Email:</label>
-                        <input className={style.input} required type='email' value={email} onChange={(e)=>setEmail(e.target.value)}></input>
+                        <input className={style.input} 
+                            required 
+                            type='email' 
+                            value={email} 
+                            onChange={(e)=>setEmail(e.target.value)}>
+                        </input>
                     </div>
                     <div className={style.fields}>
                         <label>Password:</label>
-                        <input className={style.input} required type='password' value={password} onChange={(e)=>setPassword(e.target.value)}></input>
+                        <input className={style.input} 
+                            required 
+                            type='password' 
+                            value={password} 
+                            onChange={(e)=>setPassword(e.target.value)}>
+                        </input>
                     </div>
-                    <button className={style.button} disabled={email===""||password===""} onClick={loginHandler}>
+                    <button className={style.button}
+                        type="button"
+                        disabled={email===""||password===""} 
+                        onClick={loginHandler}>
                         Login
                     </button>
                 </form>

@@ -44,12 +44,10 @@ function trades() {
     },[router]);
 
     const showNearbyPosts = () => {
-      console.log("SHPWING NEARBY",nearbyTrades)
       return <MainTradeList tradeList={nearbyTrades} none={false} city=""/>
     }
 
     const showAllPosts = () => {
-      console.log("SHPWING ALL", trades)
       return  <MainTradeList tradeList={trades} none={true} city={city}/>
     }
 

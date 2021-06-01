@@ -14,7 +14,7 @@ export default function Home() {
 
   //const {user} = useAuth();
   const dispatch = useDispatch();
-    const router = useRouter();
+  const router = useRouter();
 
   useEffect (()=> {
     const session = localStorage.getItem("uid")

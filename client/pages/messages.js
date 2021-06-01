@@ -6,17 +6,11 @@ import {loadUser, logoutUser, fetchUserById} from '../redux/user';
 import {useAuth} from '../firebase/auth';
 import { Router, useRouter } from 'next/router'
 import Link from 'next/link'
-import ProgressBar from '../components/ProgressBar/ProgressBar';
-import TradePost from '../components/TradePost/TradePost';
-import TradePostList from '../components/TradePostList/TradePostList';
-
 
 function messages() {
     const dispatch = useDispatch();
     const router = useRouter();
     const userInfo = useSelector((state)=> state.user)
-
-    const [selected,setSelected] = useState("trade")
 
     useEffect (()=> {
       const session = localStorage.getItem("uid")

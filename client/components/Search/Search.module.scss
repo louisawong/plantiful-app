@@ -49,3 +49,9 @@ $dark-jungle-green: #041910ff;
     width:90%;
 }
 
+
+@media (max-width: 648px) {
+    .searchBarContainer {
+        width:60%;
+    }
+}

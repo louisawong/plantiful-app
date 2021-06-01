@@ -13,22 +13,26 @@ import { Router, useRouter } from 'next/router'
 function signUp() {
 
     firebaseClient();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [username, setUsername] = useState("");
+
+    const initialState = {
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        username: "",
+    }
+    const [formState, setFormState] = useState(initialState);
  
     const dispatch = useDispatch();
     const router = useRouter();
 
-    const checkUsername = async () => {
+    const createHandler= async () => {
         fetch('/api/usernameExist', {
             method: 'POST',
             header:{
                 "contentType": "application/json"
             },
-            body: JSON.stringify({username:username})
+            body: JSON.stringify({username:formState.username})
         })
         .then ((res)=> {
             if (res.status === 200) {
@@ -37,20 +41,18 @@ function signUp() {
                 router.push("/signup")
             }
             else {
-                console.log("username is valid")
-                firebase.auth().createUserWithEmailAndPassword(email, password)
+                firebase.auth().createUserWithEmailAndPassword(formState.email, formState.password)
                 .then (async (res)=>{
-                    console.log(res.user.uid);
                     localStorage.setItem("uid", `${res.user.uid}`)
                     fetch("/api/geolocation")
                     .then(res => res.json())
                     .then((data)=>{
                     dispatch(createNewUser({
                         uid: res.user.uid,
-                        email: email, 
-                        username:username, 
-                        firstName:firstName, 
-                        lastName:lastName,
+                        email: formState.email, 
+                        username: formState.username, 
+                        firstName:formState.firstName, 
+                        lastName:formState.lastName,
                         country: data.country,
                         city: data.city,
                         location:data.location
@@ -58,7 +60,7 @@ function signUp() {
                     router.push("/edit-profile")
           })
           .catch((err)=>{
-            console.log(err);
+            console.error(err);
           });
                 })
                 .catch((err) => {
@@ -73,12 +75,8 @@ function signUp() {
                 })
             }
         })
-        .catch ((error)=> console.log(error));
+        .catch ((error)=> console.error(error));
 
-    }
-    
-    const createHandler = async () => {
-        checkUsername();
     }
 
     return (
@@ -100,25 +98,52 @@ function signUp() {
                 <form className={style.signForm}>
                     <div className={style.fields}>
                         <label>Email:</label>
-                        <input className={style.input}  required type='email' value={email} onChange={(e)=>setEmail(e.target.value)}></input>
+                        <input className={style.input}  
+                            required 
+                            type='email' 
+                            value={formState.email} 
+                            onChange={(e)=>setFormState({...formState, email:e.target.value})}>
+                        </input>
                     </div>
                     <div className={style.fields}>
                         <label>Username:</label>
-                        <input className={style.input}  required type='text' value={username} onChange={(e)=>setUsername(e.target.value)}></input>
+                        <input className={style.input}  
+                            required 
+                            type='text' 
+                            value={formState.username} 
+                            onChange={(e)=>setFormState({...formState, username:e.target.value})}>
+                        </input>
                     </div>
                     <div className={style.fields}>
                         <label>Password:</label>
-                        <input className={style.input}  required type='password' value={password} onChange={(e)=>setPassword(e.target.value)}></input>
+                        <input className={style.input}  
+                            required 
+                            type='password' 
+                            value={formState.password} 
+                            onChange={(e)=>setFormState({...formState, password:e.target.value})}>
+                        </input>
                     </div>
                     <div className={style.fields}>
                         <label>First Name:</label>
-                        <input className={style.input}  required type='text' value={firstName} onChange={(e)=>setFirstName(e.target.value)}></input>
+                        <input className={style.input}  
+                            required 
+                            type='text' 
+                            value={formState.firstName} 
+                            onChange={(e)=>setFormState({...formState, firstName:e.target.value})}>
+                        </input>
                     </div>
                     <div className={style.fields}>
                         <label>Last Name:</label>
-                        <input className={style.input} type='text' value={lastName} onChange={(e)=>setLastName(e.target.value)}></input>
+                        <input className={style.input} 
+                            type='text' 
+                            value={formState.lastName} 
+                            onChange={(e)=>setFormState({...formState, lastName:e.target.value})}>
+                        </input>
                     </div>
-                    <button className={style.button}  type="button" disabled={email===""||password===""}onClick={createHandler}>
+                    <button className={style.button}  
+                        type="button"  //prevents refresh like with submit
+                        disabled={formState.email===""||formState.password===""}
+                        onClick={createHandler}>
                         Create Account
                     </button>
                 </form>

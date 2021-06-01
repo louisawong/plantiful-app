@@ -47,26 +47,28 @@ function search() {
 
     const showPosts = () => {
         let regex = new RegExp(`${search}`, 'i')
-        let sortedAllPosts = trades.concat(inspos).sort((a,b) => new Date(b.createdAt)- new Date(a.createdAt));
+        //filters inspo post for keyword in caption or title
+        let filteredInspo = inspos.filter((post) => {
+            return post.caption.search(regex)!==-1 || post.title.search(regex)!==-1;
+        });
+        //filters trade post for keyword in description or title
+        let filteredTrade = trades.filter((post) => {
+            return post.description.search(regex)!==-1 || post.title.search(regex)!==-1;
+        })
+        //combine and sort all filtered posts by most recent
+        let sortedAllPosts = filteredInspo.concat(filteredTrade).sort((a,b)=> new Date(b.createdAt)- new Date(a.createdAt))
         if (sortedAllPosts.length===0) {
-            return <div className={style.noResults}>No results found.</div>
+            return <div className={style.noResults}>No results found. Please try another search word.</div>
         }
         return  sortedAllPosts.map((post)=>{
-            //check if post is trade or inspo
-            //then check if contains search word
-            //if yes, display it;
             if (post.hasOwnProperty("caption")) {
-                if (post.caption.search(regex)!==-1 || post.title.search(regex)!==-1) {
-                    return <MainInspoPost key={uuid()} inspo={post}/>
-                }
-                return <div></div>
+                return <MainInspoPost key={uuid()} inspo={post}/>
             }
             else {
-                if (post.description.search(regex)!==-1 || post.title.search(regex)!==-1) {
-                    console.log(post)
+                //if (post.description.search(regex)!==-1 || post.title.search(regex)!==-1) {
                     return <MainTradePost key={uuid()} trade={post}/>
-                }
-                return <div></div>
+                //}
+                //return <div></div>
             }
         })
         
@@ -76,7 +78,7 @@ function search() {
     return (
         <div>
             <Head>
-                <title>Plantiful</title>
+                <title>Plantiful-Search</title>
                 <link rel="icon" href="/favicon.ico" />
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
                   rel="stylesheet"></link>

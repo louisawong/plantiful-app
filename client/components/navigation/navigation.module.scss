@@ -14,13 +14,16 @@ $dark-jungle-green: #041910ff;
     padding-right: 4vw;
     padding-top: 2vh;
     padding-bottom: 2vh;
-    //background-color:$phthalo-green;
     color: rgb(39, 53, 47);
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: 0.9em ;
     font-weight: 600;
+    position: fixed;
+    top:0;
+    z-index: 9999;
 }
 
 .logo {
@@ -154,4 +157,71 @@ $dark-jungle-green: #041910ff;
 .buttons {
     font-weight: 500;
     font-size: 1em;
+}
+
+.logoMobile {
+    height: 100%;
+    width: auto;
+}
+
+.mobileMenu {
+    display: none;
+    box-sizing: border-box;
+    width: 100vw;
+    height: 12vh;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    color: rgb(39, 53, 47);
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9em ;
+    font-weight: 600;
+    position: fixed;
+    top:0;
+    z-index: 9999;
+    background-color: white;
+}
+
+.mobileMenu_wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon_menu {
+    font-size: 50px;
+}
+
+.mobileMenu_popup {
+    position: fixed;
+    top: 12vh;
+    right: 0;
+    height: 88vh;
+    width: 100vw;
+    background-color: #e1ede6;
+    z-index: 10;
+    color:rgb(108, 108, 108);
+    display: flex;
+    font-size: 1.5rem;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20vh 20vw;
+}
+
+
+@media (max-width: 648px) {
+    .navigation {
+        display:none;
+    }
+    .navigation_signout {
+        display: flex;
+    }
+    .mobileMenu {
+        display: flex;
+    }
 }

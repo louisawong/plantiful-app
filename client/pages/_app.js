@@ -10,7 +10,9 @@ function MyApp({ Component, pageProps }) {
     <Provider store={store}>
       <AuthProvider>
         <Navigation/>
-        <Component {...pageProps} />
+          <div className="mainContainer">
+            <Component {...pageProps} />
+          </div>
         <Add/>
       </AuthProvider>
     </Provider>

@@ -6,7 +6,7 @@ import firebaseClient from '../../firebase/config';
 import firebase from "firebase/app"
 import {useAuth} from '../../firebase/auth';
 import { Router, useRouter } from 'next/router'
-import {useDispatch, useSelector} from 'react-redux';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
 import {logoutUser} from '../..//redux/user';
 
 function Navigation() {
@@ -15,6 +15,9 @@ function Navigation() {
     const dispatch = useDispatch();
     //const {user} = useAuth();
     const [session, setSession] = useState(false);
+    const [clicked, setClicked] = useState(false);
+    function handleClicked () {setClicked(!clicked); console.log("CLICKED", clicked)}
+    const closeMobileMenu = () => setClicked(false);
 
     useEffect (()=> {
         const session = localStorage.getItem("uid")
@@ -33,11 +36,23 @@ function Navigation() {
         router.push("/");
     }
 
+    function showMobileView() {
+        if (clicked) {
+            return (
+                <div className={style.mobileMenu_popup}>
+                    <Link href="/home" onClick={closeMobileMenu}>Home</Link>
+                </div>
+            )
+        } else {
+            return <div></div>
+        }
+    }
+
     return (
         <div>
         {!session? 
         //Show this nav if no user
-        <div className={style.navigation}>
+        <div className={`${style.navigation} ${style.navigation_signout}`}>
             <div className={style.left}>
                 <Link href="/">
                 <img className={style.logo} src="/images/Plantiful.png"/>
@@ -58,6 +73,7 @@ function Navigation() {
         </div>
         :
         //Show this nav if user is logged in
+        <>
         <div className={style.navigation}>
             <div className={style.left}>
                 <Link href="/home">
@@ -76,11 +92,6 @@ function Navigation() {
             </div>
             <Search/>
             <div className={style.right}>
-                {/* <Link href="/messages">
-                <div className={style.container_nav2}>
-                    <span className={`material-icons ${style.icon}`}>question_answer</span>
-                </div>
-                </Link> */}
                 <Link href="/profile">
                 <div className={style.container_nav2}>
                     <span className={`material-icons ${style.icon}`}>account_circle</span>
@@ -91,6 +102,32 @@ function Navigation() {
                 </div>
             </div>
         </div>
+        <div className={style.mobileMenu}> 
+            <div className={style.mobileMenu_wrapper}> 
+                <Link href="/home">
+                    <img className={style.logoMobile} src="/images/Plantiful_icon.png"/>
+                </Link> 
+                <Search className={style.searchBar}/>
+                <div onClick={handleClicked} className={`material-icons ${style.icon_menu}`}>menu</div>
+            </div>
+            {clicked ? 
+            <div className={style.mobileMenu_popup}>
+                <div onClick={closeMobileMenu}>
+                    <Link href="/home">Home</Link>
+                </div>
+                <div onClick={closeMobileMenu}>
+                    <Link href="/trades">Trades</Link>
+                </div>
+                <div onClick={closeMobileMenu}>
+                    <Link href="/profile">My Profile</Link>
+                </div>
+                <div onClick={closeMobileMenu} onClick={logoutHandler}>Logout</div>
+            </div>
+            :
+            <></>
+            }
+        </div>
+        </>
         }
         </div>
     )

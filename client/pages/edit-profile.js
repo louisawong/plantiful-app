@@ -14,23 +14,25 @@ function editProfile() {
     //const {user} = useAuth();
 
     //state 
-    const [file, setFile] = useState("");
-    const [url, setUrl] = useState("");
-    const [location, setLocation] = useState([]);
-    const [firstName, setFirstName] = useState("");
-    const [editFirst, setEditFirst] = useState(false)
-    const [lastName, setLastName] = useState("");
-    const [editLast, setEditLast] = useState(false)
-    const [description, setDescription] = useState("");
-    const [editDescription, setEditDescription] = useState(false);
-    const [city, setCity] = useState("");
-    const [country, setCountry] = useState("");
-    const [locationCheck, setLocationCheck] = useState(false)
+    const initialState = {
+      file: "",
+      url: "",
+      location: [],
+      firstName: "",
+      editFirst: false,
+      lastName: "",
+      editLast: false,
+      description: "",
+      editDescription: false,
+      city: "",
+      country: "",
+      locationCheck: false,
+    }
+     const [formState, setFormState] = useState(initialState)
 
     //check auth session
     useEffect (()=> {
         const session = localStorage.getItem("uid")
-        console.log("Local storage get:", session)
         if (!session) {
             dispatch(logoutUser());
             router.push("/login")
@@ -43,23 +45,28 @@ function editProfile() {
     //handle Location
     const handleLocation = (e) => {
         if (e.target.checked) {
-            setLocationCheck(e.target.checked)
             fetch("/api/geolocation")
             .then(res => res.json())
             .then((data)=>{
-                console.log(data)
-              setLocation(data.location);
-              setCity(data.city);
-              setCountry(data.country)
+                setFormState({
+                    ...formState, 
+                    location:data.location,
+                    city: data.city,
+                    country: data.country,
+                    locationCheck: e.target.checked
+              });
             })
             .catch((err)=>{
-                console.log(err)
+                console.error(err);
             })
         } else {
-            setLocationCheck(e.target.checked)
-            setLocation([]);
-            setCity("");
-            setCountry("")
+            setFormState({
+                ...formState,
+                locationCheck:e.target.checked,
+                location:[],
+                city: "",
+                country: "",
+            });
         }
     }
 
@@ -68,26 +75,25 @@ function editProfile() {
         let update={};
         update.firstName=(firstName.length>=2 ? firstName : userInfo.firstName)
         update.lastName= (editLast ? lastName : userInfo.lastName)
-        if (!userInfo.description && !editDescription) { 
+        if (!userInfo.description && !formState.editDescription) { 
             update.description =  `Welcome to ${userInfo.firstName}'s greenhouse! 🪴 `
         }
-        if (editDescription && description!=="") {
-            update.description =  description;
+        if (formState.editDescription && formState.description!=="") {
+            update.description =  formState.description;
         }
-        if (userInfo.description && !editDescription) {
+        if (userInfo.description && !formState.editDescription) {
             update.description =  userInfo.description;
         }
-        if (locationCheck) {
-            update.location = location;
-            update.city = city;
-            update.country = country;
+        if (formState.locationCheck) {
+            update.location = formState.location;
+            update.city = formState.city;
+            update.country = formState.country;
         }
-        if(url) update.profile = url;
+        if (formState.url) update.profile = formState.url;
         dispatch(updateUser({
             uid: userInfo.uid,
             update: update
         }))
-
         router.push("/profile")
     }
 
@@ -97,9 +103,9 @@ function editProfile() {
     const handleEditProfile = (e) => {
         let selected = e.target.files[0];
         if (selected && types.includes(selected.type)) {
-          setFile(selected);
+          setFormState({...formState, file: selected});
         } else {
-            setFile(null);
+            setFormState({...formState, file: null});
             alert('Please select an image file (png or jpg)');
         }
     }
@@ -116,7 +122,7 @@ function editProfile() {
             </Head>
             <main className={style.container}>
               <div className={style.left}>
-                {!url ? 
+                {!formState.url ? 
                     <label className={style.profileWrapper}>
                         {userInfo.profile ? 
                         <img className={style.profilePic} src={userInfo.profile}/>
@@ -128,11 +134,11 @@ function editProfile() {
                     </label>
                     : 
                     <div className={style.profileWrapper}>
-                        {url && <img className={style.profilePic} src={url}></img>}
+                        {formState.url && <img className={style.profilePic} src={formState.url}></img>}
                         <span className={style.addImage}>New Profile Image</span>
                     </div>
                 }
-                {!url && file && <ProgressBar file={file} setUrl={setUrl} />}   
+                {!formState.url && formState.file && <ProgressBar file={formState.file} setUrl={setFormState} state={formState} />}   
               </div>
               <div className={style.right}>
                 <h1 className={style.header}>Edit Your Profile</h1>
@@ -144,15 +150,27 @@ function editProfile() {
                 <div className={style.name}>
                     <label> First Name: {' '}
                         <input className={style.firstName} 
-                        value={firstName} 
-                        onChange={(e)=>{setEditFirst(true); setFirstName(e.target.value)}} 
+                        value={formState.firstName} 
+                        onChange={(e)=>{
+                            setFormState({
+                                ...formState,
+                                editFirst:true,
+                                firstName:e.target.value,
+                            });
+                        }} 
                         placeholder={userInfo.firstName}
                         />
                     </label>
                     <label>Last Name: {' '}
                         <input className={style.lastName} 
-                        value={lastName} 
-                        onChange={(e)=>{setEditLast(true); setLastName(e.target.value)}} 
+                        value={formState.lastName} 
+                        onChange={(e)=>{
+                            setFormState({
+                                ...formState,
+                                editLast: true,
+                                lastName: e.target.value,
+                            });
+                        }} 
                         placeholder={userInfo.lastName? userInfo.lastName : "Add last name"}
                         />
                     </label>
@@ -160,8 +178,14 @@ function editProfile() {
                 <div className={style.description}>
                     <label> Your Profile's Description: {' '}
                         <textarea className={style.descriptionText} 
-                        value={description} 
-                        onChange={(e)=>{setEditDescription(true); setDescription(e.target.value)}}
+                        value={formState.description} 
+                        onChange={(e)=>{
+                            setFormState({
+                                ...formState,
+                                editDescription:true,
+                                description:e.target.value,
+                            });
+                        }}
                         placeholder={userInfo.description? userInfo.description : `Welcome to ${userInfo.firstName}'s greenhouse! 🪴 `}>
                         </textarea>
                     </label>
@@ -175,7 +199,7 @@ function editProfile() {
                         type="checkbox"
                         onClick={handleLocation}></input>
                     </label>
-                    {locationCheck? <div className={style.currentLocation}>{`${city}, ${country}`}</div> : <div></div>}
+                    {formState.locationCheck? <div className={style.currentLocation}>{`${formState.city}, ${formState.country}`}</div> : <div></div>}
                 </div>
                 <button className={style.buttonSubmit}
                 onClick={handleSubmit}
