@@ -15,9 +15,6 @@ function createInspo() {
     const {user} = useAuth();
 
     //state for images
-    const initialState = {
-        file1
-    }
     const [file1, setFile1] = useState("");
     const [file2, setFile2] = useState("");
     const [file3, setFile3] = useState("");
